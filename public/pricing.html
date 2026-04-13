@@ -2220,7 +2220,7 @@
 
         // Hero Sub and Stats Animation
         function animateHeroElements() {
-            gsap.to('.hero-sub', {
+            if(document.querySelector('.hero-sub')) gsap.to('.hero-sub', {
                 opacity: 1,
                 y: 0,
                 duration: 1,
@@ -2228,7 +2228,7 @@
                 delay: 1.2
             });
 
-            gsap.to('.hero-stat', {
+            if(document.querySelector('.hero-stat')) gsap.to('.hero-stat', {
                 opacity: 1,
                 y: 0,
                 duration: 0.8,
@@ -2390,13 +2390,13 @@
             });
 
             // Guarantee Section
-            gsap.to('.guarantee-section h2', {
+            if(document.querySelector('.guarantee-section h2')) gsap.to('.guarantee-section h2', {
                 opacity: 1,
                 duration: 0.8,
                 scrollTrigger: { trigger: '.guarantee-section h2', start: 'top 85%', once: true }
             });
 
-            gsap.to('.guarantee-section .section-sub', {
+            if(document.querySelector('.guarantee-section .section-sub')) gsap.to('.guarantee-section .section-sub', {
                 opacity: 1,
                 duration: 0.8,
                 delay: 0.2,
@@ -2415,7 +2415,7 @@
                 });
             });
 
-            gsap.to('.criteria-box', {
+            if(document.querySelector('.criteria-box')) gsap.to('.criteria-box', {
                 opacity: 1,
                 y: 0,
                 duration: 0.8,
@@ -2423,14 +2423,14 @@
             });
 
             // Success Section
-            gsap.to('.success-content', {
+            if(document.querySelector('.success-content')) gsap.to('.success-content', {
                 y: 0,
                 duration: 0.8,
                 scrollTrigger: { trigger: '.success-content', start: 'top 85%', once: true }
             });
 
             // Calculator Section
-            gsap.to('.calculator-box', {
+            if(document.querySelector('.calculator-box')) gsap.to('.calculator-box', {
                 y: 0,
                 duration: 0.8,
                 scrollTrigger: { trigger: '.calculator-box', start: 'top 85%', once: true }
