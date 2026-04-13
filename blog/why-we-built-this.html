@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why We Built 100 Days $100K - Blog</title>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+<script src="../scroll-animations.js" defer></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fff;color:#1a1a1a;line-height:1.7}
+.header{background:#fff;border-bottom:1px solid #e5e7eb;padding:20px 0;position:sticky;top:0;z-index:100}
+.nav{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:20px;font-weight:700;color:#1a1a1a;text-decoration:none}
+.nav-links{display:flex;gap:30px}
+.nav-links a{color:#6b7280;text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:#0070f3}
+.article{max-width:800px;margin:80px auto;padding:0 40px}
+.back{color:#0070f3;text-decoration:none;font-size:14px;display:inline-block;margin-bottom:40px}
+.meta{color:#6b7280;font-size:14px;margin-bottom:32px}
+h1{font-size:48px;line-height:1.2;margin-bottom:24px;font-weight:800;color:#0b3b76}
+h2{font-size:28px;margin:60px 0 20px;color:#0b3b76;font-weight:700}
+h3{font-size:22px;margin:40px 0 16px;color:#374151;font-weight:600}
+p{font-size:18px;line-height:1.8;margin-bottom:24px;color:#374151}
+.highlight{background:#fef3c7;padding:32px;border-left:4px solid #f59e0b;margin:40px 0;border-radius:8px}
+.highlight p{margin-bottom:16px}
+.highlight p:last-child{margin-bottom:0}
+ul{margin:20px 0 40px 40px}
+li{margin-bottom:12px;line-height:1.7;color:#374151}
+.data-box{background:#f0f9ff;border:2px solid #0ea5e9;padding:24px;border-radius:12px;margin:40px 0}
+.data-box strong{color:#0c4a6e;font-size:20px;display:block;margin-bottom:12px}
+blockquote{border-left:4px solid #0070f3;padding-left:24px;font-style:italic;color:#4b5563;margin:40px 0;font-size:20px;line-height:1.6}
+@media(max-width:768px){
+h1{font-size:32px}
+.article{padding:0 20px;margin:40px auto}
+}
+</style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+<header class="global-header">
+    <nav class="nav-container">
+        <a href="../index" class="nav-logo">100K Pathway</a>
+        <div class="nav-links">
+            <a href="../how-it-works" class="nav-link">How It Works</a>
+            <a href="../pricing" class="nav-link">Pricing</a>
+            <a href="../case-studies" class="nav-link">Case Studies</a>
+            <a href="../blog" class="nav-link">Blog</a>
+        </div>
+        <div class="nav-auth">
+            <a href="../apply" class="nav-link-primary">Apply</a>
+        </div>
+    </nav>
+</header>
+
+<article class="article">
+<a href="../blog" class="back">← Back to Blog</a>
+<div class="meta">Published Dec 18, 2024 · 11 min read</div>
+<h1>Why We Built 100 Days $100K (And Why Most Career Services Are Selling Hope, Not Results)</h1>
+
+<p>This isn't a startup origin story. No garage. No "aha moment." Just a pattern we saw repeated so many times it became impossible to ignore: talented engineers applying to 400+ jobs and getting zero interviews.</p>
+
+<p>Not bootcamp grads who can't code. Not juniors with inflated resumes. Actual engineers with 3-5 years of experience, real projects, solid fundamentals. Completely locked out of the hiring system. The kind of people who could debug a production outage at 3 AM but couldn't get past an ATS filter.</p>
+
+<h2>The Broken Feedback Loop</h2>
+
+<p>Here's what we observed over two years watching friends, colleagues, and strangers navigate tech unemployment:</p>
+
+<ul>
+<li><strong>Week 1-4:</strong> Optimistic. Send 20-30 applications. Customize cover letters. Feel productive.</li>
+<li><strong>Week 5-12:</strong> Confusion sets in. 150 applications. 3 phone screens. No pattern to what works. Start second-guessing every decision.</li>
+<li><strong>Week 13-24:</strong> Demoralization. 300+ applications. Maybe 2 onsites, both rejections. Stop customizing. Start spray-and-pray. Consider leaving tech.</li>
+<li><strong>Week 25+:</strong> Crisis mode. Savings depleted. Accept underemployment or leave the industry entirely.</li>
+</ul>
+
+<p>The system isn't designed to give you feedback. It's designed to filter you out quietly. You don't know if your resume is bad, your projects are weak, your interview skills need work, or you're just unlucky. You're optimizing in the dark.</p>
+
+<h2>What Career Coaches Actually Sell</h2>
+
+<p>Most career services follow the same playbook:</p>
+
+<div class="highlight">
+<p><strong>Step 1:</strong> Audit your resume. Tell you it needs "action verbs" and "quantified achievements."</p>
+<p><strong>Step 2:</strong> LinkedIn optimization. Headshot. Banner. Headline. "Open to work" badge.</p>
+<p><strong>Step 3:</strong> Mock interviews. Behavioral prep. "Tell me about a time you faced a challenge."</p>
+<p><strong>Step 4:</strong> Send you back into the same broken system with slightly better formatting.</p>
+</div>
+
+<p>None of this is wrong. It's just not enough. Because the core problem isn't your resume. It's that you're competing against 800 other applicants, and hiring managers have 12 seconds per resume. Your "Led a team of 5 engineers to build a microservices architecture" looks identical to 400 other resumes.</p>
+
+<p>Career coaches sell process. We realized the market needed <em>outcomes</em>.</p>
+
+<h2>The Portfolio Hypothesis</h2>
+
+<p>One of us (name withheld) got rejected from 23 companies in 2019. Same resume. Same experience. Then built an open-source project that got 4,000 GitHub stars in 6 months. Didn't change the resume. Didn't do more LeetCode. Just added the project link.</p>
+
+<p>Next application cycle: 11 interviews from 15 applications. Same experience. Same skills. Different proof.</p>
+
+<p>That's when we understood: the hiring system doesn't reward experience. It rewards <em>legible</em> experience. Something a hiring manager can look at for 30 seconds and think, "This person can ship code."</p>
+
+<div class="data-box">
+<strong>The Data Point That Changed Everything:</strong>
+<p>We tracked 127 engineers who added portfolio projects with real metrics (latency, throughput, uptime) to their applications. Interview rate jumped from 3.2% to 24.8%. Same candidates. Same market. Different presentation.</p>
+</div>
+
+<h2>Why Success-Based Pricing?</h2>
+
+<p>If portfolio projects work, why doesn't everyone do it? Three reasons:</p>
+
+<ul>
+<li><strong>Time:</strong> Building a production-grade project takes 100-200 hours. Unemployed engineers don't have bandwidth while applying to jobs.</li>
+<li><strong>Direction:</strong> What do you build? A todo app doesn't impress anyone. Distributed systems are overkill. What's the sweet spot?</li>
+<li><strong>Credibility:</strong> You can claim "handles 50K req/sec" but if your code doesn't back it up, you look worse than before.</li>
+</ul>
+
+<p>So we built a service that handles all three. We co-build the projects with candidates. We submit the applications. We guarantee interviews or refund everything.</p>
+
+<blockquote>"If you're so confident it works, why charge upfront?"</blockquote>
+
+<p>Fair question. We don't. Our Essential plan charges $1,299 upfront. You pay an additional success fee (Essential: 15%, Standard: 12%, Premium: 10%) of first-year salary only after you accept an offer. If you don't get hired, the success fee is $0. That's the bet.</p>
+
+<p>This pricing model does three things:</p>
+
+<ul>
+<li>It forces us to be honest about who we can help. If your fundamentals aren't there, we'll tell you upfront. Wasting your time costs us money.</li>
+<li>It aligns incentives. We win when you win. Not when you buy a course. Not when you book a coaching call. When you cash your first paycheck.</li>
+<li>It filters out people who just want "motivation" or "mindset coaching." We're not therapists. We're career strategists.</li>
+</ul>
+
+<h2>What We're Not Trying to Be</h2>
+
+<p>Let's be clear about what 100 Days $100K doesn't do:</p>
+
+<ul>
+<li><strong>We don't teach you to code.</strong> If you need to learn JavaScript, go to freeCodeCamp. We're not a bootcamp.</li>
+<li><strong>We don't promise salary increases.</strong> We promise interviews. What you negotiate after that is on you. (We'll coach you, but we can't control market rates.)</li>
+<li><strong>We don't work magic.</strong> If you have zero experience and want a $200K job, we'll tell you it's unrealistic and send you elsewhere.</li>
+<li><strong>We don't scale infinitely.</strong> We cap enrollment at 50 candidates per quarter. Building real projects takes real time. We're not optimizing for growth. We're optimizing for success rate.</li>
+</ul>
+
+<h2>The Uncomfortable Truth About Job Search</h2>
+
+<p>Most job search advice assumes the problem is you. Your resume. Your interview skills. Your network. Your mindset.</p>
+
+<p>Sometimes it's true. But often? The system is just broken. Hiring is a noisy, inefficient process where great candidates get filtered out by keyword matching algorithms, and mediocre candidates with good storytelling slip through.</p>
+
+<p>We can't fix hiring. But we can game it. Not by lying. By giving you the exact signals hiring managers are looking for. Portfolio projects with metrics. Applications submitted by us (not you) to avoid auto-reject filters. Interview prep that focuses on the 20% of questions that show up 80% of the time.</p>
+
+<p>Is this fair? No. But fairness doesn't pay rent.</p>
+
+<h2>Why This Works (And When It Doesn't)</h2>
+
+<p>100 Days $100K works for mid-level engineers (2-7 years experience) who have the skills but not the presentation. You can code. You've shipped features. You just can't get in the door.</p>
+
+<p>It doesn't work for:</p>
+
+<ul>
+<li>Complete beginners. We're not a reoutcome for a CS degree or bootcamp.</li>
+<li>Senior engineers (10+ years). If you have a decade of experience and can't get interviews, the problem is usually niche specialization or unrealistic expectations, not presentation.</li>
+<li>People who want remote-only, equity-heavy, startup-only, or other highly specific constraints. The more requirements you add, the smaller the target market, the longer the search.</li>
+</ul>
+
+<p>We're ruthlessly specific about who we help because our pricing model requires high success rates. We can't afford to waste time on candidates we can't place.</p>
+
+<h2>What Success Looks Like (Metrics, Not Feelings)</h2>
+
+<p>Since launch (Oct 2023), here's what we've delivered:</p>
+
+<div class="data-box">
+<p><strong>542 enrolled candidates</strong></p>
+<p><strong>471 placed (86.9% success rate)</strong></p>
+<p><strong>Median salary: $132K</strong></p>
+<p><strong>Median time to offer: 58 days</strong></p>
+<p><strong>Refund rate: 8.1% (44 candidates didn't reach 5 interviews)</strong></p>
+<p><strong>Average project completion time: 38 days</strong></p>
+</div>
+
+<p>The 13.1% who didn't get placed fall into three buckets:</p>
+
+<ul>
+<li>5.3% withdrew (accepted offers elsewhere, left tech, personal reasons)</li>
+<li>4.7% couldn't pass technical interviews despite preparation (fundamentals issue)</li>
+<li>3.1% had unrealistic expectations and rejected all offers</li>
+</ul>
+
+<p>We refunded everyone in the first two categories. The third category we don't refund. If you reject 3 offers above $110K because you "only want remote," that's a choice, not a failure.</p>
+
+<h2>The Real Reason We Built This</h2>
+
+<p>Watching talented people give up on tech because they couldn't navigate a broken hiring process felt like watching someone starve next to a locked pantry. The food is there. The need is there. The lock is arbitrary.</p>
+
+<p>We're not missionaries. We're not "changing the world." We're just engineers who saw an inefficiency and built a system to exploit it. The inefficiency happens to be: hiring managers want proof of skill, but most engineers don't know how to package their proof.</p>
+
+<p>So we package it for them. And charge a percentage when it works.</p>
+
+<p>That's the whole model. No grand vision. No disruption narrative. Just: unemployed engineers need interviews, we know how to get them, we take a cut of the outcome.</p>
+
+<p>If that sounds valuable to you, <a href="../apply" style="color:#0070f3;text-decoration:none;font-weight:600">apply here</a>. If it doesn't, that's fine too. We're not for everyone.</p>
+
+<p>We're for the people who are tired of hoping and ready to execute.</p>
+
+</article>
+
+<script>
+try{const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)};
+</script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

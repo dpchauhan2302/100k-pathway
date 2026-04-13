@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Email Preview - 100K Pathway</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .preview-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .preview-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .preview-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .email-frame {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        .email-title {
+            background: #0B1120;
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+        }
+        .email-content {
+            padding: 0;
+        }
+        iframe {
+            width: 100%;
+            border: none;
+            min-height: 600px;
+        }
+    </style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body>
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+    <div class="preview-container">
+        <div class="preview-header">
+            <h1>Email Templates Preview</h1>
+            <p>Professional, Apple-level email design for 100K Pathway</p>
+        </div>
+
+        <div class="email-frame">
+            <div class="email-title">
+                1. Applicant Confirmation Email
+            </div>
+            <div class="email-content">
+                <iframe srcdoc='<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #0B1120;
+            color: #D1D5DB;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #0B1120;
+        }
+        .email-header {
+            padding: 40px 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .email-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #F9FAFB;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+        .email-logo-accent {
+            color: #00B894;
+            margin-left: 4px;
+            font-weight: 800;
+        }
+        .email-body {
+            padding: 40px 30px;
+            background: #111827;
+            border-radius: 12px;
+            margin: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .email-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #F9FAFB;
+            margin-bottom: 16px;
+            text-align: center;
+            letter-spacing: 0.015em;
+        }
+        .email-subtitle {
+            font-size: 16px;
+            color: #9CA3AF;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 184, 148, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            border: 2px solid #00B894;
+        }
+        .email-section {
+            margin: 24px 0;
+            padding: 20px;
+            background: rgba(17, 24, 39, 0.6);
+            border-radius: 8px;
+            border-left: 3px solid #00B894;
+        }
+        .email-details {
+            margin: 20px 0;
+            padding: 16px;
+            background: rgba(0, 184, 148, 0.08);
+            border-radius: 8px;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .detail-label {
+            color: #9CA3AF;
+            font-weight: 500;
+        }
+        .detail-value {
+            color: #F9FAFB;
+            font-weight: 600;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 16px 0;
+        }
+        .step-number {
+            width: 24px;
+            height: 24px;
+            background: #00B894;
+            color: #0B1120;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-right: 12px;
+            margin-top: 2px;
+        }
+        .email-footer {
+            padding: 30px;
+            text-align: center;
+            color: #9CA3AF;
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <div class="email-logo">
+                100K <span class="email-logo-accent">Pathway</span>
+            </div>
+            <h1 class="email-title">Application Received</h1>
+            <p class="email-subtitle">Thank you for your interest in 100K Pathway</p>
+        </div>
+        
+        <div class="email-body">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <div class="success-icon">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+            </div>
+            
+            <p>Hello John,</p>
+            
+            <p>We'"'"'ve received your application for the 100K Pathway program. Thank you for taking the first step toward landing your $100K+ tech role.</p>
+            
+            <div class="email-section">
+                <p><strong>What happens next?</strong></p>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>We'"'"'ll review your application details</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>Our team will reach out within 24 hours to schedule your strategy call</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>During the call, we'"'"'ll discuss your goals and determine the best fit</div>
+                </div>
+            </div>
+            
+            <div class="email-details">
+                <div class="detail-row">
+                    <span class="detail-label">Your Application:</span>
+                    <span class="detail-value">Premium ($2,999 + 10%)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Experience:</span>
+                    <span class="detail-value">7-10 years</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Submitted:</span>
+                    <span class="detail-value">Feb 8, 2026</span>
+                </div>
+            </div>
+            
+            <p>If you have any immediate questions, feel free to reply to this email. Otherwise, we'"'"'ll be in touch soon!</p>
+            
+            <p>Best regards,<br>The 100K Pathway Team</p>
+        </div>
+        
+        <div class="email-footer">
+            <p>&copy; 2025 100K Pathway. All rights reserved.</p>
+            <p>Helping professionals land $100K+ tech roles in 100 days</p>
+        </div>
+    </div>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>'></iframe>
+            </div>
+        </div>
+
+        <div class="email-frame">
+            <div class="email-title">
+                2. Team Notification Email
+            </div>
+            <div class="email-content">
+                <iframe srcdoc='<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #0B1120;
+            color: #D1D5DB;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #0B1120;
+        }
+        .email-header {
+            padding: 40px 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .email-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #F9FAFB;
+            margin-bottom: 8px;
+        }
+        .email-logo-accent {
+            color: #00B894;
+            margin-left: 4px;
+            font-weight: 800;
+        }
+        .email-body {
+            padding: 40px 30px;
+            background: #111827;
+            border-radius: 12px;
+            margin: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .email-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #F9FAFB;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .email-subtitle {
+            font-size: 16px;
+            color: #9CA3AF;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 184, 148, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            border: 2px solid #00B894;
+        }
+        .email-details {
+            margin: 20px 0;
+            padding: 16px;
+            background: rgba(0, 184, 148, 0.08);
+            border-radius: 8px;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .detail-label {
+            color: #9CA3AF;
+            font-weight: 500;
+        }
+        .detail-value {
+            color: #F9FAFB;
+            font-weight: 600;
+            text-align: right;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 16px 0;
+        }
+        .step-number {
+            width: 24px;
+            height: 24px;
+            background: #00B894;
+            color: #0B1120;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-right: 12px;
+        }
+        .email-highlight {
+            color: #00B894;
+            font-weight: 600;
+        }
+        .email-footer {
+            padding: 30px;
+            text-align: center;
+            color: #9CA3AF;
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <div class="email-logo">
+                100K <span class="email-logo-accent">Pathway</span>
+            </div>
+            <h1 class="email-title">New Application Received</h1>
+            <p class="email-subtitle">Application from John Doe</p>
+        </div>
+        
+        <div class="email-body">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <div class="success-icon">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+            </div>
+            
+            <p>Hello Team,</p>
+            
+            <p>You'"'"'ve received a new application through the 100K Pathway website. Here are the details:</p>
+            
+            <div class="email-details">
+                <div class="detail-row">
+                    <span class="detail-label">Applicant Name:</span>
+                    <span class="detail-value">John Doe</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">john@example.com</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Phone:</span>
+                    <span class="detail-value">+1 (555) 123-4567</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Plan Interested:</span>
+                    <span class="detail-value">Premium ($2,999 + 10%)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Experience:</span>
+                    <span class="detail-value">7-10 years</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Submitted:</span>
+                    <span class="detail-value">Feb 8, 2026 at 3:45 PM</span>
+                </div>
+            </div>
+            
+            <p><span class="email-highlight">Next Steps:</span></p>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>Review the application details above</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>Reach out to the applicant within 24 hours</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>Schedule their strategy call</div>
+            </div>
+            
+            <p style="margin-top: 24px;">We'"'"'ve already sent a confirmation to the applicant letting them know we received their application.</p>
+        </div>
+        
+        <div class="email-footer">
+            <p>&copy; 2025 100K Pathway. All rights reserved.</p>
+            <p>100K Pathway | Helping professionals land $100K+ tech roles in 100 days</p>
+        </div>
+    </div>
+</body>
+</html>'></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

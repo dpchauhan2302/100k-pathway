@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Preview - 100K Pathway</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0B1120;
+            color: #D1D5DB;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #FFFFFF;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .email-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+        .email-preview {
+            background: #111827;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .email-title {
+            background: #1F2937;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: #00B894;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .email-content {
+            padding: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        iframe {
+            width: 100%;
+            min-height: 500px;
+            border: none;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Templates Preview</h1>
+        
+        <div class="email-grid">
+            <div class="email-preview">
+                <div class="email-title">Application Confirmation (User Receives)</div>
+                <div class="email-content">
+                    <iframe id="applicant"></iframe>
+                </div>
+            </div>
+            
+            <div class="email-preview">
+                <div class="email-title">Team Notification (Internal)</div>
+                <div class="email-content">
+                    <iframe id="team"></iframe>
+                </div>
+            </div>
+            
+            <div class="email-preview">
+                <div class="email-title">Payment Welcome (After Payment)</div>
+                <div class="email-content">
+                    <iframe id="welcome"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const sampleData = {
+            fullName: 'John Smith',
+            email: 'john@example.com',
+            phone: '+1 (555) 123-4567',
+            plan: 'Full Support Package',
+            experience: 'Mid-level (3-7 years)',
+            timestamp: Date.now()
+        };
+        
+        // Load email templates
+        async function loadTemplates() {
+            const templates = [
+                { id: 'applicant', type: 'applicant_confirmation' },
+                { id: 'team', type: 'contact_form' },
+                { id: 'welcome', type: 'payment_welcome' }
+            ];
+            
+            for (const template of templates) {
+                try {
+                    const response = await fetch('/api/preview-email', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            type: template.type,
+                            data: sampleData
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    
+                    const html = await response.text();
+                    const iframe = document.getElementById(template.id);
+                    iframe.srcdoc = html;
+                    // Loaded
+                } catch (error) {
+                    // Failed to load
+                    const iframe = document.getElementById(template.id);
+                    iframe.srcdoc = `<body style="padding: 20px; font-family: monospace; color: red;">Error loading email: ${error.message}</body>`;
+                }
+            }
+        }
+        
+        window.addEventListener('load', loadTemplates);
+    </script>
+</body>
+</html>

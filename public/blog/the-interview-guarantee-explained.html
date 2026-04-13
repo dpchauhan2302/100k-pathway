@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Interview Guarantee Explained - 100K Pathway</title>
+<link rel="stylesheet" href="../global-nav.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+<script src="../3d-animations.js" defer></script>
+<script src="../scroll-animations.js" defer></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0B1120;color:#E5E7EB;line-height:1.7}
+.article-hero{background:linear-gradient(135deg,#4facfe,#00f2fe);padding:80px 40px;color:white;text-align:center}
+.article-title{font-size:48px;font-weight:800;margin-bottom:20px;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.2}
+.article-meta{font-size:16px;opacity:0.9;margin-top:20px}
+.article-content{max-width:800px;margin:60px auto;padding:0 40px}
+.article-content h2{font-size:32px;margin:60px 0 24px;color:#0b3b76}
+.article-content h3{font-size:24px;margin:40px 0 20px;color:#0b3b76}
+.article-content p{font-size:18px;line-height:1.8;margin-bottom:24px;color:#374151}
+.article-content strong{color:#0b3b76;font-weight:600}
+.article-content ul,.article-content ol{margin:24px 0;padding-left:40px}
+.article-content li{margin:12px 0;font-size:18px;color:#374151}
+.highlight-box{background:#f0f9ff;border-left:4px solid #3b82f6;padding:24px;margin:32px 0;border-radius:8px}
+.highlight-box h3{margin-top:0;color:#0b3b76}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:40px 0}
+.stat-card{background:#f9fafb;padding:24px;border-radius:12px;text-align:center;border:2px solid #e5e7eb}
+.stat-number{font-size:36px;font-weight:800;color:#3b82f6;margin-bottom:8px}
+.stat-label{font-size:14px;color:#6b7280;text-transform:uppercase}
+.cta-box{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:48px;border-radius:16px;text-align:center;margin:60px 0}
+.cta-box h3{font-size:32px;margin-bottom:16px}
+.cta-button{display:inline-block;background:white;color:#667eea;padding:16px 40px;border-radius:8px;text-decoration:none;font-weight:700;font-size:18px;margin-top:20px;transition:transform 0.2s}
+.cta-button:hover{transform:translateY(-2px)}
+@media(max-width:768px){
+.article-title{font-size:32px}
+.article-content h2{font-size:26px}
+.stat-grid{grid-template-columns:1fr}
+}
+</style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+<header class="global-header">
+    <nav class="nav-container">
+        <a href="../index" class="nav-logo">
+            <span style="font-size: 24px; font-weight: 700; color: #F9FAFB;">100K <span style="color: #00B894;">Pathway</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="../how-it-works" class="nav-link">How It Works</a>
+            <a href="../pricing" class="nav-link">Pricing</a>
+            <a href="../case-studies" class="nav-link">Verified Outcomes</a>
+            <a href="../blog" class="nav-link active">Blog</a>
+        </div>
+        <div class="nav-auth">
+            <a href="../apply" class="nav-link-primary">Apply</a>
+        </div>
+    </nav>
+</header>
+
+<div class="breadcrumbs">
+    <div class="breadcrumb-container">
+        <a href="/index" class="breadcrumb-item">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="/blog" class="breadcrumb-item">Blog</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-item current">Interview Guarantee Explained</span>
+    </div>
+</div>
+
+<div class="article-hero">
+    <h1 class="article-title">The Interview Guarantee Explained: How It Works (And What Counts)</h1>
+    <div class="article-meta">Published Dec 15, 2024 · 13 min read</div>
+</div>
+
+<div class="article-content">
+    <p><strong>The guarantee is simple: qualifying technical interviews within 100 days based on your plan (Essential: 3, Standard: 5, Premium: 7), or you're eligible for a refund.</strong></p>
+    
+    <p>But the devil's in the details, right? Most guarantees are structured to never actually pay out. Insurance companies make billions on this model. So let's break down exactly what counts, what doesn't, and why this actually works.</p>
+
+    <h2>What Qualifies as an Interview?</h2>
+    
+    <p>Not all "interviews" are created equal. A 15-minute phone screen with a recruiter who asks "tell me about yourself" doesn't count. Here's what does:</p>
+
+    <div class="highlight-box">
+        <h3>Qualifying Interview Criteria (All Must Be Met):</h3>
+        <ul>
+            <li><strong>Technical Component:</strong> Must include coding challenge, system design, or technical deep-dive</li>
+            <li><strong>Duration:</strong> Minimum 30 minutes scheduled time</li>
+            <li><strong>Real Company:</strong> Verifiable company with legitimate job posting (not recruiting agencies)</li>
+            <li><strong>Role Alignment:</strong> Matches your target level (junior/mid/senior) within ±1 level</li>
+            <li><strong>Documentation:</strong> Calendar invite, email confirmation, or interview recording as proof</li>
+        </ul>
+    </div>
+
+    <p>Why these criteria? Because we're guaranteeing meaningful opportunities, not spam. A 15-minute call where they "want to learn more about you" is not an interview. It's a screening. We don't count those.</p>
+
+    <h2>What Doesn't Count</h2>
+
+    <p>Let's be explicit about what we exclude:</p>
+
+    <ul>
+        <li><strong>Recruiter screens:</strong> Initial 15-20 min calls that don't discuss technical skills</li>
+        <li><strong>Agency pitches:</strong> Third-party recruiters "gauging interest" for unnamed clients</li>
+        <li><strong>Informational interviews:</strong> Coffee chats with no formal hiring process</li>
+        <li><strong>Mismatched roles:</strong> If you're applying for senior roles, a junior position doesn't count (and vice versa)</li>
+        <li><strong>Scam companies:</strong> MLMs, "commission-only," unpaid "trial periods"</li>
+    </ul>
+
+    <p>We've seen candidates rack up 20+ "interviews" that were actually just recruiter intake calls. That's not what we're selling. If it doesn't test your technical skills, it doesn't count.</p>
+
+    <h2>The 100-Day Clock</h2>
+
+    <p>Day 1 starts when you pay your upfront fee. Not when you "feel ready." Not when you finish your portfolio. The clock starts immediately.</p>
+
+    <p><strong>Why?</strong> Because without a hard deadline, people procrastinate forever. We've had beta members say "I'm not ready yet" for 8 months. The deadline forces action. And historically, 87% hit the goal by Day 95.</p>
+
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-number">55</div>
+            <div class="stat-label">Median Days to 1st Interview</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">76</div>
+            <div class="stat-label">Median Days to 5th Interview</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">87%</div>
+            <div class="stat-label">Hit Goal by Day 95</div>
+        </div>
+    </div>
+
+    <h2>Why Multiple Interviews Instead of 1 Offer?</h2>
+
+    <p>We could guarantee an offer. But that would be dishonest. Here's why:</p>
+
+    <p><strong>1. We can't control whether you accept the offer.</strong> If we guarantee an offer and you get one for $85K but want $120K, you'll reject it. Did we fail? Technically no, but you'd be unhappy.</p>
+
+    <p><strong>2. Offers depend on your interview performance.</strong> We can prep you relentlessly. We can get you in the room. But if you freeze during the coding challenge, that's on you. Harsh? Maybe. But it's honest.</p>
+
+    <p><strong>3. Multiple interviews = statistical certainty of offers.</strong> Historical data: candidates with 5+ technical interviews convert at 68% offer rate. Most get multiple offers, not just one. The goal isn't "an offer." It's "your choice of offers."</p>
+
+    <div class="highlight-box">
+        <h3>Real Conversion Data (542 Members):</h3>
+        <ul>
+            <li>5+ interviews → 68% get ≥1 offer</li>
+            <li>8+ interviews → 89% get ≥1 offer</li>
+            <li>12+ interviews → 96% get ≥2 offers</li>
+        </ul>
+        <p><strong>Average interviews per member who hit guarantee: 9.3</strong></p>
+    </div>
+
+    <p>So when we get you your guaranteed interviews, we're not barely scraping by. We're getting you into offer territory with high probability.</p>
+
+    <h2>What Happens If You Don't Hit Your Goal by Day 100?</h2>
+
+    <p>You have until Day 180 to request a refund. Why the extra 80 days?</p>
+
+    <p><strong>Interview scheduling lag.</strong> You might hit 5 interviews scheduled by Day 98, but 2 of them happen on Days 105 and 112 because companies move slow. We don't want to penalize you for corporate bureaucracy.</p>
+
+    <p>The refund window also accounts for:</p>
+    <ul>
+        <li>Holidays (companies freeze hiring in Dec/Jan)</li>
+        <li>Offer delays (some companies take 3-4 weeks to extend offers)</li>
+        <li>Multi-round processes (final rounds can push past Day 100)</li>
+    </ul>
+
+    <p><strong>But here's the key:</strong> If you want a refund on Day 101, you can request it. You don't have to wait until Day 180. The window just gives you flexibility.</p>
+
+    <h2>The Refund Formula (No Hidden Fees)</h2>
+
+    <p>Full details are in <a href="how-refund-guarantee-works" style="color:#3b82f6;text-decoration:none;font-weight:600;">this article</a>, but the summary:</p>
+
+    <p><strong>Essential Plan ($1,299 upfront):</strong> Minimal upfront risk. Refund available if 3 interview minimum not met.</p>
+
+    <p><strong>Standard Plan ($1,999 upfront):</strong></p>
+    <ul>
+        <li>Day 0-100: 100% refund ($997)</li>
+        <li>Day 101-140: 75% refund ($748)</li>
+        <li>Day 141-180: 50% refund ($499)</li>
+        <li>After Day 180: No refund</li>
+    </ul>
+
+    <p><strong>Premium Plan ($2,999 upfront):</strong></p>
+    <ul>
+        <li>Day 0-100: 100% refund ($2,997)</li>
+        <li>Day 101-140: 75% refund ($2,248)</li>
+        <li>Day 141-180: 50% refund ($1,499)</li>
+        <li>After Day 180: No refund</li>
+    </ul>
+
+    <p>Why does the refund decrease after Day 100? Because we've delivered value: portfolio projects, interview prep, applications submitted. The time-decay isn't punitive. It's compensation for work done.</p>
+
+    <h2>What If You Get Hired Before Day 100?</h2>
+
+    <p>You still owe the success fee. The guarantee is about interviews, not speed. If you get an offer on Day 40, congratulations. You'll pay the success percentage when you start the job.</p>
+
+    <p><strong>Example (Standard Plan):</strong></p>
+    <ul>
+        <li>You pay $997 upfront</li>
+        <li>You get 3 interviews by Day 60, accept $140K offer</li>
+        <li>Success fee: $140K × 10% = $14,000</li>
+        <li>Total cost: $997 + $14,000 = $14,997</li>
+    </ul>
+
+    <p>You didn't hit 5 interviews, but you got the outcome (a job). No refund. The guarantee protects you from <em>no interviews</em>, not from <em>early success</em>.</p>
+
+    <h2>Can You Game The System?</h2>
+
+    <p>People ask this. "What if I just bomb every interview on purpose to get a refund?"</p>
+
+    <p><strong>Sure. You could.</strong> But why would you? You've spent 100 days working on portfolio projects, prepping for interviews, and building skills. You've invested your time. Arguably more valuable than $997.</p>
+
+    <p>Also, we track interview performance. If you're consistently bombing technical questions you demonstrably know (based on your project work), that's a red flag. We reserve the right to deny refunds for intentional sabotage. It's in the fine print.</p>
+
+    <p>But in 18 months and 542 members, we've had <strong>zero cases of this.</strong> People who get interviews want offers. The incentives align.</p>
+
+    <h2>Why This Guarantee Works</h2>
+
+    <p>Most programs can't offer this because they don't control the process. Career coaches give advice and hope you execute. Bootcamps teach skills and hope you apply them.</p>
+
+    <p><strong>We control the application process.</strong> We submit a minimum of 30-75 applications on your behalf (varies by plan). We follow up. We leverage our recruiter network. We get you in the room.</p>
+
+    <p>The guarantee works because we're not leaving it to chance. We're doing the work.</p>
+
+    <div class="cta-box">
+        <h3>Guaranteed Interviews in 100 Days. Money-Back Protection.</h3>
+        <p style="font-size:18px;opacity:0.9;margin-top:12px;">Essential: 3. Standard: 5. Premium: 7. No vague promises. No fine-print tricks. Just results or a refund.</p>
+        <a href="/apply" class="cta-button">Start Your Application →</a>
+    </div>
+
+    <h2>Common Questions</h2>
+
+    <p><strong>Q: What if I get 4 interviews on Day 99 and the 5th is scheduled for Day 103?</strong><br>
+    A: Counts. As long as it's scheduled by Day 100, it counts, even if it happens later.</p>
+
+    <p><strong>Q: Do second-round interviews count separately?</strong><br>
+    A: No. Multiple rounds with the same company count as one interview process.</p>
+
+    <p><strong>Q: What if I get sick or have a family emergency?</strong><br>
+    A: We offer one 30-day pause per enrollment for documented emergencies. The clock stops, then resumes.</p>
+
+    <p><strong>Q: Can I extend beyond Day 100 by paying more?</strong><br>
+    A: No. The timeline is fixed. But you have until Day 180 to request a refund, which gives you time to keep interviewing.</p>
+
+    <p><strong>Q: What if companies ghost me after interviews?</strong><br>
+    A: Still counts. The guarantee is about getting interviews, not responses. But for what it's worth, 73% of our members get feedback within 2 weeks.</p>
+
+    <h2>The Bottom Line</h2>
+
+    <p>This guarantee isn't a marketing gimmick. It's how we've structured the business. We make money when you get hired. If you don't get interviews, we lose money.</p>
+
+    <p>That's the alignment. That's why it works.</p>
+
+    <p>Guaranteed qualifying technical interviews in 100 days. Or refund by Day 180. No asterisks. No hidden fees. Just results or refund protection.</p>
+</div>
+
+<footer class="global-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>100K Pathway</h4>
+            <p style="margin-top:1rem;line-height:1.6;color:var(--page-text-muted)">Interviews in 100 days with money-back guarantee. We handle applications. You handle interviews.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Product</h4>
+            <div class="footer-links">
+                <a href="../how-it-works" class="footer-link">How It Works</a>
+                <a href="../pricing" class="footer-link">Pricing</a>
+                <a href="../case-studies" class="footer-link">Verified Outcomes</a>
+                <a href="../faq" class="footer-link">FAQ</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Company</h4>
+            <div class="footer-links">
+                <a href="../about" class="footer-link">About</a>
+                <a href="../blog" class="footer-link">Blog</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <div class="footer-links">
+                <a href="../terms" class="footer-link">Terms of Service</a>
+                <a href="../privacy" class="footer-link">Privacy Policy</a>
+                <a href="../refund" class="footer-link">Refund Policy</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 100K Pathway. All rights reserved.
+    </div>
+</footer>
+
+<script>
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
+}
+try{const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)};
+</script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

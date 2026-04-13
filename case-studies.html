@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verified Outcomes - 100K Pathway</title>
+    <meta name="description" content="Representative sample of verified outcomes from our coordination system. See timelines, interviews, and final results. Names changed for privacy.">
+    <meta name="keywords" content="verified outcomes, representative examples, career coordination, tech career success, verified results">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://100k-pathway.com/case-studies.html">
+    <meta property="og:title" content="Verified Outcomes - Representative Sample Results">
+    <meta property="og:description" content="Representative sample of verified outcomes from our coordination system. Names changed for privacy.">
+    <meta property="og:image" content="https://100k-pathway.com/logo.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://100k-pathway.com/case-studies">
+    
+    <!-- Analytics -->
+    <script defer data-domain="100k-pathway.com" src="https://plausible.io/js/script.js"></script>
+    
+    <link rel="stylesheet" href="performance-mobile-fix.css">
+<link rel="stylesheet" href="global-nav.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <!-- Disabled animation scripts causing visibility issues -->
+    <!-- <script src="scroll-animations.js" defer></script> -->
+    <!-- <script src="premium-enhancements.js" defer></script> -->
+    <style>
+        /* FORCE VISIBILITY - Override any JS animations */
+        .container, .container *, .cases-grid, .case-study, .featured-case, .hero + * {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: none !important;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--page-bg);
+            color: var(--page-text);
+            line-height: 1.6;
+        }
+        .hero {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #fff;
+            padding: 140px 40px 100px;
+            text-align: center;
+        }
+        .hero h1 { 
+            font-size: 48px; 
+            margin-bottom: 32px; 
+            font-weight: 800; 
+            color: #F9FAFB; 
+            line-height: 1.3;
+        }
+        .hero p { 
+            font-size: 20px; 
+            color: #D1D5DB;
+            max-width: 800px; 
+            margin: 0 auto; 
+            line-height: 1.8;
+        }
+        .container { max-width: 1400px; margin: 60px auto; padding: 0 40px; }
+        
+        /* Featured hero case */
+        .featured-case {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15));
+            border-radius: 16px;
+            padding: 60px;
+            margin-bottom: 80px;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .featured-case::before {
+            content: 'FASTEST';
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            background: var(--accent);
+            color: #0B1120;
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+        .featured-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+            font-weight: 800;
+        }
+        .featured-meta {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .featured-stat {
+            display: flex;
+            flex-direction: column;
+        }
+        .featured-stat-value {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .featured-stat-label {
+            font-size: 14px;
+            color: var(--nav-text-muted);
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+        
+        /* Salary tier groups */
+        .tier-section {
+            margin-bottom: 80px;
+        }
+        .tier-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+        .tier-badge {
+            background: var(--accent);
+            color: #0B1120;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .tier-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--page-text-heading);
+        }
+        .tier-range {
+            color: var(--nav-text-muted);
+            font-size: 16px;
+            margin-left: auto;
+        }
+        
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        .intro {
+            background: var(--page-bg-alt);
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 60px;
+            border-left: 4px solid var(--accent);
+        }
+        .intro h2 { font-size: 28px; margin-bottom: 16px; color: var(--page-text-heading); }
+        .intro p { font-size: 18px; line-height: 1.8; color: var(--page-text); margin-bottom: 16px; }
+        .case-study {
+            background: var(--page-bg-alt);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-left: 4px solid #10b981;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .case-study:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .case-header { margin-bottom: 20px; }
+        .case-title { font-size: 20px; margin-bottom: 10px; color: var(--page-text-heading); font-weight: 700; line-height: 1.3; }
+        .case-meta {
+            display: flex;
+            gap: 30px;
+            color: var(--nav-text-muted);
+            font-size: 14px;
+            flex-wrap: wrap;
+        }
+        .case-content { font-size: 14px; line-height: 1.7; color: var(--page-text); }
+        .case-content p { margin-bottom: 12px; }
+        .case-content strong { color: var(--page-text-heading); }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 16px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        .metric { text-align: center; }
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+        .metric-label {
+            font-size: 13px;
+            color: var(--nav-text-muted);
+            text-transform: uppercase;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .tech {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .timeline {
+            margin: 30px 0;
+            padding-left: 30px;
+            border-left: 2px solid var(--nav-border);
+        }
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #10b981;
+        }
+        .timeline-week { font-weight: 600; color: #10b981; margin-bottom: 4px; }
+        @media(max-width: 1024px) {
+            .cases-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .case-study { padding: 24px 20px; }
+            .featured-case { padding: 40px 30px; }
+            .featured-title { font-size: 28px; }
+            .featured-stat-value { font-size: 32px; }
+            .filter-buttons {
+                flex-wrap: wrap;
+                gap: 8px;
+                justify-content: center;
+            }
+            .filter-btn {
+                font-size: 13px;
+                padding: 10px 16px;
+                min-width: auto;
+            }
+            .insights-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .comparison-cards {
+                grid-template-columns: 1fr;
+            }
+            body {
+                padding-bottom: 80px; /* Space for fixed mobile CTA */
+            }
+        }
+        
+        /* Filter button hover states */
+        .filter-btn:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+            transition: all 0.2s;
+        }
+        .filter-btn[data-filter="all"] {
+            background: var(--accent) !important;
+            color: #0B1120 !important;
+            border: none !important;
+        }
+        .case-study.hidden {
+            display: none;
+        }
+        .tier-section.hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        // Professional filtering system with real-time insights
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const insightDiv = document.getElementById('filter-insight');
+            
+            const caseData = [
+                {exp: 'senior', days: 27, salary: 135, role: 'Java Developer'},
+                {exp: 'senior', days: 53, salary: 120, role: 'Backend Engineer'},
+                {exp: 'senior', days: 98, salary: 115, role: 'DevOps Engineer'},
+                {exp: 'senior', days: 145, salary: 108, role: 'Data Engineer'},
+                {exp: 'mid', days: 89, salary: 105, role: 'Full Stack Developer'},
+                {exp: 'senior', days: 212, salary: 96.6, role: 'Software Engineer'},
+                {exp: 'senior', days: 87, salary: 88, role: 'Senior Engineer'},
+                {exp: 'mid', days: 112, salary: 92, role: 'Frontend Engineer'},
+                {exp: 'mid', days: 134, salary: 78, role: 'QA Engineer'},
+                {exp: 'junior', days: 68, salary: 66.5, role: 'Mid-Level Engineer'},
+                {exp: 'junior', days: 110, salary: 59.2, role: 'Software Engineer'},
+                {exp: 'mid', days: 102, salary: 110, role: 'Machine Learning Engineer'},
+                {exp: 'mid', days: 75, salary: 73, role: 'Software Engineer'}
+            ];
+            
+            function updateInsight(filter) {
+                let filtered = caseData;
+                let filterText = 'all experience levels';
+                
+                if (filter === 'senior') {
+                    filtered = caseData.filter(c => c.exp === 'senior');
+                    filterText = '5+ years experience';
+                } else if (filter === 'mid') {
+                    filtered = caseData.filter(c => c.exp === 'mid');
+                    filterText = '3-5 years experience';
+                } else if (filter === 'junior') {
+                    filtered = caseData.filter(c => c.exp === 'junior');
+                    filterText = '0-3 years experience';
+                } else if (filter === 'fast') {
+                    filtered = caseData.filter(c => c.days < 60);
+                    filterText = 'examples under 60 days';
+                }
+                
+                const count = filtered.length;
+                const avgDays = Math.round(filtered.reduce((sum, c) => sum + c.days, 0) / count);
+                const avgSalary = Math.round(filtered.reduce((sum, c) => sum + c.salary, 0) / count);
+                const fastest = Math.min(...filtered.map(c => c.days));
+                const highest = Math.max(...filtered.map(c => c.salary));
+                
+                insightDiv.innerHTML = `<strong style="color:var(--accent);">Insight:</strong> ${count} representative examples with ${filterText}. Average time: ${avgDays} days. Average salary: $${avgSalary}K. Fastest: ${fastest} days. Highest: $${highest}K.`;
+            }
+            
+            function applyFilter(filter) {
+                // Update button states
+                filterBtns.forEach(btn => {
+                    if (btn.dataset.filter === filter) {
+                        btn.style.background = 'var(--accent)';
+                        btn.style.color = '#0B1120';
+                        btn.style.border = 'none';
+                    } else {
+                        btn.style.background = 'rgba(255,255,255,0.1)';
+                        btn.style.color = 'var(--page-text)';
+                        btn.style.border = '1px solid rgba(255,255,255,0.2)';
+                    }
+                });
+                
+                // Show/hide case studies
+                const cases = document.querySelectorAll('.case-study');
+                const tiers = document.querySelectorAll('.tier-section');
+                
+                if (filter === 'all') {
+                    cases.forEach(c => c.classList.remove('hidden'));
+                    tiers.forEach(t => t.classList.remove('hidden'));
+                    document.querySelector('.featured-case').style.display = 'block';
+                } else {
+                    // Hide all first
+                    cases.forEach(c => c.classList.add('hidden'));
+                    
+                    // Show matching cases
+                    cases.forEach(c => {
+                        const meta = c.querySelector('.case-meta').textContent;
+                        if (filter === 'senior' && (meta.includes('5+ Years') || meta.includes('6+ Years') || meta.includes('8+ Years') || meta.includes('7+ Years'))) {
+                            c.classList.remove('hidden');
+                        } else if (filter === 'mid' && (meta.includes('3+ Years') || meta.includes('4+ Years'))) {
+                            c.classList.remove('hidden');
+                        } else if (filter === 'junior' && (meta.includes('2+ Years') || meta.includes('1+ Years'))) {
+                            c.classList.remove('hidden');
+                        } else if (filter === 'fast') {
+                            const daysText = meta.match(/(\d+)\s*Days/);
+                            if (daysText && parseInt(daysText[1]) < 60) {
+                                c.classList.remove('hidden');
+                            }
+                        }
+                    });
+                    
+                    // Hide empty tiers
+                    tiers.forEach(t => {
+                        const visibleCases = t.querySelectorAll('.case-study:not(.hidden)');
+                        if (visibleCases.length === 0) {
+                            t.classList.add('hidden');
+                        } else {
+                            t.classList.remove('hidden');
+                        }
+                    });
+                    
+                    // Featured case visibility
+                    if (filter === 'senior' || filter === 'fast') {
+                        document.querySelector('.featured-case').style.display = 'block';
+                    } else {
+                        document.querySelector('.featured-case').style.display = 'none';
+                    }
+                }
+                
+                updateInsight(filter);
+            }
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    applyFilter(this.dataset.filter);
+                });
+            });
+        });
+    </script>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+    <header class="global-header">
+        <nav class="nav-container">
+            <a href="index" class="nav-logo">
+                <img src="/100k_pathway_logo_pack_v2/100k_pathway_256px.png" alt="100K Pathway" class="nav-logo-img">
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="nav-links" id="nav-links">
+                <a href="how-it-works" class="nav-link">How It Works</a>
+                <a href="pricing" class="nav-link">Pricing</a>
+                <a href="case-studies" class="nav-link active">Verified Outcomes</a>
+                <a href="blog" class="nav-link">Insights</a>
+            </div>
+            <div class="nav-auth">
+                <a href="apply" class="nav-link-primary" id="nav-apply">Apply</a>
+            </div>
+
+            <div class="nav-user" id="nav-user" style="display: none;">
+                <div class="nav-avatar" id="nav-avatar">U</div>
+                <span id="nav-username">User</span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Verified Outcomes</h1>
+        <p>Representative sample from our coordination system. Names changed for privacy. Data verified by independent placement records.</p>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <h2>Why This Page Exists</h2>
+            <p>Most placement services hide their outcomes. We publish a sample. Every candidate below operated within the <strong>100 Days, $100K system</strong>: coordinated application volume, structured interview coordination, and transparent compensation targeting from day one.</p>
+            <p>Names changed for privacy. Data verified. The pattern repeats: first 10 interviews secured within 50 days, final placements ranging 27 to 212 days, salaries from $59K to $135K. Below are representative examples of how the system performs when executed correctly.</p>
+        </div>
+
+        <!-- Interactive filters/insights -->
+        <div style="background:rgba(16,185,129,0.1);border-left:4px solid #10b981;padding:32px;border-radius:12px;margin-bottom:60px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-bottom:24px;">
+                <h3 style="color:#10b981;font-size:20px;font-weight:700;margin:0;">Filter by Your Profile</h3>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                    <button class="filter-btn" data-filter="all" style="background:var(--accent);color:#0B1120;padding:10px 20px;border:none;border-radius:6px;font-weight:600;cursor:pointer;font-size:14px;">All Examples (13)</button>
+                    <button class="filter-btn" data-filter="senior" style="background:rgba(255,255,255,0.1);color:var(--page-text);padding:10px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:6px;font-weight:600;cursor:pointer;font-size:14px;">5+ Years Exp</button>
+                    <button class="filter-btn" data-filter="mid" style="background:rgba(255,255,255,0.1);color:var(--page-text);padding:10px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:6px;font-weight:600;cursor:pointer;font-size:14px;">3-5 Years Exp</button>
+                    <button class="filter-btn" data-filter="junior" style="background:rgba(255,255,255,0.1);color:var(--page-text);padding:10px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:6px;font-weight:600;cursor:pointer;font-size:14px;">0-3 Years Exp</button>
+                    <button class="filter-btn" data-filter="fast" style="background:rgba(255,255,255,0.1);color:var(--page-text);padding:10px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:6px;font-weight:600;cursor:pointer;font-size:14px;">Under 60 Days</button>
+                </div>
+            </div>
+            <div id="filter-insight" style="color:var(--nav-text-muted);font-size:15px;line-height:1.6;">
+                <strong style="color:var(--accent);">Insight:</strong> 13 representative examples across all experience levels. Average time: 108 days. Median salary: $96K. Fastest: 27 days. Highest: $135K.
+            </div>
+        </div>
+
+        <!-- Featured fastest placement -->
+        <div class="featured-case">
+            <h2 class="featured-title">Purvi P. | Java Developer | $135K</h2>
+            <div class="featured-meta">
+                <div class="featured-stat">
+                    <div class="featured-stat-value">27</div>
+                    <div class="featured-stat-label">Days to Placement</div>
+                </div>
+                <div class="featured-stat">
+                    <div class="featured-stat-value">25+</div>
+                    <div class="featured-stat-label">Interviews</div>
+                </div>
+                <div class="featured-stat">
+                    <div class="featured-stat-value">$135K</div>
+                    <div class="featured-stat-label">Annual Salary</div>
+                </div>
+                <div class="featured-stat">
+                    <div class="featured-stat-value">8+ Yrs</div>
+                    <div class="featured-stat-label">Experience</div>
+                </div>
+            </div>
+            <p style="font-size:17px;line-height:1.8;color:var(--page-text);"><strong>Challenge:</strong> Senior Java development role with multiple concurrent interview processes across top tech companies including Meta, Oracle, CrowdStrike.</p>
+            <p style="font-size:17px;line-height:1.8;color:var(--page-text);margin-top:12px;"><strong>Approach:</strong> First 10 interviews within 10 days. High-volume parallel interview coordination across enterprise clients. Managed 25+ technical screenings and panel rounds simultaneously.</p>
+            <p style="font-size:17px;line-height:1.8;color:var(--page-text);margin-top:12px;"><strong>Outcome:</strong> Secured $135K Java developer role ($65/hour). Fastest interview velocity at 25+ screenings in under 30 days. Volume strategy with technical depth proved senior-level capability quickly.</p>
+        </div>
+
+        <!-- $100K+ Tier -->
+        <div class="tier-section">
+            <div class="tier-header">
+                <div class="tier-badge">$100K+</div>
+                <h3 class="tier-title">Premium Tier Examples</h3>
+                <span class="tier-range">5 Examples | $105K to $135K</span>
+            </div>
+            <div class="cases-grid">
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Yasir A. | Backend Engineer | $120K</h2>
+                <div class="case-meta">
+                    <span>30+ interviews</span>
+                    <span>3+ Years Experience</span>
+                    <span>124 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> High-volume interview process across multiple enterprise clients with competitive compensation expectations.</p>
+                <p><strong>Approach:</strong> First 10 interviews secured within 45 days. Structured coordination across 30+ touchpoints maintained engagement through extended evaluation cycle.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">30+</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$120K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">124</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Mid-level placement with strong growth trajectory. Managed complex, multi-stakeholder hiring cycles successfully.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Salman R. | Senior Engineer | $110K (Fastest)</h2>
+                <div class="case-meta">
+                    <span>12 interviews</span>
+                    <span>6+ Years Experience</span>
+                    <span>53 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> Urgent senior-level requirement with minimal time-to-hire and immediate impact expectations.</p>
+                <p><strong>Approach:</strong> First 10 interviews secured within 45 days. Streamlined process limited to decision-makers. Fast feedback loops enabled rapid closure.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">12</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$110K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">53</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Fastest placement across all engagements. Senior hire with leadership readiness saved significant operational bandwidth.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Vikram T. | DevOps Engineer | $115K</h2>
+                <div class="case-meta">
+                    <span>22 interviews</span>
+                    <span>6+ Years Experience</span>
+                    <span>98 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> Senior DevOps role requiring cloud infrastructure expertise with enterprise-level compensation expectations.</p>
+                <p><strong>Approach:</strong> First 10 interviews within 46 days. AWS/Azure certification credentials opened doors. Infrastructure-as-code demonstrations validated hands-on capability.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">22</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$115K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">98</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> High-value DevOps placement exceeding $100K threshold. Cloud certifications accelerated credibility establishment.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Rahul P. | Data Engineer | $108K</h2>
+                <div class="case-meta">
+                    <span>25 interviews</span>
+                    <span>5+ Years Experience</span>
+                    <span>145 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> Data engineering role requiring pipeline architecture expertise with high technical bar and competitive compensation.</p>
+                <p><strong>Approach:</strong> First 10 interviews within 48 days. SQL optimization case studies and ETL architecture walkthroughs demonstrated depth. Extended evaluation justified by technical complexity.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">25</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$108K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">145</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> High-value data engineering placement above $100K target. Technical depth over volume strategy paid off in specialized role.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Arjun K. | Full Stack Developer | $105K</h2>
+                <div class="case-meta">
+                    <span>18 interviews</span>
+                    <span>4+ Years Experience</span>
+                    <span>89 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> Full-stack requirement demanding both frontend and backend proficiency at competitive compensation levels.</p>
+                <p><strong>Approach:</strong> First 10 interviews within 48 days. Portfolio-led outreach to showcase full-stack capability. Technical depth demonstrations accelerated decision cycles.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">18</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$105K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">89</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Strong full-stack placement above $100K target. Portfolio strategy proved technical versatility early, reducing interview friction.</p>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- $80K-$99K Tier -->
+        <div class="tier-section">
+            <div class="tier-header">
+                <div class="tier-badge">$80K-$99K</div>
+                <h3 class="tier-title">Mid-Tier Examples</h3>
+                <span class="tier-range">4 Examples | $88K to $96.6K</span>
+            </div>
+            <div class="cases-grid">
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Kunal S. | Software Engineer | $96.6K</h2>
+                <div class="case-meta">
+                    <span>45+ interviews</span>
+                    <span>3+ Years Experience</span>
+                    <span>212 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> Niche technical requirement with extensive evaluation depth across multiple interview panels.</p>
+                <p><strong>Approach:</strong> First 10 interviews secured within 50 days. Deep technical screening combined with continuous engagement to prevent dropout over extended timeline.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">45+</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$96.6K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">212</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Successfully closed hard-to-find technical profile. Maintained candidate commitment through rigorous evaluation process.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Gouthami P. | Senior Developer | $88K</h2>
+                <div class="case-meta">
+                    <span>30+ interviews</span>
+                    <span>7+ Years Experience</span>
+                    <span>100 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> Senior-level acquisition balancing multiple interviewer expectations with competitive compensation alignment.</p>
+                <p><strong>Approach:</strong> First 10 interviews secured within 45 days. Structured stages with clear compensation discussions from early evaluation phases.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">30+</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$88K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">100</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Delivered senior professional with leadership capability within standard hiring timelines. Strong domain depth and role alignment.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Anjali M. | Frontend Engineer | $92K</h2>
+                <div class="case-meta">
+                    <span>16 interviews</span>
+                    <span>3+ Years Experience</span>
+                    <span>112 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> React-focused frontend role with design collaboration requirements and competitive market positioning.</p>
+                <p><strong>Approach:</strong> First 10 interviews within 49 days. Live coding demos and deployed portfolio projects demonstrated production-ready skills immediately.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">16</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$92K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">112</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Strong frontend placement near $100K benchmark. Portfolio-first approach reduced time-to-offer by showcasing production capability.</p>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- $60K-$79K Tier -->
+        <div class="tier-section">
+            <div class="tier-header">
+                <div class="tier-badge">$60K-$79K</div>
+                <h3 class="tier-title">Entry to Mid-Level Examples</h3>
+                <span class="tier-range">4 Examples | $59.2K to $78K</span>
+            </div>
+            <div class="cases-grid">
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Neha B. | Mid-Level Engineer | $66.5K</h2>
+                <div class="case-meta">
+                    <span>15+ interviews</span>
+                    <span>4+ Years Experience</span>
+                    <span>100 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> Mid-level talent requirement with budget sensitivity and speed requirements.</p>
+                <p><strong>Approach:</strong> First 10 interviews secured within 50 days. Targeted screening focused on functional fit. Controlled rounds balanced quality with cost efficiency.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">15+</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$66.5K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">100</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Cost-effective hire with strong functional alignment. Quick ramp-up capability demonstrated optimal speed-quality-cost balance.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Pranavi C. | Mid-Senior Engineer | $72.8K</h2>
+                <div class="case-meta">
+                    <span>12 interviews</span>
+                    <span>5+ Years Experience</span>
+                    <span>164 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> Mid-to-senior placement requiring careful experience evaluation within defined budget constraints.</p>
+                <p><strong>Approach:</strong> First 10 interviews secured within 45 days. Limited rounds to essential evaluators. Early compensation alignment reduced negotiation cycles.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">12</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$72.8K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">164</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Experienced professional with strong role ownership. Controlled interview discipline maintained hiring momentum.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Megh M. | Software Engineer | $59.2K</h2>
+                <div class="case-meta">
+                    <span>15 interviews</span>
+                    <span>3+ Years Experience</span>
+                    <span>100 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> Early-to-mid level hire within strict budget parameters requiring strong technical fundamentals.</p>
+                <p><strong>Approach:</strong> First 10 interviews secured within 50 days. Clear requirement calibration with transparent compensation discussions enabled quick acceptance.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">15</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$59.2K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">100</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Cost-effective placement with fast onboarding readiness. Delivered within budget maintaining quality standards.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Priya S. | QA Engineer | $78K</h2>
+                <div class="case-meta">
+                    <span>20 interviews</span>
+                    <span>5+ Years Experience</span>
+                    <span>134 Days</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Challenge:</strong> Quality assurance role requiring automation expertise with stable compensation expectations.</p>
+                <p><strong>Approach:</strong> First 10 interviews within 47 days. Emphasized automation frameworks and CI/CD integration experience to stand out from manual QA candidates.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">20</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">$78K</div><div class="metric-label">Salary</div></div>
+                    <div class="metric"><div class="metric-value">134</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Secured QA automation role with clear growth path. Technical specialization differentiated candidacy in competitive QA market.</p>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div style="background:rgba(59,130,246,0.1);border-left:4px solid #3b82f6;padding:40px;border-radius:12px;">
+            <h2 style="color:#3b82f6;font-size:24px;font-weight:700;margin-bottom:24px;">Compare Your Profile</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;">
+                <div style="background:rgba(255,255,255,0.05);padding:24px;border-radius:8px;">
+                    <div style="font-size:32px;font-weight:800;color:#10b981;margin-bottom:8px;">27-212</div>
+                    <div style="color:var(--nav-text-muted);font-size:14px;margin-bottom:12px;">Days to Placement Range</div>
+                    <div style="color:var(--page-text);font-size:14px;line-height:1.6;">Your timeline depends on experience level, interview velocity, and market conditions. Most candidates place within 90-120 days.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.05);padding:24px;border-radius:8px;">
+                    <div style="font-size:32px;font-weight:800;color:#10b981;margin-bottom:8px;">$59K-$135K</div>
+                    <div style="color:var(--nav-text-muted);font-size:14px;margin-bottom:12px;">Salary Range Achieved</div>
+                    <div style="color:var(--page-text);font-size:14px;line-height:1.6;">Your compensation correlates with years of experience, technical depth, and negotiation execution. Senior candidates average $110K+.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.05);padding:24px;border-radius:8px;">
+                    <div style="font-size:32px;font-weight:800;color:#10b981;margin-bottom:8px;">15-45+</div>
+                    <div style="color:var(--nav-text-muted);font-size:14px;margin-bottom:12px;">Interview Volume Range</div>
+                    <div style="color:var(--page-text);font-size:14px;line-height:1.6;">Higher volume doesn't mean lower quality. Our most thorough candidates averaged 30+ interviews before selecting optimal offers.</div>
+                </div>
+            </div>
+            <div style="margin-top:32px;padding:24px;background:rgba(16,185,129,0.1);border-radius:8px;">
+                <p style="color:var(--page-text);font-size:15px;line-height:1.8;margin:0;"><strong style="color:var(--accent);">Pattern Recognition:</strong> Candidates who secured first 10 interviews within 45-50 days consistently placed faster overall. The system front-loads interview velocity to build momentum and calibrate expectations early.</p>
+            </div>
+        </div>
+
+        <!-- Success metrics showcase -->
+        <div style="background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(59,130,246,0.1));border-radius:12px;padding:48px;margin-top:60px;text-align:center;">
+            <h2 style="color:var(--page-text-heading);font-size:28px;font-weight:800;margin-bottom:36px;">Representative Sample Performance</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;">
+                <div>
+                    <div style="font-size:48px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:12px;">13</div>
+                    <div style="color:var(--nav-text-muted);font-size:14px;text-transform:uppercase;letter-spacing:1px;">Verified Examples</div>
+                </div>
+                <div>
+                    <div style="font-size:48px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:12px;">100%</div>
+                    <div style="color:var(--nav-text-muted);font-size:14px;text-transform:uppercase;letter-spacing:1px;">10 Interviews in 50 Days</div>
+                </div>
+                <div>
+                    <div style="font-size:48px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:12px;">108</div>
+                    <div style="color:var(--nav-text-muted);font-size:14px;text-transform:uppercase;letter-spacing:1px;">Average Days (Sample)</div>
+                </div>
+                <div>
+                    <div style="font-size:48px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:12px;">$96K</div>
+                    <div style="color:var(--nav-text-muted);font-size:14px;text-transform:uppercase;letter-spacing:1px;">Median Salary (Sample)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Candidate quote -->
+        <div style="background:rgba(255,255,255,0.03);border-left:4px solid var(--accent);padding:40px;border-radius:12px;margin-top:60px;">
+            <div style="font-size:20px;line-height:1.8;color:var(--page-text);font-style:italic;margin-bottom:24px;">
+                "First 10 interviews came within 47 days exactly as they said. Interview coordination took mental load off me so I could focus on technical prep. The system works if you execute your part."
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+                <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#10b981,#3b82f6);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#0B1120;">P</div>
+                <div>
+                    <div style="color:var(--page-text-heading);font-weight:700;font-size:16px;">Purvi P.</div>
+                    <div style="color:var(--nav-text-muted);font-size:14px;">Java Developer | $135K | 27 Days</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategic CTA -->
+        <div style="background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(16,185,129,0.1));border-radius:16px;padding:60px;text-align:center;margin-top:60px;border:2px solid rgba(16,185,129,0.3);">
+            <h2 style="color:var(--page-text-heading);font-size:32px;font-weight:800;margin-bottom:20px;">Your Timeline Starts When You Apply</h2>
+            <p style="color:var(--page-text);font-size:18px;line-height:1.8;max-width:700px;margin:0 auto 32px;">Every day you delay is a day further from your first 10 interviews and eventual placement. The candidates above started exactly where you are now.</p>
+            <a href="/apply" style="display:inline-block;background:var(--accent);color:#0B1120;padding:18px 48px;border-radius:8px;font-weight:700;font-size:16px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(16,185,129,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';">Start Your Application</a>
+            <div style="margin-top:24px;color:var(--nav-text-muted);font-size:14px;">Application review within 48 hours | No upfront payment required</div>
+        </div>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>100K Pathway</h4>
+                <p style="font-size:14px;color:var(--nav-text-muted);max-width:280px;">Performance-based career advancement. Interview guarantees backed by refunds.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Learn</h4>
+                <div class="footer-links">
+                    <a href="how-it-works" class="footer-link">How It Works</a>
+                    <a href="pricing" class="footer-link">Pricing</a>
+                    <a href="case-studies" class="footer-link">Verified Outcomes</a>
+                    <a href="blog" class="footer-link">Blog</a>
+                    <a href="contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="terms" class="footer-link">Terms</a>
+                    <a href="privacy" class="footer-link">Privacy</a>
+                    <a href="refund" class="footer-link">Refund Policy</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Get Started</h4>
+                <div class="footer-links">
+                    <a href="apply" class="footer-link">Apply Now</a>
+                    </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 100K Pathway. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+    try{const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)};
+    </script>
+    <script>
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        if (menuToggle) {
+            menuToggle.onclick = function() {
+                const navLinks = document.getElementById('nav-links');
+                navLinks.classList.toggle('active');
+            };
+        }
+    });
+    </script>
+    <script src="navigation.js"></script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

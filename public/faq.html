@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>faq - 100K Pathway</title>
+    <meta name="description" content="Common questions about our interview guarantee program: How the guarantee works, pricing details, refund policy, eligibility requirements, and success rates. Get all your answers here.">
+    <meta name="keywords" content="FAQ, frequently asked questions, help, common questions, program details, guarantee details">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://100k-pathway.com/faq">
+    <meta property="og:title" content="FAQ - Frequently Asked Questions">
+    <meta property="og:description" content="Common questions about our interview guarantee program and how it works.">
+    <meta property="og:image" content="https://100k-pathway.com/logo.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://100k-pathway.com/faq">
+    
+    <!-- Analytics -->
+    <script defer data-domain="100k-pathway.com" src="https://plausible.io/js/script.js"></script>
+    
+    <link rel="stylesheet" href="performance-mobile-fix.css">
+<link rel="stylesheet" href="global-nav.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+    <script src="3d-animations.js" defer></script>
+    <script src="mobile-nav.js" defer></script>
+    <style>
+        .faq-hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .faq-hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Two Column Layout */
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 6rem;
+            padding: 0 2rem;
+        }
+        
+        /* Category Navigation */
+        .faq-categories {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .faq-category-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .category-btn {
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            color: #94a3b8;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .category-btn:hover {
+            background: rgba(102, 126, 234, 0.08);
+            color: #f1f5f9;
+            border-color: rgba(102, 126, 234, 0.2);
+        }
+        
+        .category-btn.active {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.1) 100%);
+            color: #f1f5f9;
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        .category-btn.active::before {
+            transform: scaleY(1);
+        }
+        
+        .category-count {
+            float: right;
+            background: rgba(102, 126, 234, 0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #667eea;
+        }
+        
+        /* FAQ Content */
+        .faq-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .faq-section {
+            display: none;
+        }
+        
+        .faq-section.active {
+            display: block;
+            animation: fadeSlide 0.4s ease;
+        }
+        
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .faq-section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        /* Accordion Items */
+        .faq-item {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.15);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+        
+        .faq-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(102, 126, 234, 0.12), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .faq-item:hover::before {
+            opacity: 1;
+        }
+        
+        .faq-item:hover {
+            border-color: rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+            transform: translateX(8px);
+        }
+        
+        .faq-question {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .faq-toggle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+        
+        .faq-toggle::before {
+            content: '+';
+            color: #667eea;
+            font-size: 1.2rem;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.open .faq-toggle {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: rotate(45deg);
+        }
+        
+        .faq-item.open .faq-toggle::before {
+            color: #fff;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.23, 1, 0.32, 1), padding 0.3s ease;
+        }
+        
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 2rem 1.5rem;
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+        
+        .faq-answer-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .faq-answer-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .faq-answer-content ul, .faq-answer-content ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+        
+        .faq-answer-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .faq-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .faq-categories {
+                position: static;
+            }
+            
+            .faq-category-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .category-btn {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .category-count {
+                display: none;
+            }
+            
+            .faq-question {
+                padding: 1.25rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .faq-answer-content {
+                padding: 0 1.5rem 1.25rem;
+            }
+        }
+    </style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+    <!-- Global Header -->
+   <header class="global-header">
+        <nav class="nav-container">
+            <a href="index" class="nav-logo">
+                <span style="font-size: 24px; font-weight: 700; color: #F9FAFB;">100K <span style="color: #00B894;">Pathway</span></span>
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="nav-links" id="nav-links">
+                <a href="how-it-works" class="nav-link">How It Works</a>
+                <a href="pricing" class="nav-link">Pricing</a>
+                <a href="case-studies" class="nav-link">Verified Outcomes</a>
+                <a href="blog" class="nav-link">Insights</a>
+            </div>
+            <div class="nav-auth">
+                <a href="apply" class="nav-link-primary" id="nav-apply">Apply</a>
+            </div>
+
+            <div class="nav-user" id="nav-user" style="display: none;">
+                <div class="nav-avatar" id="nav-avatar">U</div>
+                <span id="nav-username">User</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <div class="faq-hero">
+        <h1>Frequently Asked Questions</h1>
+        <p>Everything you need to know about pricing, guarantees, and how we help you land $100K+ roles.</p>
+    </div>
+
+    <!-- FAQ Layout -->
+    <div class="faq-layout">
+        <!-- Category Navigation -->
+        <aside class="faq-categories">
+            <nav class="faq-category-nav">
+                <button class="category-btn active" data-category="pricing">Pricing <span class="category-count">3</span></button>
+                <button class="category-btn" data-category="guarantee">Guarantees <span class="category-count">2</span></button>
+                <button class="category-btn" data-category="program">Program <span class="category-count">2</span></button>
+                <button class="category-btn" data-category="after">After Enrollment <span class="category-count">1</span></button>
+            </nav>
+        </aside>
+
+        <!-- FAQ Content -->
+        <div class="faq-content">
+            <!-- Pricing Section -->
+            <section class="faq-section active" data-section="pricing">
+                <h2 class="faq-section-title">Pricing and Fees</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is the success fee structure?</span>
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>If you accept an $80K+ offer, you pay a one-time success fee based on your plan:</p>
+                            <ul>
+                                <li>Essential: 15% of first-year base salary</li>
+                                <li>Standard: 12% of first-year base salary</li>
+                                <li>Premium: 10% of first-year base salary</li>
+                            </ul>
+                            <p>No offer? No success fee. You only pay the upfront plan cost.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is this worth it if I'm already making $80K?</span>
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>If you're at $80K and land a $120K offer, that's $40K more per year. Even after the success fee (~$15K-18K), you're still up $22K-25K in year one. Every year after that, you keep the full $40K difference.</p>
+                            <p>Most members recoup the investment in 6-8 months.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's included in the upfront cost?</span>
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>The upfront fee covers: application submission to target companies, resume optimization, LinkedIn profile enhancement, interview preparation materials, and access to our job tracking system.</p>
+                            <p>Success fee is only charged if you accept an offer at $80K+ base salary.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Guarantee Section -->
+            <section class="faq-section" data-section="guarantee">
+                <h2 class="faq-section-title">Guarantees and Refunds</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if I don't get the guaranteed interviews?</span>
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>If you complete ALL program requirements and receive fewer than the guaranteed qualifying interviews by Day 100, you're eligible for a refund. You have until Day 180 to request it. See <a href="refund" style="color:var(--accent)">Refund Policy</a> for complete terms.</p>
+                            <p>Requirements include: attending sessions, completing applications, and accepting all interview opportunities. Declining interviews forfeits refund eligibility.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you guarantee a job?</span>
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>No. We guarantee qualifying interviews, not job offers. Whether you get hired depends on your interview performance, salary expectations, location, and market conditions.</p>
+                            <p>We prepare you thoroughly, but final hiring decisions rest with employers.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Program Section -->
+            <section class="faq-section" data-section="program">
+                <h2 class="faq-section-title">Program Details</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I keep my current job while enrolled?</span>
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Yes. 90% of our members are employed full-time. We handle the application work. Mentorship sessions are scheduled around your availability.</p>
+                            <p>Interviews typically happen during work hours. Use PTO/sick days as needed.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What counts as a qualifying interview?</span>
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>A qualifying interview must meet these criteria:</p>
+                            <ul>
+                                <li>Technical screen or onsite interview</li>
+                                <li>$80K+ W-2 role</li>
+                                <li>Company with 20+ employees</li>
+                                <li>You have legal work authorization in the target country</li>
+                                <li>Within 180 days of program completion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- After Enrollment Section -->
+            <section class="faq-section" data-section="after">
+                <h2 class="faq-section-title">After Enrollment</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What happens after I enroll?</span>
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Within 24 hours of payment:</p>
+                            <ol>
+                                <li>You receive a welcome email with next steps</li>
+                                <li>Access to our member portal and job tracking system</li>
+                                <li>Your personalized onboarding survey</li>
+                                <li>First strategy session scheduling</li>
+                            </ol>
+                            <p>Your first week focuses on assessment and goal setting. We review your background, current skills, and create a customized plan to reach your target salary.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>100K Pathway</h4>
+                <p style="margin-top:1rem;line-height:1.6;color:var(--page-text-muted)">Interviews in 100 days with money-back guarantee. We handle applications. You handle interviews.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <div class="footer-links">
+                    <a href="how-it-works" class="footer-link">How It Works</a>
+                    <a href="pricing" class="footer-link">Pricing</a>
+                    <a href="case-studies" class="footer-link">Verified Outcomes</a>
+                    <a href="faq" class="footer-link">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="about" class="footer-link">About</a>
+                    <a href="blog" class="footer-link">Blog</a>
+                    <a href="contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="terms" class="footer-link">Terms of Service</a>
+                    <a href="privacy" class="footer-link">Privacy Policy</a>
+                    <a href="refund" class="footer-link">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            &copy; 2025 100K Pathway. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+    // Check auth status
+    const token = localStorage.getItem('token');
+    if (token) {
+        const loginLink = document.getElementById('nav-login');
+        const applyLink = document.getElementById('nav-apply');
+        if (loginLink) loginLink.style.display = 'none';
+        if (applyLink) applyLink.textContent = 'Dashboard';
+        if (applyLink) applyLink.href = '/dashboard.html';
+    }
+    
+    // ===== FAQ CATEGORY SWITCHING =====
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const faqSections = document.querySelectorAll('.faq-section');
+    
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.dataset.category;
+            
+            // Update active button
+            categoryBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Show matching section
+            faqSections.forEach(section => {
+                section.classList.remove('active');
+                if (section.dataset.section === category) {
+                    section.classList.add('active');
+                }
+            });
+        });
+    });
+    
+    // ===== FAQ ACCORDION =====
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+            const isOpen = item.classList.contains('open');
+            
+            // Close all items in the same section
+            const section = item.closest('.faq-section');
+            section.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            
+            // Toggle clicked item
+            if (!isOpen) {
+                item.classList.add('open');
+            }
+        });
+        
+        // Add hover effect for mouse glow
+        item.addEventListener('mousemove', (e) => {
+            const rect = item.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            item.style.setProperty('--mouse-x', x + '%');
+            item.style.setProperty('--mouse-y', y + '%');
+        });
+    });
+    
+    // Open first item by default
+    if (faqItems.length > 0) {
+        faqItems[0].classList.add('open');
+    }
+    </script>
+    <script src="navigation.js"></script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

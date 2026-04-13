@@ -1,0 +1,343 @@
+<!-- INTERACTIVE ROI CALCULATOR WIDGET
+     Embeds into pricing or any page to show personalized value
+     Keeps users engaged by showing their specific numbers
+-->
+
+<style>
+.calculator-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 4rem 2rem;
+    margin: 4rem 0;
+    border-radius: 16px;
+    color: white;
+}
+
+.calculator-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.calculator-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.calculator-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.calculator-subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.calculator-body {
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    padding: 2.5rem;
+    color: #1a1a1a;
+}
+
+.calc-input-group {
+    margin-bottom: 2rem;
+}
+
+.calc-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 16px;
+    color: #374151;
+}
+
+.calc-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.calc-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.calc-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: #e5e7eb;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+.calc-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    border: none;
+}
+
+.calc-results {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border: 2px solid #3b82f6;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.calc-result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.calc-result-row:last-child {
+    border-bottom: none;
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+    border-top: 2px solid #3b82f6;
+}
+
+.calc-result-label {
+    font-size: 16px;
+    color: #4b5563;
+}
+
+.calc-result-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0b3b76;
+}
+
+.calc-result-highlight {
+    font-size: 32px;
+    color: #10b981;
+}
+
+.calc-plan-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.calc-plan-option {
+    padding: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.calc-plan-option:hover {
+    border-color: #667eea;
+}
+
+.calc-plan-option.active {
+    border-color: #667eea;
+    background: #f0f9ff;
+}
+
+.calc-plan-name {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.calc-plan-fee {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+@media (max-width: 768px) {
+    .calculator-title {
+        font-size: 28px;
+    }
+    
+    .calc-plan-selector {
+        grid-template-columns: 1fr;
+    }
+    
+    .calc-result-value {
+        font-size: 20px;
+    }
+}
+</style>
+
+<div class="calculator-section">
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h2 class="calculator-title">Calculate Your ROI</h2>
+            <p class="calculator-subtitle">See exactly how much you'll gain by landing a higher-paying role</p>
+        </div>
+        
+        <div class="calculator-body">
+            <!-- Current Salary Input -->
+            <div class="calc-input-group">
+                <label class="calc-label" for="current-salary">Current Annual Salary</label>
+                <input 
+                    type="number" 
+                    id="current-salary" 
+                    class="calc-input" 
+                    placeholder="$80,000" 
+                    value="80000"
+                    min="0"
+                    step="1000"
+                    oninput="calculateROI()"
+                >
+            </div>
+            
+            <!-- Target Salary Slider -->
+            <div class="calc-input-group">
+                <label class="calc-label" for="target-salary">
+                    Target Salary: <span id="target-salary-display">$120,000</span>
+                </label>
+                <input 
+                    type="range" 
+                    id="target-salary" 
+                    class="calc-slider" 
+                    min="100000" 
+                    max="200000" 
+                    step="5000" 
+                    value="120000"
+                    oninput="updateTargetDisplay(); calculateROI()"
+                >
+                <div style="display:flex;justify-content:space-between;font-size:14px;color:#6b7280;margin-top:0.5rem;">
+                    <span>$100K</span>
+                    <span>$200K</span>
+                </div>
+            </div>
+            
+            <!-- Plan Selector -->
+            <div class="calc-input-group">
+                <label class="calc-label">Select Plan</label>
+                <div class="calc-plan-selector">
+                    <div class="calc-plan-option active" onclick="selectPlan('essential', 1299, 15)">
+                        <div class="calc-plan-name">Essential</div>
+                        <div class="calc-plan-fee">$1,299 + 15%</div>
+                    </div>
+                    <div class="calc-plan-option" onclick="selectPlan('standard', 1999, 12)">
+                        <div class="calc-plan-name">Standard</div>
+                        <div class="calc-plan-fee">$1,999 + 12%</div>
+                    </div>
+                    <div class="calc-plan-option" onclick="selectPlan('premium', 2999, 10)">
+                        <div class="calc-plan-name">Premium</div>
+                        <div class="calc-plan-fee">$2,999 + 10%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results -->
+            <div class="calc-results">
+                <div class="calc-result-row">
+                    <span class="calc-result-label">Annual Salary Increase</span>
+                    <span class="calc-result-value" id="salary-increase">$40,000</span>
+                </div>
+                <div class="calc-result-row">
+                    <span class="calc-result-label">Upfront Cost</span>
+                    <span class="calc-result-value" id="upfront-cost">$0</span>
+                </div>
+                <div class="calc-result-row">
+                    <span class="calc-result-label">Success Fee (One-Time)</span>
+                    <span class="calc-result-value" id="success-fee">$18,000</span>
+                </div>
+                <div class="calc-result-row">
+                    <span class="calc-result-label">Net Gain (Year 1)</span>
+                    <span class="calc-result-value calc-result-highlight" id="net-gain-y1">$22,000</span>
+                </div>
+                <div class="calc-result-row">
+                    <span class="calc-result-label">Lifetime Gain (5 Years)</span>
+                    <span class="calc-result-value calc-result-highlight" id="lifetime-gain">$182,000</span>
+                </div>
+            </div>
+            
+            <div style="margin-top:2rem;padding:1.5rem;background:#fef3c7;border-left:4px solid #f59e0b;border-radius:8px;">
+                <strong style="color:#92400e;display:block;margin-bottom:0.5rem;">💡 Pro Tip:</strong>
+                <p style="color:#78350f;line-height:1.6;margin:0;">This assumes you stay at the new salary level. Most candidates see 10-15% annual raises in subsequent years, compounding the value even further.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Calculator state
+let selectedPlan = {
+    name: 'essential',
+    upfront: 1299,
+    successPercent: 15
+};
+
+function updateTargetDisplay() {
+    const slider = document.getElementById('target-salary');
+    const display = document.getElementById('target-salary-display');
+    const value = parseInt(slider.value);
+    display.textContent = '$' + value.toLocaleString();
+}
+
+function selectPlan(name, upfront, successPercent) {
+    selectedPlan = { name, upfront, successPercent };
+    
+    // Update UI
+    document.querySelectorAll('.calc-plan-option').forEach(el => {
+        el.classList.remove('active');
+    });
+    event.target.closest('.calc-plan-option').classList.add('active');
+    
+    calculateROI();
+}
+
+function calculateROI() {
+    const currentSalary = parseInt(document.getElementById('current-salary').value) || 0;
+    const targetSalary = parseInt(document.getElementById('target-salary').value) || 0;
+    
+    // Calculations
+    const salaryIncrease = targetSalary - currentSalary;
+    const successFee = (targetSalary * selectedPlan.successPercent) / 100;
+    const upfrontCost = selectedPlan.upfront;
+    const totalCost = upfrontCost + successFee;
+    const netGainY1 = salaryIncrease - totalCost;
+    const lifetimeGain = (salaryIncrease * 5) - totalCost;
+    
+    // Update display
+    document.getElementById('salary-increase').textContent = '$' + salaryIncrease.toLocaleString();
+    document.getElementById('upfront-cost').textContent = '$' + upfrontCost.toLocaleString();
+    document.getElementById('success-fee').textContent = '$' + Math.round(successFee).toLocaleString();
+    document.getElementById('net-gain-y1').textContent = '$' + Math.round(netGainY1).toLocaleString();
+    document.getElementById('lifetime-gain').textContent = '$' + Math.round(lifetimeGain).toLocaleString();
+    
+    // Color code net gain
+    const netGainEl = document.getElementById('net-gain-y1');
+    if (netGainY1 < 0) {
+        netGainEl.style.color = '#ef4444';
+    } else {
+        netGainEl.style.color = '#10b981';
+    }
+}
+
+// Initialize on load
+updateTargetDisplay();
+calculateROI();
+</script>

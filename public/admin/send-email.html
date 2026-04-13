@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Email - Admin | 100K Pathway</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0B1120;
+      color: #D1D5DB;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .header {
+      margin-bottom: 40px;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .logo-prefix { color: #fff; }
+    .logo-accent { color: #00B894; }
+    .subtitle { color: #9CA3AF; font-size: 14px; }
+    .card {
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #F9FAFB;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #9CA3AF;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: #0B1120;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: #F9FAFB;
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #00B894;
+    }
+    select { cursor: pointer; }
+    textarea { min-height: 100px; resize: vertical; }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) {
+      .row { grid-template-columns: 1fr; }
+    }
+    .dynamic-fields { display: none; }
+    .dynamic-fields.active { display: block; }
+    .btn {
+      width: 100%;
+      padding: 16px;
+      background: #00B894;
+      color: #0B1120;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #00a07f; transform: translateY(-1px); }
+    .btn:disabled { background: #374151; cursor: not-allowed; transform: none; }
+    .status {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: none;
+    }
+    .status.success { display: block; background: rgba(0,184,148,0.1); color: #00B894; border: 1px solid #00B894; }
+    .status.error { display: block; background: rgba(239,68,68,0.1); color: #EF4444; border: 1px solid #EF4444; }
+    .template-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-left: 8px;
+    }
+    .badge-auto { background: rgba(0,184,148,0.15); color: #00B894; }
+    .badge-manual { background: rgba(139,92,246,0.15); color: #8B5CF6; }
+    .hint {
+      font-size: 12px;
+      color: #6B7280;
+      margin-top: 6px;
+    }
+  </style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body>
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <span class="logo-prefix">100K</span>
+        <span class="logo-accent">Pathway</span>
+      </div>
+      <p class="subtitle">Admin / Send Email</p>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">Candidate Details</h2>
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="fullName" placeholder="e.g. Purvi Patel">
+      </div>
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="text" id="email" placeholder="e.g. purvi@email.com">
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label>Plan</label>
+          <select id="plan">
+            <option value="Essential Plan">Essential Plan</option>
+            <option value="Standard Plan" selected>Standard Plan</option>
+            <option value="Premium Plan">Premium Plan</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Experience</label>
+          <select id="experience">
+            <option value="0-2 years">0-2 years</option>
+            <option value="3-5 years" selected>3-5 years</option>
+            <option value="5-10 years">5-10 years</option>
+            <option value="10+ years">10+ years</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">Email Template</h2>
+      <div class="form-group">
+        <label>Select Template *</label>
+        <select id="templateType" onchange="updateFields()">
+          <option value="">-- Choose --</option>
+          <option value="applicant_confirmation">Application Received</option>
+          <option value="payment_welcome">Payment Welcome</option>
+          <option value="agreement_invite">Agreement Invite</option>
+          <option value="interview_scheduled">Interview Scheduled</option>
+          <option value="offer_received">Offer Received</option>
+          <option value="feedback_request">Feedback Request</option>
+          <option value="company_announcement">Company Announcement</option>
+        </select>
+      </div>
+
+      <!-- Agreement Invite Fields -->
+      <div id="fields-agreement_invite" class="dynamic-fields">
+        <div class="form-group">
+          <label>Agreement Link</label>
+          <input type="text" id="agreementLink" placeholder="https://docusign.com/...">
+        </div>
+      </div>
+
+      <!-- Interview Scheduled Fields -->
+      <div id="fields-interview_scheduled" class="dynamic-fields">
+        <div class="form-group">
+          <label>Company Name *</label>
+          <input type="text" id="companyName" placeholder="e.g. Google">
+        </div>
+        <div class="form-group">
+          <label>Role *</label>
+          <input type="text" id="role" placeholder="e.g. Senior Software Engineer">
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Interview Date</label>
+            <input type="text" id="interviewDate" placeholder="e.g. March 5, 2025">
+          </div>
+          <div class="form-group">
+            <label>Interview Time</label>
+            <input type="text" id="interviewTime" placeholder="e.g. 2:00 PM EST">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Interview Type</label>
+          <select id="interviewType">
+            <option value="Video Call">Video Call</option>
+            <option value="Phone Call">Phone Call</option>
+            <option value="On-site">On-site</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Offer Received Fields -->
+      <div id="fields-offer_received" class="dynamic-fields">
+        <div class="form-group">
+          <label>Offer Amount</label>
+          <input type="text" id="offerAmount" placeholder="e.g. $165,000/year or $65/hour">
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" id="offerCompany" placeholder="e.g. Microsoft">
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <input type="text" id="offerRole" placeholder="e.g. Java Developer">
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback Request Fields -->
+      <div id="fields-feedback_request" class="dynamic-fields">
+        <div class="form-group">
+          <label>Days Since Placement</label>
+          <input type="text" id="daysSincePlacement" placeholder="e.g. 30 days" value="30 days">
+        </div>
+      </div>
+
+      <!-- Company Announcement Fields -->
+      <div id="fields-company_announcement" class="dynamic-fields">
+        <div class="form-group">
+          <label>Announcement Type</label>
+          <select id="announcementType">
+            <option value="holiday">Holiday</option>
+            <option value="update">Update</option>
+            <option value="event">Event</option>
+            <option value="news">News</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Headline *</label>
+          <input type="text" id="headline" placeholder="e.g. Office Closed for Independence Day">
+        </div>
+        <div class="form-group">
+          <label>Message (HTML allowed)</label>
+          <textarea id="message" placeholder="<p>Your message here...</p>"></textarea>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Button Text (optional)</label>
+            <input type="text" id="ctaText" placeholder="e.g. View Dashboard">
+          </div>
+          <div class="form-group">
+            <label>Button Link</label>
+            <input type="text" id="ctaLink" placeholder="https://...">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" id="sendBtn" onclick="sendEmail()" disabled>Send Email</button>
+    <div id="status" class="status"></div>
+  </div>
+
+  <script>
+    function updateFields() {
+      document.querySelectorAll('.dynamic-fields').forEach(el => el.classList.remove('active'));
+      const template = document.getElementById('templateType').value;
+      if (template) {
+        const fields = document.getElementById('fields-' + template);
+        if (fields) fields.classList.add('active');
+        document.getElementById('sendBtn').disabled = false;
+      } else {
+        document.getElementById('sendBtn').disabled = true;
+      }
+    }
+
+    function sendEmail() {
+      const btn = document.getElementById('sendBtn');
+      const status = document.getElementById('status');
+      
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      status.className = 'status';
+      status.style.display = 'none';
+      
+      const template = document.getElementById('templateType').value;
+      const fullName = document.getElementById('fullName').value || 'User';
+      const email = document.getElementById('email').value || '';
+      const plan = document.getElementById('plan').value;
+      const experience = document.getElementById('experience').value;
+      
+      const payload = {
+        template: template,
+        fullName: fullName,
+        email: email,
+        plan: plan,
+        experience: experience,
+        timestamp: Date.now()
+      };
+
+      if (template === 'agreement_invite') {
+        payload.agreementLink = document.getElementById('agreementLink').value || '';
+      } else if (template === 'interview_scheduled') {
+        payload.companyName = document.getElementById('companyName').value || '';
+        payload.role = document.getElementById('role').value || '';
+        payload.interviewDate = document.getElementById('interviewDate').value || '';
+        payload.interviewTime = document.getElementById('interviewTime').value || '';
+        payload.interviewType = document.getElementById('interviewType').value || '';
+      } else if (template === 'offer_received') {
+        payload.offerAmount = document.getElementById('offerAmount').value || '';
+        payload.offerCompany = document.getElementById('offerCompany').value || '';
+        payload.offerRole = document.getElementById('offerRole').value || '';
+      } else if (template === 'feedback_request') {
+        payload.daysSincePlacement = document.getElementById('daysSincePlacement').value || '30 days';
+      } else if (template === 'company_announcement') {
+        payload.announcementType = document.getElementById('announcementType').value || 'update';
+        payload.headline = document.getElementById('headline').value || '';
+        payload.message = document.getElementById('message').value || '';
+        payload.ctaText = document.getElementById('ctaText').value || '';
+        payload.ctaLink = document.getElementById('ctaLink').value || '';
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/admin/send-email', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      
+      xhr.onload = function() {
+        btn.disabled = false;
+        btn.textContent = 'Send Email';
+        if (xhr.status === 200) {
+          status.className = 'status success';
+          status.textContent = 'Email sent to ' + email;
+          status.style.display = 'block';
+        } else {
+          status.className = 'status error';
+          try {
+            var resp = JSON.parse(xhr.responseText);
+            status.textContent = 'Error: ' + (resp.error || 'Failed');
+          } catch(e) {
+            status.textContent = 'Error: ' + xhr.status;
+          }
+          status.style.display = 'block';
+        }
+      };
+      
+      xhr.onerror = function() {
+        btn.disabled = false;
+        btn.textContent = 'Send Email';
+        status.className = 'status error';
+        status.textContent = 'Network error';
+        status.style.display = 'block';
+      };
+      
+      xhr.send(JSON.stringify(payload));
+    }
+  </script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

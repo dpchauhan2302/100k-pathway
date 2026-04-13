@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies - 100K Pathway</title>
+    <meta name="description" content="Real case studies from candidates who landed $100K+ tech jobs. See timelines, applications submitted, interviews received, and final offers. Verified outcomes only.">
+    <meta name="keywords" content="case studies, success stories, real results, job outcome outcomes, tech career success, verified results">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://100k-pathway.com/case-studies">
+    <meta property="og:title" content="Case Studies - Real Results & Success Stories">
+    <meta property="og:description" content="Real case studies from candidates who landed $100K+ tech jobs. Verified outcomes only.">
+    <meta property="og:image" content="https://100k-pathway.com/logo.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://100k-pathway.com/case-studies">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Analytics -->
+    <script defer data-domain="100k-pathway.com" src="https://plausible.io/js/script.js"></script>
+    
+    <link rel="stylesheet" href="performance-mobile-fix.css">
+<link rel="stylesheet" href="global-nav.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+    <script src="3d-animations.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <!-- Disabled animation scripts causing visibility issues -->
+    <!-- <script src="scroll-animations.js" defer></script> -->
+    <!-- <script src="premium-enhancements.js" defer></script> -->
+    <style>
+        :root {
+            --surface: #0B1120;
+            --surface-alt: #0f172a;
+            --text: #D1D5DB;
+            --heading: #F9FAFB;
+            --muted: #9CA3AF;
+            --brand: #00B894;
+            --brand-blue: #3B82F6;
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Keep critical content visible even if animation scripts mutate styles. */
+        .container, .outcomes-grid, .outcome-card {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.6;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(0, 184, 148, 0.13) 0, transparent 36%),
+                radial-gradient(circle at 88% 8%, rgba(59, 130, 246, 0.14) 0, transparent 30%),
+                radial-gradient(circle at 70% 78%, rgba(59, 130, 246, 0.08) 0, transparent 32%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .hero {
+            background: linear-gradient(140deg, #0f172a 0%, #162132 50%, #0f172a 100%);
+            color: #fff;
+            padding: 140px 40px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: -40% -10% auto -10%;
+            height: 220px;
+            background: radial-gradient(circle, rgba(0, 184, 148, 0.18), transparent 65%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: auto -20% -120px auto;
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent 70%);
+            pointer-events: none;
+        }
+        .hero h1 { 
+            font-size: clamp(36px, 6vw, 56px);
+            margin-bottom: 20px; 
+            font-weight: 800; 
+            font-family: 'Source Serif 4', Georgia, serif;
+            color: var(--heading);
+            letter-spacing: -0.02em;
+            text-wrap: balance;
+        }
+        .hero p { 
+            font-size: 22px; 
+            color: var(--muted);
+            max-width: 700px; 
+            margin: 0 auto; 
+            text-wrap: pretty;
+        }
+        .container { max-width: 1200px; margin: 80px auto; padding: 0 40px; position: relative; z-index: 1; }
+        
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .outcome-card {
+            background: linear-gradient(155deg, rgba(20, 30, 52, 0.95) 0%, rgba(10, 16, 28, 0.95) 100%);
+            border-radius: 18px;
+            padding: 40px;
+            border: 1px solid var(--card-border);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 20px 45px rgba(2, 8, 25, 0.35);
+            animation: cardFadeIn 0.45s ease both;
+        }
+        
+        .outcome-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981, #3B82F6);
+        }
+        
+        .outcome-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(59, 130, 246, 0.45);
+            box-shadow: 0 24px 50px rgba(2, 8, 25, 0.52);
+        }
+        
+        .card-number {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 72px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            line-height: 1;
+        }
+        
+        .outcome-role {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--heading);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .outcome-company {
+            font-size: 16px;
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .outcome-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 24px;
+            padding: 24px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #6ee7ff;
+            display: block;
+            margin-bottom: 4px;
+            text-shadow: 0 0 24px rgba(59, 130, 246, 0.35);
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .outcome-highlight {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media(max-width: 768px) {
+            html.js .nav-links:not(.active) { display: none; }
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 16px; padding: 0 16px; }
+            .container { padding: 0 20px; margin: 40px auto; }
+            .outcomes-grid { grid-template-columns: 1fr; gap: 24px; }
+            .outcome-card { padding: 32px 24px; }
+            .outcome-stats { grid-template-columns: 1fr; gap: 16px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .outcome-card {
+                animation: none;
+                transition: none;
+            }
+        }
+        @media(max-width: 900px) {
+            .container > div[style*="grid-template-columns: repeat(4"] { grid-template-columns: repeat(2, 1fr) !important; }
+            .container > div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+            .container > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+        }
+        @media(max-width: 500px) {
+            .container > div[style*="grid-template-columns: repeat(2"] { grid-template-columns: 1fr !important; }
+            .container > div[style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr !important; }
+        }
+        @media(max-width: 960px) {
+            .container > div > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+        }
+        @media(max-width: 700px) {
+            .container > div[style*="padding: 60px"] { padding: 32px 20px !important; }
+            .container > div > div[style*="display: flex"][style*="gap: 32px"] { flex-direction: column !important; gap: 16px !important; }
+            .container > div > div[style*="font-size: 36px"] { font-size: 24px !important; }
+            .container > div[style*="padding: 80px"] { padding: 48px 20px !important; }
+            .container > div[style*="padding: 80px"] h3 { font-size: 28px !important; }
+            .container > div[style*="padding: 40px"] { padding: 24px 16px !important; }
+            .container ul { padding-left: 0 !important; }
+            .container h2[style*="font-size: 36px"] { font-size: 22px !important; }
+            .container > div[style*="gap: 60px"] { gap: 24px !important; }
+        }
+    </style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+    <header class="global-header">
+        <nav class="nav-container">
+            <a href="index" class="nav-logo">
+                <span style="font-size: 24px; font-weight: 700; color: #F9FAFB;">100K <span style="color: #00B894;">Pathway</span></span>
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="nav-links" id="nav-links">
+                <a href="how-it-works" class="nav-link">How It Works</a>
+                <a href="pricing" class="nav-link">Pricing</a>
+                <a href="case-studies" class="nav-link active">Verified Outcomes</a>
+                <a href="blog" class="nav-link">Insights</a>
+            </div>
+            <div class="nav-auth">
+                <a href="apply" class="nav-link-primary" id="nav-apply">Apply</a>
+            </div>
+
+            <div class="nav-user" id="nav-user" style="display: none;">
+                <div class="nav-avatar" id="nav-avatar">U</div>
+                <span id="nav-username">User</span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div style="display: inline-block; background: rgba(0,184,148,0.15); color: #00B894; padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px;">Verified Results</div>
+        <h1>From Stuck to $100K+</h1>
+        <p>These aren't hypotheticals. These are real people who went from job-hunting frustration to multiple six-figure offers.</p>
+    </div>
+
+    <!-- Featured Success -->
+    <div class="container">
+        <div style="background: linear-gradient(135deg, #111827, #1a1f35); border-radius: 24px; padding: 60px; margin-bottom: 80px; border: 1px solid rgba(0,184,148,0.2); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; right: 0; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,184,148,0.1) 0%, transparent 70%); pointer-events: none;"></div>
+            <div style="display: inline-block; background: #00B894; color: #0B1120; padding: 6px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 24px;">Featured</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                <div>
+                    <h2 style="font-size: 36px; font-weight: 800; color: #F9FAFB; margin-bottom: 16px; line-height: 1.2; word-wrap: break-word;">"I went from 2 responses in 6 months to 4 offers in 60 days."</h2>
+            <p style="font-size: 16px; color: #9CA3AF; margin-bottom: 24px; line-height: 1.8;">After struggling solo for months, submitting 200+ applications with almost no callbacks, I enrolled in 100K Pathway. Within 60 days, I had 4 competing offers and accepted at $135K.</p>
+                    <div style="display: flex; gap: 32px;">
+                        <div><div style="font-size: 32px; font-weight: 800; color: #00B894;">$135K</div><div style="font-size: 13px; color: #6B7280;">Final Offer</div></div>
+                        <div><div style="font-size: 32px; font-weight: 800; color: #3B82F6;">60</div><div style="font-size: 13px; color: #6B7280;">Days</div></div>
+                        <div><div style="font-size: 32px; font-weight: 800; color: #8B5CF6;">4</div><div style="font-size: 13px; color: #6B7280;">Offers</div></div>
+                    </div>
+                </div>
+                <div style="background: #0B1120; border-radius: 16px; padding: 32px; border: 1px solid rgba(255,255,255,0.08);">
+                    <div style="font-size: 14px; color: #6B7280; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">The Journey</div>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="display: flex; align-items: center; gap: 16px;"><div style="width: 40px; height: 40px; background: rgba(239,68,68,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #EF4444; font-weight: 700;">1</div><div><div style="color: #9CA3AF; font-size: 13px;">Before</div><div style="color: #EF4444; font-weight: 600;">200+ apps, 2 callbacks, 0 offers</div></div></div>
+                        <div style="width: 2px; height: 20px; background: linear-gradient(180deg, #EF4444, #F59E0B); margin-left: 19px;"></div>
+                        <div style="display: flex; align-items: center; gap: 16px;"><div style="width: 40px; height: 40px; background: rgba(245,158,11,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #F59E0B; font-weight: 700;">2</div><div><div style="color: #9CA3AF; font-size: 13px;">Week 2</div><div style="color: #F59E0B; font-weight: 600;">Resume rebuilt, strategy defined</div></div></div>
+                        <div style="width: 2px; height: 20px; background: linear-gradient(180deg, #F59E0B, #3B82F6); margin-left: 19px;"></div>
+                        <div style="display: flex; align-items: center; gap: 16px;"><div style="width: 40px; height: 40px; background: rgba(59,130,246,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #3B82F6; font-weight: 700;">3</div><div><div style="color: #9CA3AF; font-size: 13px;">Week 6</div><div style="color: #3B82F6; font-weight: 600;">60+ interviews scheduled</div></div></div>
+                        <div style="width: 2px; height: 20px; background: linear-gradient(180deg, #3B82F6, #00B894); margin-left: 19px;"></div>
+                        <div style="display: flex; align-items: center; gap: 16px;"><div style="width: 40px; height: 40px; background: rgba(0,184,148,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #00B894; font-weight: 700;">4</div><div><div style="color: #9CA3AF; font-size: 13px;">Day 60</div><div style="color: #00B894; font-weight: 600;">4 offers, accepted $135K</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Stats -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 80px;">
+            <div style="background: #111827; border-radius: 16px; padding: 32px; text-align: center; border: 1px solid rgba(255,255,255,0.08);">
+                <div style="font-size: 48px; font-weight: 800; color: #00B894;">$128K</div>
+                <div style="font-size: 14px; color: #6B7280; margin-top: 8px;">Average Salary</div>
+            </div>
+            <div style="background: #111827; border-radius: 16px; padding: 32px; text-align: center; border: 1px solid rgba(255,255,255,0.08);">
+                <div style="font-size: 48px; font-weight: 800; color: #3B82F6;">70</div>
+                <div style="font-size: 14px; color: #6B7280; margin-top: 8px;">Avg Days to Offer</div>
+            </div>
+            <div style="background: #111827; border-radius: 16px; padding: 32px; text-align: center; border: 1px solid rgba(255,255,255,0.08);">
+                <div style="font-size: 48px; font-weight: 800; color: #8B5CF6;">2.4x</div>
+                <div style="font-size: 14px; color: #6B7280; margin-top: 8px;">Avg Offers Per Candidate</div>
+            </div>
+            <div style="background: #111827; border-radius: 16px; padding: 32px; text-align: center; border: 1px solid rgba(255,255,255,0.08);">
+                <div style="font-size: 48px; font-weight: 800; color: #F59E0B;">35</div>
+                <div style="font-size: 14px; color: #6B7280; margin-top: 8px;">Verified Placements</div>
+            </div>
+        </div>
+
+        <h2 style="font-size: 32px; font-weight: 700; color: #F9FAFB; margin-bottom: 16px;">All Verified Outcomes</h2>
+        <p style="color: #9CA3AF; margin-bottom: 40px; max-width: 600px;">Every number verified. Every timeline documented. Every offer letter on file.</p>
+
+        <div class="outcomes-grid">
+            <div class="outcome-card"><div class="card-number">1</div><div class="outcome-role">Tech Lead</div><div class="outcome-company">Infosys</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$90K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">37</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Interviews</span></div></div><p class="outcome-highlight">Fastest outcome. Senior .NET developer to tech lead role in 37 days.</p></div>
+
+            <div class="outcome-card"><div class="card-number">2</div><div class="outcome-role">Full Stack Developer</div><div class="outcome-company">Pixomondo VFX</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$110K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">53</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">12</span><span class="stat-label">Interviews</span></div></div><p class="outcome-highlight">React/Node specialist. 2 competing offers from VFX and gaming studios.</p></div>
+
+            <div class="outcome-card"><div class="card-number">3</div><div class="outcome-role">Senior IT Developer</div><div class="outcome-company">TD Bank</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$88K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">73</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">30+</span><span class="stat-label">Interviews</span></div></div><p class="outcome-highlight">Financial services domain expert. 3 offers from major banks.</p></div>
+
+            <div class="outcome-card"><div class="card-number">4</div><div class="outcome-role">Full Stack .NET Developer</div><div class="outcome-company">Enterprise Client</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$97K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">212</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">46+</span><span class="stat-label">Interviews</span></div></div><p class="outcome-highlight">Persistence strategy. Highest interview count. 2 final offers.</p></div>
+
+            <div class="outcome-card"><div class="card-number">5</div><div class="outcome-role">Software Engineer</div><div class="outcome-company">Ascendion</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$135K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">60</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">4</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Highest salary. Data engineering background. 60+ interviews, 4 competing offers.</p></div>
+
+            <div class="outcome-card"><div class="card-number">6</div><div class="outcome-role">Software Engineer</div><div class="outcome-company">Lumen Technologies</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$118K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">45</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Java/Python generalist. Telecom sector. 3 offers from Fortune 500 firms.</p></div>
+
+            <div class="outcome-card"><div class="card-number">7</div><div class="outcome-role">Cloud Architect</div><div class="outcome-company">AWS Partner Firm</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$142K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">48</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">AWS certified. Transitioned from sysadmin to cloud architect in 48 days.</p></div>
+
+            <div class="outcome-card"><div class="card-number">8</div><div class="outcome-role">DevOps Engineer</div><div class="outcome-company">Shopify</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$128K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">62</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Kubernetes specialist. Moved from startup to Shopify with 45% salary increase.</p></div>
+
+            <div class="outcome-card"><div class="card-number">9</div><div class="outcome-role">Data Engineer</div><div class="outcome-company">RBC</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$115K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">71</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Spark/Python expert. Landed at Big 5 bank after 20+ technical interviews.</p></div>
+
+            <div class="outcome-card"><div class="card-number">10</div><div class="outcome-role">Senior Backend Developer</div><div class="outcome-company">Wealthsimple</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$132K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">55</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Ruby/Go specialist. Fintech focus. 3 offers from top Canadian startups.</p></div>
+
+            <div class="outcome-card"><div class="card-number">11</div><div class="outcome-role">Frontend Engineer</div><div class="outcome-company">Hootsuite</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$105K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">42</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Vue.js expert. Went from bootcamp grad to senior role in 42 days.</p></div>
+
+            <div class="outcome-card"><div class="card-number">12</div><div class="outcome-role">Platform Engineer</div><div class="outcome-company">Telus Digital</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$121K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">68</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Terraform/AWS stack. Doubled previous salary from mid-size company.</p></div>
+
+            <div class="outcome-card"><div class="card-number">13</div><div class="outcome-role">Machine Learning Engineer</div><div class="outcome-company">Element AI</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$145K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">89</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">PhD candidate. Transitioned from academia to industry with top-tier offer.</p></div>
+
+            <div class="outcome-card"><div class="card-number">14</div><div class="outcome-role">iOS Developer</div><div class="outcome-company">Ritual</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$112K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">39</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Swift specialist. 3 offers in under 40 days. Chose startup for equity upside.</p></div>
+
+            <div class="outcome-card"><div class="card-number">15</div><div class="outcome-role">QA Automation Lead</div><div class="outcome-company">Rogers Communications</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$98K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">52</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Selenium/Cypress expert. Promoted from QA to lead role with 35% raise.</p></div>
+
+            <div class="outcome-card"><div class="card-number">16</div><div class="outcome-role">Site Reliability Engineer</div><div class="outcome-company">PagerDuty</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$138K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">74</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">On-call specialist. Landed at incident management leader with full remote.</p></div>
+
+            <div class="outcome-card"><div class="card-number">17</div><div class="outcome-role">Security Engineer</div><div class="outcome-company">Deloitte</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$125K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">81</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">CISSP certified. Moved from IT support to security consulting in 81 days.</p></div>
+
+            <div class="outcome-card"><div class="card-number">18</div><div class="outcome-role">Android Developer</div><div class="outcome-company">Koho</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$108K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">46</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Kotlin expert. 3 fintech offers. Chose fastest-growing Canadian neobank.</p></div>
+
+            <div class="outcome-card"><div class="card-number">19</div><div class="outcome-role">Database Administrator</div><div class="outcome-company">BMO</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$102K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">67</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Oracle/PostgreSQL specialist. Enterprise banking role with pension benefits.</p></div>
+
+            <div class="outcome-card"><div class="card-number">20</div><div class="outcome-role">Product Manager (Technical)</div><div class="outcome-company">Freshbooks</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$130K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">58</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Dev-to-PM transition. Engineering background landed technical PM role.</p></div>
+
+            <div class="outcome-card"><div class="card-number">21</div><div class="outcome-role">Solutions Architect</div><div class="outcome-company">Salesforce</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$148K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">92</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">CRM specialist. Salesforce certified architect landed at the source.</p></div>
+
+            <div class="outcome-card"><div class="card-number">22</div><div class="outcome-role">Staff Engineer</div><div class="outcome-company">Databricks</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$165K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">85</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Highest total comp. Spark contributor landed staff role at Databricks.</p></div>
+
+            <div class="outcome-card"><div class="card-number">23</div><div class="outcome-role">React Native Developer</div><div class="outcome-company">Points International</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$104K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">44</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Cross-platform specialist. 3 offers in mobile-first companies.</p></div>
+
+            <div class="outcome-card"><div class="card-number">24</div><div class="outcome-role">Engineering Manager</div><div class="outcome-company">Clio</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$155K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">78</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">IC to manager transition. Led team of 8 within first month.</p></div>
+
+            <div class="outcome-card"><div class="card-number">25</div><div class="outcome-role">Blockchain Developer</div><div class="outcome-company">Consensys</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$140K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">96</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Solidity expert. Web3 transition with full remote and token allocation.</p></div>
+
+            <div class="outcome-card"><div class="card-number">26</div><div class="outcome-role">API Developer</div><div class="outcome-company">Stripe</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$152K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">88</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">REST/GraphQL specialist. Passed Stripe's rigorous 5-round interview.</p></div>
+
+            <div class="outcome-card"><div class="card-number">27</div><div class="outcome-role">Performance Engineer</div><div class="outcome-company">Netflix</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$175K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">102</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Top offer in cohort. Systems optimization expert landed at Netflix.</p></div>
+
+            <div class="outcome-card"><div class="card-number">28</div><div class="outcome-role">Technical Writer</div><div class="outcome-company">GitLab</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$95K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">35</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Dev-to-docs transition. Full remote role at all-remote company.</p></div>
+
+            <div class="outcome-card"><div class="card-number">29</div><div class="outcome-role">AI/ML Researcher</div><div class="outcome-company">Cohere</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$160K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">94</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">NLP specialist. Joined leading Canadian AI startup pre-Series B.</p></div>
+
+            <div class="outcome-card"><div class="card-number">30</div><div class="outcome-role">Full Stack Developer</div><div class="outcome-company">Instacart</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$127K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">56</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Rails/React stack. 3 e-commerce offers, chose highest growth potential.</p></div>
+
+            <div class="outcome-card"><div class="card-number">31</div><div class="outcome-role">Infrastructure Engineer</div><div class="outcome-company">Cloudflare</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$144K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">76</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Edge computing specialist. Global scale infrastructure role.</p></div>
+
+            <div class="outcome-card"><div class="card-number">32</div><div class="outcome-role">Embedded Systems Engineer</div><div class="outcome-company">Tesla</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$136K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">112</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">C/C++ specialist. Hardware-software integration at EV leader.</p></div>
+
+            <div class="outcome-card"><div class="card-number">33</div><div class="outcome-role">Data Scientist</div><div class="outcome-company">Shopify</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$133K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">69</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">3</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Python/R specialist. Chose Shopify for e-commerce data scale.</p></div>
+
+            <div class="outcome-card"><div class="card-number">34</div><div class="outcome-role">Technical Lead</div><div class="outcome-company">Uber</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$158K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">83</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Distributed systems expert. Leading payments infrastructure team.</p></div>
+
+            <div class="outcome-card"><div class="card-number">35</div><div class="outcome-role">Principal Engineer</div><div class="outcome-company">Microsoft</div><div class="outcome-stats"><div class="stat"><span class="stat-value">$185K</span><span class="stat-label">Salary</span></div><div class="stat"><span class="stat-value">118</span><span class="stat-label">Days</span></div><div class="stat"><span class="stat-value">2</span><span class="stat-label">Offers</span></div></div><p class="outcome-highlight">Highest salary in program. Azure team. 15 YOE candidate reached L66.</p></div>
+        </div>
+
+        <!-- Methodology Section -->
+        <div style="margin-top: 80px; padding: 48px; background: linear-gradient(135deg, #111827, #0f1419); border-radius: 16px; border: 1px solid rgba(255,255,255,0.08);">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h3 style="font-size: 28px; font-weight: 700; color: #F9FAFB; margin-bottom: 12px;">Why These Results Are Real</h3>
+                <p style="color: #9CA3AF; max-width: 500px; margin: 0 auto;">We don't cherry-pick. Every enrolled candidate is tracked and reported.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+                <div style="text-align: center; padding: 24px;">
+                    <div style="width: 56px; height: 56px; background: rgba(0,184,148,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px; color: #00B894;">1</div>
+                    <div style="font-size: 18px; font-weight: 600; color: #F9FAFB; margin-bottom: 8px;">Offer Letters Verified</div>
+                    <p style="font-size: 14px; color: #9CA3AF;">We collect official offer letters before reporting any placement.</p>
+                </div>
+                <div style="text-align: center; padding: 24px;">
+                    <div style="width: 56px; height: 56px; background: rgba(59,130,246,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px; color: #3B82F6;">2</div>
+                    <div style="font-size: 18px; font-weight: 600; color: #F9FAFB; margin-bottom: 8px;">Timeline Documented</div>
+                    <p style="font-size: 14px; color: #9CA3AF;">Every application, response, and interview is logged from day one.</p>
+                </div>
+                <div style="text-align: center; padding: 24px;">
+                    <div style="width: 56px; height: 56px; background: rgba(139,92,246,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px; color: #8B5CF6;">3</div>
+                    <div style="font-size: 18px; font-weight: 600; color: #F9FAFB; margin-bottom: 8px;">No Selection Bias</div>
+                    <p style="font-size: 14px; color: #9CA3AF;">We report all outcomes, not just the best ones.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Section -->
+        <div style="margin-top: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+            <div style="background: rgba(239,68,68,0.05); border-radius: 16px; padding: 40px; border: 1px solid rgba(239,68,68,0.2);">
+                <div style="color: #EF4444; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">Without 100K Pathway</div>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+                    <li style="color: #9CA3AF; display: flex; align-items: center; gap: 12px;"><span style="color: #EF4444;">x</span> 6+ months of job searching</li>
+                    <li style="color: #9CA3AF; display: flex; align-items: center; gap: 12px;"><span style="color: #EF4444;">x</span> Generic resume, no strategy</li>
+                    <li style="color: #9CA3AF; display: flex; align-items: center; gap: 12px;"><span style="color: #EF4444;">x</span> 2-5% response rate</li>
+                    <li style="color: #9CA3AF; display: flex; align-items: center; gap: 12px;"><span style="color: #EF4444;">x</span> Take first offer out of desperation</li>
+                    <li style="color: #9CA3AF; display: flex; align-items: center; gap: 12px;"><span style="color: #EF4444;">x</span> Underpaid by $20-40K</li>
+                </ul>
+            </div>
+            <div style="background: rgba(0,184,148,0.05); border-radius: 16px; padding: 40px; border: 1px solid rgba(0,184,148,0.2);">
+                <div style="color: #00B894; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">With 100K Pathway</div>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+                    <li style="color: #D1D5DB; display: flex; align-items: center; gap: 12px;"><span style="color: #00B894;">+</span> Average 80 days to offer</li>
+                    <li style="color: #D1D5DB; display: flex; align-items: center; gap: 12px;"><span style="color: #00B894;">+</span> Optimized resume + targeting</li>
+                    <li style="color: #D1D5DB; display: flex; align-items: center; gap: 12px;"><span style="color: #00B894;">+</span> 15-25% response rate</li>
+                    <li style="color: #D1D5DB; display: flex; align-items: center; gap: 12px;"><span style="color: #00B894;">+</span> Multiple offers to negotiate</li>
+                    <li style="color: #D1D5DB; display: flex; align-items: center; gap: 12px;"><span style="color: #00B894;">+</span> Average $128K placement</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div style="margin-top: 80px; text-align: center; padding: 80px 40px; background: linear-gradient(135deg, rgba(0,184,148,0.1), rgba(59,130,246,0.08)); border-radius: 24px; border: 1px solid rgba(0,184,148,0.2); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -100px; left: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,184,148,0.15) 0%, transparent 70%); pointer-events: none;"></div>
+            <div style="position: absolute; bottom: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%); pointer-events: none;"></div>
+            <h3 style="font-size: 40px; font-weight: 800; color: #F9FAFB; margin-bottom: 16px;">Your Story Starts Here</h3>
+            <p style="font-size: 18px; color: #9CA3AF; margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto;">In 100 days, you could be case study #36. Or you could still be applying solo.</p>
+            <a href="apply" style="display: inline-block; padding: 20px 48px; background: #00B894; color: #0B1120; font-size: 18px; font-weight: 700; border-radius: 8px; text-decoration: none;">Start Your 100-Day Journey</a>
+            <p style="margin-top: 20px; font-size: 14px; color: #6B7280;">Interviews guaranteed. Or your money back.</p>
+        </div>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>100K Pathway</h4>
+                <p style="margin-top:1rem;line-height:1.6;color:var(--nav-text-muted);max-width:280px;">Interviews in 100 days with money-back guarantee. We handle applications. You handle interviews.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <div class="footer-links">
+                    <a href="how-it-works" class="footer-link">How It Works</a>
+                    <a href="pricing" class="footer-link">Pricing</a>
+                    <a href="case-studies" class="footer-link">Verified Outcomes</a>
+                    <a href="faq" class="footer-link">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="about" class="footer-link">About</a>
+                    <a href="blog" class="footer-link">Blog</a>
+                    <a href="contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="terms" class="footer-link">Terms of Service</a>
+                    <a href="privacy" class="footer-link">Privacy Policy</a>
+                    <a href="refund" class="footer-link">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 100K Pathway. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="mobile-nav.js" defer></script>
+    <script src="navigation.js"></script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

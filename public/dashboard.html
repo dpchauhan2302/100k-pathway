@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - 100K Pathway</title>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+    <script src="3d-animations.js" defer></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #1a1a1a;
+        }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: #0b1120;
+            color: white;
+            padding: 32px 24px;
+            overflow-y: auto;
+        }
+        .logo { font-size: 18px; font-weight: 800; margin-bottom: 40px; letter-spacing: -0.3px; color: white; }
+        .nav-item {
+            padding: 12px 16px;
+            margin-bottom: 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+        .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
+        .nav-item.active { background: #0070f3; color: white; }
+        .main { margin-left: 260px; padding: 32px 48px; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .header h1 { font-size: 32px; font-weight: 700; }
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: #0b3b76;
+        }
+        .stat-change {
+            font-size: 13px;
+            color: #10b981;
+            margin-top: 4px;
+        }
+        .progress-section {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 32px;
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0070f3, #00c6ff);
+            width: 34%;
+            transition: width 0.3s;
+        }
+        .milestone {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .milestone-status {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .milestone.pending .milestone-status { background: #e5e7eb; color: #6b7280; }
+        .milestone-content h4 { font-size: 16px; margin-bottom: 4px; }
+        .milestone-content p { font-size: 14px; color: #6b7280; }
+        .task-list {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .task:last-child { border-bottom: none; }
+        .task-info { flex: 1; }
+        .task-title { font-weight: 600; margin-bottom: 4px; }
+        .task-meta { font-size: 13px; color: #6b7280; }
+        .task-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-urgent { background: #fee2e2; color: #991b1b; }
+        .badge-normal { background: #dbeafe; color: #1e40af; }
+        .btn-primary {
+            padding: 10px 20px;
+            background: #0070f3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-secondary {
+            padding: 10px 20px;
+            background: white;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .interview-card {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 12px;
+        }
+        .interview-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .interview-company { font-weight: 700; font-size: 16px; }
+        
+        /* Success checkmark animation */
+        .success-toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 2.7s;
+            z-index: 10000;
+        }
+        .success-checkmark {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            animation: scaleIn 0.3s ease;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
+        }
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .interview-date { color: #6b7280; font-size: 13px; }
+        .interview-position { color: #374151; margin-bottom: 4px; }
+        .interview-type { 
+            display: inline-block;
+            padding: 4px 8px;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body>
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+    <header class="global-header">
+        <nav class="nav-container">
+            <a href="index" class="nav-logo">
+                <span style="font-size: 24px; font-weight: 700; color: #F9FAFB;">100K <span style="color: #00B894;">Pathway</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="how-it-works" class="nav-link">How It Works</a>
+                <a href="pricing" class="nav-link">Pricing</a>
+                <a href="case-studies" class="nav-link">Case Studies</a>
+                <a href="blog" class="nav-link">Blog</a>
+            </div>
+            <div class="nav-auth">
+                <a href="apply" class="nav-link-primary">Apply</a>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="sidebar">
+        <a href="index" class="logo">100K Pathway</a>
+        <div class="nav-item active">
+            <span>📊</span> Dashboard
+        </div>
+        <div class="nav-item" onclick="window.location.href = 'program'">
+            <span>🎯</span> My Program
+        </div>
+        <div class="nav-item" onclick="window.location.href = 'projects'">
+            <span>💼</span> Projects
+        </div>
+        <div class="nav-item" onclick="window.location.href = 'interviews'">
+            <span>🎤</span> Interviews
+        </div>
+        <div class="nav-item" onclick="window.location.href = 'mentorship'">
+            <span>👥</span> Mentorship
+        </div>
+        <div class="nav-item" onclick="window.location.href = 'resources'">
+            <span>📚</span> Resources
+        </div>
+        <div class="nav-item" onclick="window.location.href = 'settings'">
+            <span>⚙️</span> Settings
+        </div>
+        <div class="nav-item" onclick="logout()" style="margin-top: auto; color: #ef4444;">
+            <span>🚪</span> Sign Out
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <div>
+                <h1>Welcome back, <span id="user-name">Sarah</span></h1>
+                <p style="color: #6b7280; margin-top: 4px;">Day <span id="display-day">34</span> of 100 • <span id="user-plan">Standard Plan</span></p>
+            </div>
+            <div class="user-menu">
+                <button class="btn-secondary">Schedule Mentor</button>
+                <div class="avatar">S</div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Program Progress</div>
+                <div class="stat-value">34%</div>
+                <div class="stat-change">↑ 8% this week</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Applications Sent</div>
+                <div class="stat-value">12</div>
+                <div class="stat-change">Target: 30</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Interviews Secured</div>
+                <div class="stat-value" id="interview-count">3</div>
+                <div class="stat-change"><button class="btn-primary" onclick="openInterviewModal()" style="font-size:12px;padding:6px 12px;">+ Log Interview</button></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Days Remaining</div>
+                <div class="stat-value">66</div>
+                <div class="stat-change">On track</div>
+            </div>
+        </div>
+
+        <!-- 100-Day Progress Tracker -->
+        <div style="background:white;padding:32px;border-radius:12px;border:1px solid #e5e7eb;margin-bottom:32px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+                <div>
+                    <h3 style="font-size:20px;font-weight:700;margin-bottom:4px;">100-Day Journey</h3>
+                    <p style="color:#6b7280;font-size:14px;">Day <span id="current-day">34</span> of 100</p>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:32px;font-weight:800;color:#0b3b76;" id="progress-percent">34%</div>
+                    <div style="font-size:13px;color:#10b981;">↑ On track</div>
+                </div>
+            </div>
+            <div style="background:#f3f4f6;height:12px;border-radius:6px;overflow:hidden;margin-bottom:16px;">
+                <div id="progress-bar" style="background:linear-gradient(90deg,#0070f3,#00d4ff);height:100%;width:34%;transition:width 0.5s ease;"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+                <div style="text-align:center;padding:12px;background:#f9fafb;border-radius:8px;">
+                    <div style="font-size:11px;color:#6b7280;text-transform:uppercase;margin-bottom:4px;">Phase 1</div>
+                    <div style="font-weight:600;font-size:13px;">✓ Resume Ready</div>
+                    <div style="font-size:11px;color:#10b981;">Day 0-30</div>
+                </div>
+                <div style="text-align:center;padding:12px;background:#dbeafe;border-radius:8px;border:2px solid #0070f3;">
+                    <div style="font-size:11px;color:#6b7280;text-transform:uppercase;margin-bottom:4px;">Phase 2</div>
+                    <div style="font-weight:600;font-size:13px;">▶ Applications</div>
+                    <div style="font-size:11px;color:#0070f3;">Day 31-60</div>
+                </div>
+                <div style="text-align:center;padding:12px;background:#f9fafb;border-radius:8px;opacity:0.5;">
+                    <div style="font-size:11px;color:#6b7280;text-transform:uppercase;margin-bottom:4px;">Phase 3</div>
+                    <div style="font-weight:600;font-size:13px;">Interviews</div>
+                    <div style="font-size:11px;color:#6b7280;">Day 61-90</div>
+                </div>
+                <div style="text-align:center;padding:12px;background:#f9fafb;border-radius:8px;opacity:0.5;">
+                    <div style="font-size:11px;color:#6b7280;text-transform:uppercase;margin-bottom:4px;">Phase 4</div>
+                    <div style="font-weight:600;font-size:13px;">Offers</div>
+                    <div style="font-size:11px;color:#6b7280;">Day 91-100</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Refund Eligibility Widget -->
+        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);padding:24px;border-radius:12px;margin-bottom:32px;border:2px solid #f59e0b;">
+            <div style="display:flex;justify-content:space-between;align-items:start;">
+                <div>
+                    <h3 style="font-size:18px;font-weight:700;color:#92400e;margin-bottom:8px;">Refund Guarantee Status</h3>
+                    <p style="font-size:14px;color:#78350f;margin-bottom:16px;">Meet your interview guarantee in 100 days or request a refund until day 180</p>
+                    <div style="display:flex;gap:24px;">
+                        <div>
+                            <div style="font-size:11px;color:#92400e;text-transform:uppercase;margin-bottom:4px;">Interviews</div>
+                            <div style="font-size:24px;font-weight:800;color:#92400e;"><span id="refund-interviews">3</span>/<span id="guarantee-limit">5</span></div>
+                        </div>
+                        <div>
+                            <div style="font-size:11px;color:#92400e;text-transform:uppercase;margin-bottom:4px;">Days Left</div>
+                            <div style="font-size:24px;font-weight:800;color:#92400e;" id="refund-days">146</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:12px 20px;background:#10b981;color:white;border-radius:8px;font-weight:700;font-size:14px;" id="refund-status">✓ On Track</div>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-header">
+                <h3>Current Phase: Build</h3>
+                <span style="color: #6b7280; font-size: 14px;">Days 15-50</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            
+            <div class="milestone">
+                <div class="milestone-status">✓</div>
+                <div class="milestone-content">
+                    <h4>Phase 1: Foundation Complete</h4>
+                    <p>Skills assessment, personalized roadmap, resume transformation</p>
+                </div>
+            </div>
+            
+            <div class="milestone">
+                <div class="milestone-status">⋯</div>
+                <div class="milestone-content">
+                    <h4>Phase 2: Build (In Progress)</h4>
+                    <p>Portfolio projects, weekly reviews, technical documentation</p>
+                </div>
+            </div>
+            
+            <div class="milestone pending">
+                <div class="milestone-status">○</div>
+                <div class="milestone-content">
+                    <h4>Phase 3: Interview Prep</h4>
+                    <p>Mock interviews, system design, negotiation coaching</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="task-list">
+            <h3 style="margin-bottom: 24px;">This Week's Priority Tasks</h3>
+            
+            <div class="task">
+                <div class="task-info">
+                    <div class="task-title">Complete Project 1: API Design & Implementation</div>
+                    <div class="task-meta">Due in 2 days • Build Phase</div>
+                </div>
+                <span class="task-badge badge-urgent">High Priority</span>
+            </div>
+            
+            <div class="task">
+                <div class="task-info">
+                    <div class="task-title">Submit 5 targeted applications to curated companies</div>
+                    <div class="task-meta">Due in 4 days • Application Phase</div>
+                </div>
+                <span class="task-badge badge-urgent">High Priority</span>
+            </div>
+            
+            <div class="task">
+                <div class="task-info">
+                    <div class="task-title">1:1 Mentor Session: Code Review</div>
+                    <div class="task-meta">Tomorrow at 2:00 PM PST</div>
+                </div>
+                <span class="task-badge badge-normal">Scheduled</span>
+            </div>
+            
+            <div class="task">
+                <div class="task-info">
+                    <div class="task-title">Update LinkedIn with new project showcase</div>
+                    <div class="task-meta">Due in 6 days</div>
+                </div>
+                <span class="task-badge badge-normal">Medium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interview Logging Modal -->
+    <div id="interviewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Log Interview</div>
+            <form id="interviewForm">
+                <div class="form-group">
+                    <label class="form-label">Company Name *</label>
+                    <input type="text" class="form-input" name="company_name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Position Title *</label>
+                    <input type="text" class="form-input" name="position_title" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Interview Type *</label>
+                    <select class="form-select" name="interview_type" required>
+                        <option value="">Select type</option>
+                        <option value="phone_screen">Phone Screen</option>
+                        <option value="technical">Technical</option>
+                        <option value="behavioral">Behavioral</option>
+                        <option value="onsite">Onsite</option>
+                        <option value="final">Final Round</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Interview Date *</label>
+                    <input type="datetime-local" class="form-input" name="interview_date" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Duration (minutes)</label>
+                    <input type="number" class="form-input" name="duration_minutes" value="60">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Outcome</label>
+                    <select class="form-select" name="outcome">
+                        <option value="PENDING">Pending</option>
+                        <option value="PASSED">Passed</option>
+                        <option value="REJECTED">Rejected</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-textarea" name="notes" placeholder="Interview feedback, questions asked, etc."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeInterviewModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Interview</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/config.js"></script>
+    <script src="api-client.js"></script>
+    <script>
+        // Auth check
+        if (!localStorage.getItem('authToken')) {
+            window.location.href = 'auth';
+        }
+
+        function logout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userRole');
+            window.location.href = 'index';
+        }
+
+        // Load user data
+        const userName = localStorage.getItem('userName') || 'Professional';
+        document.getElementById('user-name').textContent = userName.split(' ')[0];
+        document.querySelector('.avatar').textContent = userName.charAt(0).toUpperCase();
+
+        // Interview modal functions
+        function openInterviewModal() {
+            document.getElementById('interviewModal').classList.add('active');
+        }
+
+        function closeInterviewModal() {
+            document.getElementById('interviewModal').classList.remove('active');
+            document.getElementById('interviewForm').reset();
+        }
+
+        // Handle interview form submission
+        document.getElementById('interviewForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            const result = await window.api.request('/api/interviews', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+
+            if (result.success) {
+                showSuccessToast('Interview logged successfully!');
+                document.getElementById('interview-count').textContent = result.data.totalQualifyingInterviews;
+                closeInterviewModal();
+                loadInterviews();
+            } else {
+                alert('Error: ' + (result.error || 'Failed to log interview'));
+            }
+        });
+        
+        // Success toast notification
+        function showSuccessToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'success-toast';
+            toast.innerHTML = `
+                <div class="success-checkmark">✓</div>
+                <div style="font-weight:600;color:#1a1a1a;">${message}</div>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Load interviews on page load
+        async function loadInterviews() {
+            const result = await window.api.request('/api/interviews');
+            if (result.success) {
+                const count = result.data.interviews.length;
+                const plan = localStorage.getItem('userPlan') || 'Standard';
+                const limit = plan === 'Premium' ? 7 : (plan === 'Essential' ? 3 : 5);
+                
+                document.getElementById('interview-count').textContent = count;
+                document.getElementById('refund-interviews').textContent = count;
+                document.getElementById('guarantee-limit').textContent = limit;
+                
+                // Update refund status
+                if (count >= limit) {
+                    document.getElementById('refund-status').textContent = '✓ Eligible';
+                    document.getElementById('refund-status').style.background = '#10b981';
+                } else if (count >= Math.ceil(limit * 0.6)) {
+                    document.getElementById('refund-status').textContent = '✓ On Track';
+                    document.getElementById('refund-status').style.background = '#10b981';
+                } else {
+                    document.getElementById('refund-status').textContent = '⚠ At Risk';
+                    document.getElementById('refund-status').style.background = '#f59e0b';
+                }
+            }
+        }
+
+        // Calculate program progress
+        async function loadProgramProgress() {
+            const result = await window.api.request('/api/user/progress');
+            if (result.success && result.data.enrollmentDate) {
+                const startDate = new Date(result.data.enrollmentDate);
+                const today = new Date();
+                const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+                const daysInProgram = Math.min(daysPassed, 100);
+                const progressPercent = Math.floor((daysInProgram / 100) * 100);
+                const daysRemaining = Math.max(180 - daysPassed, 0);
+                
+                document.getElementById('display-day').textContent = daysInProgram;
+                document.getElementById('current-day').textContent = daysInProgram;
+                document.getElementById('progress-percent').textContent = progressPercent + '%';
+                document.getElementById('progress-bar').style.width = progressPercent + '%';
+                document.getElementById('refund-days').textContent = daysRemaining;
+                
+                if (result.data.plan) {
+                    document.getElementById('user-plan').textContent = result.data.plan + ' Plan';
+                    localStorage.setItem('userPlan', result.data.plan);
+                    loadInterviews(); // Reload to update limit
+                }
+            }
+        }
+
+        loadInterviews();
+        loadProgramProgress();
+    </script>
+    
+    <script>
+        try{const lenis=new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true
+        });function raf(time){lenis.raf(time);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)}
+    </script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

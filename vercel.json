@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/submit-form.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    { "source": "/((?!api/).*)", "destination": "/public/$1" }
+  ]
+}

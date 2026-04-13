@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio Projects - 100 Days $100K</title>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0a0f1a;color:#fff;line-height:1.6}
+.header{background:#0d1117;border-bottom:1px solid #21262d;padding:20px 0;position:sticky;top:0;z-index:100}
+.nav{max-width:1400px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:20px;font-weight:700;color:#fff;text-decoration:none}
+.nav-links{display:flex;gap:30px}
+.nav-links a{color:#8b949e;text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:#58a6ff}
+.hero{padding:100px 40px;text-align:center;background:linear-gradient(180deg,#0d1117 0%,#0a0f1a 100%)}
+.hero h1{font-size:56px;margin-bottom:20px;background:linear-gradient(135deg,#58a6ff,#bc8cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:20px;color:#8b949e;max-width:700px;margin:0 auto}
+.container{max-width:1400px;margin:0 auto;padding:60px 40px}
+.section-title{font-size:36px;margin-bottom:50px;text-align:center}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(450px,1fr));gap:40px;margin-bottom:80px}
+.project-card{background:#161b22;border:1px solid #30363d;border-radius:12px;overflow:hidden;transition:all 0.3s}
+.project-card:hover{transform:translateY(-4px);border-color:#58a6ff;box-shadow:0 8px 24px rgba(88,166,255,0.15)}
+.project-image{width:100%;height:280px;background:linear-gradient(135deg,#1f6feb,#8957e5);position:relative;overflow:hidden}
+.project-image img{width:100%;height:100%;object-fit:cover}
+.project-content{padding:30px}
+.project-title{font-size:24px;margin-bottom:12px;color:#fff}
+.project-desc{color:#8b949e;margin-bottom:20px;font-size:15px;line-height:1.8}
+.tech-stack{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tech-tag{background:#21262d;color:#58a6ff;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500}
+.project-links{display:flex;gap:15px}
+.project-link{color:#58a6ff;text-decoration:none;font-size:14px;display:flex;align-items:center;gap:6px}
+.project-link:hover{text-decoration:underline}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px;padding-top:20px;border-top:1px solid #30363d}
+.metric{text-align:center}
+.metric-value{font-size:24px;font-weight:700;color:#58a6ff}
+.metric-label{font-size:12px;color:#8b949e;text-transform:uppercase}
+@media(max-width:768px){
+.projects-grid{grid-template-columns:1fr}
+.hero h1{font-size:36px}
+.nav{padding:0 20px}
+.container{padding:40px 20px}
+}
+</style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body>
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+<div class="header">
+<nav class="nav">
+<a href="index" class="logo">100 Days $100K</a>
+<div class="nav-links">
+<a href="how-it-works">How It Works</a>
+<a href="pricing">Pricing</a>
+<a href="portfolio">Portfolio</a>
+<a href="blog">Blog</a>
+<a href="apply">Apply</a>
+</div>
+</nav>
+</div>
+
+<div class="hero">
+<h1>Real Results. Real People.</h1>
+<p>See how 100 Days $100K transformed careers</p>
+</div>
+
+<div class="container">
+<h2 class="section-title">Featured Projects</h2>
+
+<div class="projects-grid">
+
+<div class="project-card">
+<div class="project-image" style="background:linear-gradient(135deg,#667eea,#764ba2)">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23667eea' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='24' fill='%23fff'%3ERealtime Analytics%3C/text%3E%3C/svg%3E" alt="Analytics Dashboard">
+</div>
+<div class="project-content">
+<h3 class="project-title">Distributed Analytics Platform</h3>
+<p class="project-desc">Real-time event processing system handling 50K events/sec. Built with Kafka, ClickHouse, and React. Processes user behavior data with sub-100ms latency. Deployed on AWS with auto-scaling.</p>
+<div class="tech-stack">
+<span class="tech-tag">React</span>
+<span class="tech-tag">Node.js</span>
+<span class="tech-tag">Kafka</span>
+<span class="tech-tag">ClickHouse</span>
+<span class="tech-tag">Docker</span>
+<span class="tech-tag">AWS</span>
+</div>
+<div class="metrics">
+<div class="metric"><div class="metric-value">50K</div><div class="metric-label">Events/Sec</div></div>
+<div class="metric"><div class="metric-value">99.9%</div><div class="metric-label">Uptime</div></div>
+<div class="metric"><div class="metric-value">&lt;100ms</div><div class="metric-label">Latency</div></div>
+</div>
+<div class="project-links">
+<a href="#" class="project-link">→ Live Demo</a>
+<a href="#" class="project-link">→ GitHub</a>
+<a href="#" class="project-link">→ Case Study</a>
+</div>
+</div>
+</div>
+
+<div class="project-card">
+<div class="project-image" style="background:linear-gradient(135deg,#f093fb,#f5576c)">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23f093fb' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='24' fill='%23fff'%3EE-Commerce API%3C/text%3E%3C/svg%3E" alt="API Platform">
+</div>
+<div class="project-content">
+<h3 class="project-title">Multi-Tenant E-Commerce API</h3>
+<p class="project-desc">Microservices-based e-commerce backend supporting 10K+ concurrent users. Stripe payment integration, inventory management, order processing. GraphQL API with Redis caching.</p>
+<div class="tech-stack">
+<span class="tech-tag">Go</span>
+<span class="tech-tag">GraphQL</span>
+<span class="tech-tag">PostgreSQL</span>
+<span class="tech-tag">Redis</span>
+<span class="tech-tag">Stripe</span>
+<span class="tech-tag">K8s</span>
+</div>
+<div class="metrics">
+<div class="metric"><div class="metric-value">10K</div><div class="metric-label">Concurrent</div></div>
+<div class="metric"><div class="metric-value">5ms</div><div class="metric-label">Avg Response</div></div>
+<div class="metric"><div class="metric-value">$2M</div><div class="metric-label">GMV/Month</div></div>
+</div>
+<div class="project-links">
+<a href="#" class="project-link">→ API Docs</a>
+<a href="#" class="project-link">→ GitHub</a>
+<a href="#" class="project-link">→ Architecture</a>
+</div>
+</div>
+</div>
+
+<div class="project-card">
+<div class="project-image" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%234facfe' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='24' fill='%23fff'%3EML Pipeline%3C/text%3E%3C/svg%3E" alt="ML Platform">
+</div>
+<div class="project-content">
+<h3 class="project-title">Computer Vision Pipeline</h3>
+<p class="project-desc">End-to-end ML pipeline for image classification. YOLOv8 model deployment with FastAPI. Processes 200 images/sec with 94% accuracy. Includes model versioning and A/B testing framework.</p>
+<div class="tech-stack">
+<span class="tech-tag">Python</span>
+<span class="tech-tag">PyTorch</span>
+<span class="tech-tag">FastAPI</span>
+<span class="tech-tag">MLflow</span>
+<span class="tech-tag">S3</span>
+<span class="tech-tag">Lambda</span>
+</div>
+<div class="metrics">
+<div class="metric"><div class="metric-value">94%</div><div class="metric-label">Accuracy</div></div>
+<div class="metric"><div class="metric-value">200</div><div class="metric-label">Images/Sec</div></div>
+<div class="metric"><div class="metric-value">24/7</div><div class="metric-label">Inference</div></div>
+</div>
+<div class="project-links">
+<a href="#" class="project-link">→ Demo</a>
+<a href="#" class="project-link">→ Model Card</a>
+<a href="#" class="project-link">→ Notebook</a>
+</div>
+</div>
+</div>
+
+<div class="project-card">
+<div class="project-image" style="background:linear-gradient(135deg,#fa709a,#fee140)">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23fa709a' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='24' fill='%23fff'%3ESaaS Platform%3C/text%3E%3C/svg%3E" alt="SaaS App">
+</div>
+<div class="project-content">
+<h3 class="project-title">Team Collaboration SaaS</h3>
+<p class="project-desc">Real-time collaboration platform with WebSocket sync, role-based access control, and multi-workspace support. Handles 5K active sessions. Stripe subscriptions, usage tracking, admin dashboard.</p>
+<div class="tech-stack">
+<span class="tech-tag">Next.js</span>
+<span class="tech-tag">TypeScript</span>
+<span class="tech-tag">Supabase</span>
+<span class="tech-tag">WebSocket</span>
+<span class="tech-tag">Vercel</span>
+</div>
+<div class="metrics">
+<div class="metric"><div class="metric-value">5K</div><div class="metric-label">Active Users</div></div>
+<div class="metric"><div class="metric-value">$15K</div><div class="metric-label">MRR</div></div>
+<div class="metric"><div class="metric-value">4.8/5</div><div class="metric-label">Rating</div></div>
+</div>
+<div class="project-links">
+<a href="#" class="project-link">→ Live App</a>
+<a href="#" class="project-link">→ Repo</a>
+<a href="#" class="project-link">→ Tech Stack</a>
+</div>
+</div>
+</div>
+
+<div class="project-card">
+<div class="project-image" style="background:linear-gradient(135deg,#a8edea,#fed6e3)">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23a8edea' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='24' fill='%23333'%3EDevOps Dashboard%3C/text%3E%3C/svg%3E" alt="DevOps">
+</div>
+<div class="project-content">
+<h3 class="project-title">Infrastructure Monitoring System</h3>
+<p class="project-desc">Kubernetes cluster monitoring with Prometheus, Grafana, and custom alerting. Tracks 200+ metrics across 50 services. Auto-remediation for common failures. Terraform-managed infrastructure.</p>
+<div class="tech-stack">
+<span class="tech-tag">K8s</span>
+<span class="tech-tag">Prometheus</span>
+<span class="tech-tag">Grafana</span>
+<span class="tech-tag">Terraform</span>
+<span class="tech-tag">Helm</span>
+<span class="tech-tag">ArgoCD</span>
+</div>
+<div class="metrics">
+<div class="metric"><div class="metric-value">50</div><div class="metric-label">Services</div></div>
+<div class="metric"><div class="metric-value">200+</div><div class="metric-label">Metrics</div></div>
+<div class="metric"><div class="metric-value">99.95%</div><div class="metric-label">SLA</div></div>
+</div>
+<div class="project-links">
+<a href="#" class="project-link">→ Dashboards</a>
+<a href="#" class="project-link">→ IaC Code</a>
+<a href="#" class="project-link">→ Runbooks</a>
+</div>
+</div>
+</div>
+
+<div class="project-card">
+<div class="project-image" style="background:linear-gradient(135deg,#ffecd2,#fcb69f)">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23ffecd2' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='24' fill='%23333'%3EBlockchain App%3C/text%3E%3C/svg%3E" alt="Web3">
+</div>
+<div class="project-content">
+<h3 class="project-title">DeFi Yield Aggregator</h3>
+<p class="project-desc">Web3 app aggregating yield farming opportunities across protocols. Smart contracts on Ethereum. MetaMask integration, real-time APY tracking, gas optimization. Audited by CertiK.</p>
+<div class="tech-stack">
+<span class="tech-tag">Solidity</span>
+<span class="tech-tag">Hardhat</span>
+<span class="tech-tag">Ethers.js</span>
+<span class="tech-tag">React</span>
+<span class="tech-tag">Subgraph</span>
+</div>
+<div class="metrics">
+<div class="metric"><div class="metric-value">$1.2M</div><div class="metric-label">TVL</div></div>
+<div class="metric"><div class="metric-value">800</div><div class="metric-label">Active Wallets</div></div>
+<div class="metric"><div class="metric-value">12%</div><div class="metric-label">Avg APY</div></div>
+</div>
+<div class="project-links">
+<a href="#" class="project-link">→ DApp</a>
+<a href="#" class="project-link">→ Contracts</a>
+<a href="#" class="project-link">→ Audit</a>
+</div>
+</div>
+</div>
+
+</div>
+
+<div style="background:linear-gradient(135deg,#0070f3,#7928ca);padding:60px 40px;border-radius:16px;text-align:center;margin-top:80px">
+<h2 style="font-size:36px;margin-bottom:16px;color:#fff">Build Your Portfolio Project</h2>
+<p style="font-size:18px;margin-bottom:30px;color:#fff;opacity:0.9">Get 1-on-1 guidance to ship a production-grade project in 100 days.</p>
+<a href="apply" style="display:inline-block;background:#fff;color:#0070f3;padding:18px 48px;border-radius:8px;text-decoration:none;font-weight:600;font-size:18px">Start Application →</a>
+</div>
+
+</div>
+
+<script>
+try{const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)};
+
+// GSAP Animations
+gsap.registerPlugin(ScrollTrigger);
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate project cards
+    gsap.utils.toArray('.project-card').forEach((card, i) => {
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 85%'
+            },
+            opacity: 0,
+            y: 60,
+            duration: 0.8,
+            delay: i * 0.1,
+            ease: 'power2.out'
+        });
+    });
+    
+    // Hover effect for project cards
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                y: -8,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+    });
+});
+</script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

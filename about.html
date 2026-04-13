@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About - 100K Pathway</title>
+<meta name="description" content="We're engineers who got tired of watching talented people get rejected by broken hiring systems. Learn about our mission to fix the tech hiring process and help candidates land $100K+ jobs.">
+<meta name="keywords" content="about us, our story, mission, company values, team, who we are">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://100k-pathway.com/about.html">
+<meta property="og:title" content="About Us - 100 Days $100K">
+<meta property="og:description" content="Learn about our mission to fix the tech hiring process and help candidates succeed.">
+<meta property="og:image" content="https://100k-pathway.com/logo.svg">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://100k-pathway.com/about">
+
+<!-- Analytics -->
+<script defer data-domain="100k-pathway.com" src="https://plausible.io/js/script.js"></script>
+
+<link rel="stylesheet" href="performance-mobile-fix.css">
+<link rel="stylesheet" href="global-nav.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+/* Body styled by unified-theme class */
+.hero{padding:120px 40px 80px;text-align:center;background:linear-gradient(180deg,var(--page-bg-alt) 0%,var(--page-bg) 100%)}
+.hero h1{font-size:56px;margin-bottom:24px;background:linear-gradient(135deg,#60a5fa,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+.hero p{font-size:22px;color:#9ca3af;max-width:800px;margin:0 auto;line-height:1.6}
+.container{max-width:1000px;margin:0 auto;padding:80px 40px}
+.section{margin-bottom:80px}
+.section h2{font-size:36px;margin-bottom:24px;color:#60a5fa}
+.section p{font-size:18px;color:#d1d5db;line-height:1.8;margin-bottom:20px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin:60px 0}
+.stat-card{background:#1a1f2e;padding:30px;border-radius:12px;text-align:center;border:1px solid #2d3748}
+.stat-number{font-size:48px;font-weight:800;color:#60a5fa;margin-bottom:8px}
+.stat-label{color:#9ca3af;font-size:14px}
+.principle{background:#1a1f2e;padding:40px;border-radius:12px;margin-bottom:20px;border-left:4px solid #60a5fa}
+.principle h3{font-size:24px;margin-bottom:16px;color:#60a5fa}
+.principle p{color:#d1d5db;line-height:1.7}
+@media(max-width:768px){
+.stats-grid{grid-template-columns:1fr 1fr}
+.hero h1{font-size:36px}
+}
+</style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+    <header class="global-header">
+        <nav class="nav-container">
+            <a href="index" class="nav-logo">100K Pathway</a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="nav-links" id="nav-links">
+                <a href="how-it-works" class="nav-link">How It Works</a>
+                <a href="pricing" class="nav-link">Pricing</a>
+                <a href="case-studies" class="nav-link">Outcomes</a>
+                <a href="blog" class="nav-link">Insights</a>
+            </div>
+            <div class="nav-auth">
+                <a href="apply" class="nav-link-primary" id="nav-apply">Apply</a>
+            </div>
+
+            <div class="nav-user" id="nav-user" style="display: none;">
+                <div class="nav-avatar" id="nav-avatar">U</div>
+                <span id="nav-username">User</span>
+            </div>
+        </nav>
+    </header>
+
+<div class="breadcrumbs">
+    <div class="breadcrumb-container">
+        <a href="/index" class="breadcrumb-item">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-item current">About</span>
+    </div>
+</div>
+
+<div class="hero">
+<h1>We're Not Career Coaches</h1>
+<p>We're engineers who got tired of watching talented people get rejected by broken hiring systems. So we built a system that actually works.</p>
+</div>
+
+<div class="container">
+
+<div class="section">
+<h2>The Problem We Saw</h2>
+<p>Talented engineers stuck in unemployment because they couldn't "sell themselves." Bootcamp grads who could code but couldn't get past ATS filters. Mid-level developers applying to 500+ jobs and getting ghosted.</p>
+<p>The advice? "Network more." "Optimize your resume." "Do more LeetCode." All true. None of it enough.</p>
+<p>We realized the system wasn't broken for everyone. Just for people without connections, portfolio proof, or the energy to grind applications while unemployed and demoralized.</p>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-number">87%</div>
+<div class="stat-label">Get Interviews</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">$132K</div>
+<div class="stat-label">Median Salary</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">58</div>
+<div class="stat-label">Days to Offer</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">542</div>
+<div class="stat-label">Engineers Placed</div>
+</div>
+</div>
+
+<div class="section">
+<h2>What We Actually Do</h2>
+<p>We don't teach you to code. We don't give you "motivation." We don't sell you courses on "mindset." We don't run a bootcamp.</p>
+<p>We build your portfolio projects (with you), submit your applications (for you), prep you for interviews (relentlessly), and guarantee interviews. Or refund every dollar.</p>
+<p>We handle the soul-crushing parts so you can focus on the part that matters: being ready when the interview comes.</p>
+</div>
+
+<div class="section">
+<h2>Our Principles</h2>
+
+<div class="principle">
+<h3>1. No Wasted Motion</h3>
+<p>Every hour you spend should increase your employability. If it doesn't directly lead to interviews or offers, we don't make you do it.</p>
+</div>
+
+<div class="principle">
+<h3>2. Portfolio Over Resume</h3>
+<p>Resumes are filtered by bots. Portfolio projects with real metrics (50K req/sec, 99.9% uptime, fraud detection accuracy) get humans interested.</p>
+</div>
+
+<div class="principle">
+<h3>3. We Eat Our Own Dog Food</h3>
+<p>Success-based pricing means we lose money if you don't get hired. We're not selling hope. We're betting on you.</p>
+</div>
+
+<div class="principle">
+<h3>4. Interviews > Offers</h3>
+<p>We guarantee interviews, not offers. Why? Because once you're in the room with real portfolio work and interview prep, you close the deal yourself. We get you the at-bats.</p>
+</div>
+</div>
+
+<div class="section">
+<h2>Why This Works</h2>
+<p><strong>Application Volume:</strong> We submit a minimum of 30-75 applications on your behalf (varies by plan). You never touch a job board again.</p>
+<p><strong>Portfolio Proof:</strong> When hiring managers see a production system you built (with metrics, deployment, monitoring), they stop caring about gaps in your resume.</p>
+<p><strong>Interview Readiness:</strong> Mock interviews, system design drills, behavioral prep. You walk into rooms confident because you've done this 20 times already.</p>
+<p><strong>Aligned Incentives:</strong> We only get paid when you get hired. If this doesn't work, we lose more than you do.</p>
+</div>
+
+<div class="section">
+<h2>Who We're Not For</h2>
+<p>If you're brand new to tech and can't code yet, learn the basics first, then come back.</p>
+<p>If you want "passive income" or "get rich quick," this is 100 days of real work.</p>
+<p>If you're employed and just shopping around, you don't need this. You need salary negotiation tactics.</p>
+<p>This is for unemployed or underemployed people who can do the work but can't get past the gatekeepers. That's our lane.</p>
+</div>
+
+<div style="background:linear-gradient(135deg,#0070f3,#7928ca);padding:60px 40px;border-radius:16px;text-align:center;margin:80px 0">
+<h2 style="font-size:36px;margin-bottom:16px">100 Days. Real Interviews. Money-Back Guarantee.</h2>
+<p style="font-size:18px;margin-bottom:30px;opacity:0.9">Stop reading about us. Start building your future.</p>
+<a href="apply" style="display:inline-block;background:#fff;color:#0070f3;padding:18px 48px;border-radius:8px;text-decoration:none;font-weight:600;font-size:18px">Apply Now</a>
+</div>
+
+</div>
+
+<footer class="global-footer">
+    <div class="footer-container">
+            <div class="footer-section">
+                <h4>100 Days $100K</h4>
+                <p style="margin-top:1rem;line-height:1.6;color:var(--page-text-muted)">Interviews in 100 days with money-back guarantee. We handle applications. You handle interviews.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <div class="footer-links">
+                    <a href="how-it-works" class="footer-link">How It Works</a>
+                    <a href="pricing" class="footer-link">Pricing</a>
+                    <a href="case-studies" class="footer-link">Case Studies</a>
+                    <a href="faq" class="footer-link">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="about" class="footer-link">About</a>
+                    <a href="blog" class="footer-link">Blog</a>
+                    <a href="contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="terms" class="footer-link">Terms of Service</a>
+                    <a href="privacy" class="footer-link">Privacy Policy</a>
+                    <a href="refund" class="footer-link">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 100K Pathway. All rights reserved.
+        </div>
+</footer>
+
+<script>
+// Mobile navigation toggle
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
+}
+
+// Smooth scroll
+try{const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)};
+</script>
+    <script src="navigation.js"></script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

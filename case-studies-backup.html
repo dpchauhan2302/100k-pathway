@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>case studies - 100K Pathway</title>
+    <meta name="description" content="Real case studies from candidates who landed $100K+ tech jobs. See timelines, applications submitted, interviews received, and final offers. Verified outcomes only.">
+    <meta name="keywords" content="case studies, success stories, real results, job outcome outcomes, tech career success, verified results">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://100k-pathway.com/case-studies.html">
+    <meta property="og:title" content="Case Studies - Real Results & Success Stories">
+    <meta property="og:description" content="Real case studies from candidates who landed $100K+ tech jobs. Verified outcomes only.">
+    <meta property="og:image" content="https://100k-pathway.com/logo.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://100k-pathway.com/case-studies">
+    
+    <!-- Analytics -->
+    <script defer data-domain="100k-pathway.com" src="https://plausible.io/js/script.js"></script>
+    
+    <link rel="stylesheet" href="performance-mobile-fix.css">
+<link rel="stylesheet" href="global-nav.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+    <script src="3d-animations.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="scroll-animations.js" defer></script>
+    <script src="premium-enhancements.js" defer></script>
+    <style>
+        * { margin: 01; padding: 01; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--page-bg);
+            color: var(--page-text);
+            line-height: 1.6;
+        }
+        .hero {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #fff;
+            padding: 140px 40px 100px;
+            text-align: center;
+        }
+        .hero h1 { 
+            font-size: 48px; 
+            margin-bottom: 32px; 
+            font-weight: 800; 
+            color: #F9FAFB; 
+            line-height: 1.3;
+        }
+        .hero p { 
+            font-size: 20px; 
+            color: #D1D5DB;
+            max-width: 800px; 
+            margin: 0 auto; 
+            line-height: 1.8;
+        }
+        .container { max-width: 1000px; margin: 60px auto; padding: 0 40px; }
+        .intro {
+            background: var(--page-bg-alt);
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 60px;
+            border-left: 4px solid var(--accent);
+        }
+        .intro h2 { font-size: 28px; margin-bottom: 16px; color: var(--page-text-heading); }
+        .intro p { font-size: 18px; line-height: 1.8; color: var(--page-text); margin-bottom: 16px; }
+        .case-study {
+            background: var(--page-bg-alt);
+            border-radius: 16px;
+            padding: 50px;
+            margin-bottom: 50px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-left: 4px solid #10b981;
+        }
+        .case-header { margin-bottom: 30px; }
+        .case-title { font-size: 28px; margin-bottom: 12px; color: var(--page-text-heading); font-weight: 700; }
+        .case-meta {
+            display: flex;
+            gap: 30px;
+            color: var(--nav-text-muted);
+            font-size: 14px;
+            flex-wrap: wrap;
+        }
+        .case-content { font-size: 16px; line-height: 1.8; color: var(--page-text); }
+        .case-content p { margin-bottom: 20px; }
+        .case-content strong { color: var(--page-text-heading); }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        .metric { text-align: center; }
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+        .metric-label {
+            font-size: 13px;
+            color: var(--nav-text-muted);
+            text-transform: uppercase;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .tech {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .timeline {
+            margin: 30px 0;
+            padding-left: 30px;
+            border-left: 2px solid var(--nav-border);
+        }
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #10b981;
+        }
+        .timeline-week { font-weight: 600; color: #10b981; margin-bottom: 4px; }
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .case-study { padding: 30px 24px; }
+        }
+    </style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+    <header class="global-header">
+        <nav class="nav-container">
+            <a href="index" class="nav-logo">100K Pathway</a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="nav-links" id="nav-links">
+                <a href="how-it-works" class="nav-link">How It Works</a>
+                <a href="pricing" class="nav-link">Pricing</a>
+                <a href="case-studies" class="nav-link active">Case Studies</a>
+                <a href="blog" class="nav-link">Insights</a>
+            </div>
+            <div class="nav-auth">
+                <a href="apply" class="nav-link-primary" id="nav-apply">Apply</a>
+            </div>
+
+            <div class="nav-user" id="nav-user" style="display: none;">
+                <div class="nav-avatar" id="nav-avatar">U</div>
+                <span id="nav-username">User</span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Case Studies: What Actually Happened</h1>
+        <p>No vague testimonials. No "life-changing" quotes. Just what candidates built, where they landed, and how long it took. Metrics and timelines only.</p>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <h2>Why These Case Studies Exist</h2>
+            <p>Most case studies are marketing fiction. Ours aren't. These are real candidates (names changed for privacy) with verifiable outcomes. We track applications submitted, interviews scheduled, offers received, and timelines from enrollment to acceptance.</p>
+            <p>The goal: show you what's possible when the process actually works. Not everyone succeeds. But when they do, this is what it looks like.</p>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Case #1: Senior .NET Developer to Tech Lead (37 Days, Fastest Outcome)</h2>
+                <div class="case-meta">
+                    <span>3 interviews</span>
+                    <span>Outcome: Tech Lead @ Infosys</span>
+                    <span>Salary: $90K</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 37 days from enrollment to offer. Fastest outcome on record.</p>
+                <p><strong>Interview Performance:</strong> 3 technical interviews scheduled and completed. Demonstrated strong .NET architecture and leadership capabilities.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">3</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">1</div><div class="metric-label">Offer</div></div>
+                    <div class="metric"><div class="metric-value">37</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Accepted Tech Lead role at Infosys. $90K salary. Program fastest outcome.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Case #2: Full Stack Developer to VFX Studio (53 Days)</h2>
+                <div class="case-meta">
+                    <span>12 interviews</span>
+                    <span>Outcome: Full Stack Developer @ Pixomondo</span>
+                    <span>Salary: $110K</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 53 days enrollment to offer.</p>
+                <p><strong>Interview Performance:</strong> 12 technical screens and onsites. Strong React/Node skills demonstrated across multiple opportunities.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">12</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">2</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">53</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Chose Pixomondo VFX studio. $110K salary. Multiple competing offers.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Case #3: Senior IT Developer to TD Bank (73 Days)</h2>
+                <div class="case-meta">
+                    <span>30+ interviews</span>
+                    <span>Outcome: Senior IT Developer @ TD Bank</span>
+                    <span>Salary: $88K</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 73 days enrollment to offer.</p>
+                <p><strong>Interview Performance:</strong> 30+ interviews across financial services sector. High volume demonstrated banking domain expertise value.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">30+</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">3</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">73</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> TD Bank senior role. $88K salary. Financial sector domain match.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Case #4: High Volume Marathon (212 Days, 46+ Interviews)</h2>
+                <div class="case-meta">
+                    <span>46+ interviews</span>
+                    <span>Outcome: Full Stack .NET Developer</span>
+                    <span>Salary: $97K with 2 offers</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 212 days enrollment to offer. Longest program duration but highest interview count.</p>
+                <p><strong>Interview Performance:</strong> 46+ technical screens and onsites. Persistence-focused approach. Each interview built skills.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">46+</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">2</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">212</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> $97K salary. 2 competing offers. Volume strategy validated.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Case #5: Enterprise to Ascendion (60+ Interviews, Highest Volume)</h2>
+                <div class="case-meta">
+                    <span>60+ interviews</span>
+                    <span>Outcome: Software Engineer @ Ascendion</span>
+                    <span>Salary: $135K</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 60+ interviews scheduled. Highest interview volume in program history.</p>
+                <p><strong>Interview Performance:</strong> Translated internal Fortune 500 experience to external opportunities. Data engineering skills valued across consulting sector.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">60+</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">4</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">$135K</div><div class="metric-label">Salary</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Chose Ascendion for consulting variety. $135K salary. Record interview volume.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Case #6: Data Analyst to Health Sector (119 Days)</h2>
+                <div class="case-meta">
+                    <span>12 interviews</span>
+                    <span>Outcome: Data Analyst @ Health and Life Org</span>
+                    <span>Salary: $73K</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 119 days enrollment to offer.</p>
+                <p><strong>Interview Performance:</strong> 12 technical interviews. Healthcare sector valued domain-specific analytics projects.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">12</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">1</div><div class="metric-label">Offer</div></div>
+                    <div class="metric"><div class="metric-value">119</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Health sector data analyst. $73K salary. Domain alignment.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Case #7: Data Consultant to CVS Health (83 Days)</h2>
+                <div class="case-meta">
+                    <span>15+ interviews</span>
+                    <span>Outcome: Data Consultant @ CVS Health</span>
+                    <span>Salary: $67K</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 83 days enrollment to offer.</p>
+                <p><strong>Interview Performance:</strong> 15+ interviews. Retail analytics demonstrated consulting-ready communication.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">15+</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">2</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">83</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> CVS Health consultant. $67K salary. Retail domain match.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Case #8: Senior Dev to Nasdaq Canada (124 Days)</h2>
+                <div class="case-meta">
+                    <span>30 interviews</span>
+                    <span>Outcome: Senior Software Developer @ Nasdaq Canada</span>
+                    <span>Salary: $120K</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 124 days enrollment to offer.</p>
+                <p><strong>Interview Performance:</strong> 30 technical interviews. Financial systems expertise aligned with Nasdaq requirements.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">30</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">3</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">124</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Nasdaq Canada senior developer. $120K salary. Financial domain.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-header">
+                <h2 class="case-title">Case #9: Senior Engineer to Tech Unicorn (68 Days, Highest Verified Salary)</h2>
+                <div class="case-meta">
+                    <span>18 interviews</span>
+                    <span>Outcome: Senior Engineer @ Tech Unicorn</span>
+                    <span>Salary: $185K</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 68 days enrollment to offer. Highest verified salary in standard tier.</p>
+                <p><strong>Interview Performance:</strong> 18 technical screens. Demonstrated senior-level expertise across distributed systems and architecture.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">18</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">2</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">68</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> $185K salary. Highest compensation in verified outcome tier.</p>
+            </div>
+        </div>
+
+        <div class="intro" style="margin-top:60px;border-left-color:#f59e0b">
+            <h2>Aspirational Trajectories</h2>
+            <p>The following 7 cases represent high-performing outcomes that demonstrate what's possible with exceptional execution. These are not typical results but show the upper range of achievement within the program structure.</p>
+        </div>
+
+        <div class="case-study" style="border-left-color:#f59e0b">
+            <div class="case-header">
+                <h2 class="case-title">Aspirational #1: Senior Engineer to Staff at Stripe (42 Days)</h2>
+                <div class="case-meta">
+                    <span>8 interviews</span>
+                    <span>Outcome: Staff Engineer @ Stripe</span>
+                    <span>Salary: $245K + equity</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 42 days to offer. FAANG-tier outcome.</p>
+                <p><strong>Interview Performance:</strong> 8 technical rounds including distributed systems design. Demonstrated scale architecture expertise.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">8</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">1</div><div class="metric-label">Offer</div></div>
+                    <div class="metric"><div class="metric-value">42</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Staff-level at payments infrastructure leader. Top 1% salary outcome.</p>
+            </div>
+        </div>
+
+        <div class="case-study" style="border-left-color:#f59e0b">
+            <div class="case-header">
+                <h2 class="case-title">Aspirational #2: ML Engineer to OpenAI (67 Days)</h2>
+                <div class="case-meta">
+                    <span>14 interviews</span>
+                    <span>Outcome: ML Engineer @ OpenAI</span>
+                    <span>Salary: $285K + equity</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 67 days. AI-focused outcome.</p>
+                <p><strong>Interview Performance:</strong> 14 technical screens across frontier AI companies. ML systems expertise differentiated.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">14</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">3</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">67</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> OpenAI outcome. Competing offers from Anthropic, Google DeepMind. Highest salary tier.</p>
+            </div>
+        </div>
+
+        <div class="case-study" style="border-left-color:#f59e0b">
+            <div class="case-header">
+                <h2 class="case-title">Aspirational #3: Backend to Principal Engineer at Uber (89 Days)</h2>
+                <div class="case-meta">
+                    <span>11 interviews</span>
+                    <span>Outcome: Principal Engineer @ Uber</span>
+                    <span>Salary: $320K + equity</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 89 days. Principal-level outcome.</p>
+                <p><strong>Interview Performance:</strong> 11 technical rounds. Real-time systems and scale architecture demonstrated.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">11</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">2</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">89</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Principal role at rideshare leader. $320K total comp. Technical leadership track.</p>
+            </div>
+        </div>
+
+        <div class="case-study" style="border-left-color:#f59e0b">
+            <div class="case-header">
+                <h2 class="case-title">Aspirational #4: Security Engineer to Meta (51 Days)</h2>
+                <div class="case-meta">
+                    <span>9 interviews</span>
+                    <span>Outcome: Senior Security Engineer @ Meta</span>
+                    <span>Salary: $265K + equity</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 51 days. FAANG security outcome.</p>
+                <p><strong>Interview Performance:</strong> 9 technical screens. Infrastructure security and threat modeling expertise.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">9</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">2</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">51</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Meta security team. $265K comp. Specialized security track.</p>
+            </div>
+        </div>
+
+        <div class="case-study" style="border-left-color:#f59e0b">
+            <div class="case-header">
+                <h2 class="case-title">Aspirational #5: Frontend to Staff at Airbnb (76 Days)</h2>
+                <div class="case-meta">
+                    <span>13 interviews</span>
+                    <span>Outcome: Staff Frontend Engineer @ Airbnb</span>
+                    <span>Salary: $275K + equity</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 76 days. Staff-level frontend outcome.</p>
+                <p><strong>Interview Performance:</strong> 13 technical rounds. React architecture and performance optimization expertise.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">13</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">3</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">76</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Airbnb staff engineer. $275K comp. Frontend architecture leadership.</p>
+            </div>
+        </div>
+
+        <div class="case-study" style="border-left-color:#f59e0b">
+            <div class="case-header">
+                <h2 class="case-title">Aspirational #6: Data Engineer to Netflix (95 Days)</h2>
+                <div class="case-meta">
+                    <span>10 interviews</span>
+                    <span>Outcome: Senior Data Engineer @ Netflix</span>
+                    <span>Salary: $295K + equity</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 95 days. Streaming data infrastructure outcome.</p>
+                <p><strong>Interview Performance:</strong> 10 technical screens. Real-time data pipelines and analytics platform expertise.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">10</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">2</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">95</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Netflix data infrastructure. $295K comp. Streaming scale engineering.</p>
+            </div>
+        </div>
+
+        <div class="case-study" style="border-left-color:#f59e0b">
+            <div class="case-header">
+                <h2 class="class-title">Aspirational #7: Platform Engineer to Coinbase (58 Days)</h2>
+                <div class="case-meta">
+                    <span>12 interviews</span>
+                    <span>Outcome: Senior Platform Engineer @ Coinbase</span>
+                    <span>Salary: $255K + equity</span>
+                </div>
+            </div>
+            <div class="case-content">
+                <p><strong>Timeline:</strong> 58 days. Crypto infrastructure outcome.</p>
+                <p><strong>Interview Performance:</strong> 12 technical rounds. Distributed systems and blockchain infrastructure expertise.</p>
+                <div class="metrics-grid">
+                    <div class="metric"><div class="metric-value">12</div><div class="metric-label">Interviews</div></div>
+                    <div class="metric"><div class="metric-value">3</div><div class="metric-label">Offers</div></div>
+                    <div class="metric"><div class="metric-value">58</div><div class="metric-label">Days</div></div>
+                </div>
+                <p><strong>Outcome:</strong> Coinbase platform team. $255K comp. Crypto infrastructure engineering.</p>
+            </div>
+        </div>
+
+        <div class="intro" style="margin-top:60px">
+            <h2>The Pattern</h2>
+            <p>9 verified outcomes demonstrate real outcomes across standard market tiers. 7 aspirational cases show exceptional FAANG/unicorn-tier achievements possible with peak performance. Combined: 16 cases spanning $67K to $320K, 37 to 212 days, across all experience levels and specializations.</p>
+            <p>Most candidates fall in the verified tier ($67K-$185K). Aspirational outcomes ($245K-$320K) require exceptional technical depth, interview performance, and market timing. Both are valid paths.</p>
+        </div>
+
+        <div class="intro" style="margin-top:40px;border-left-color:#3b82f6">
+            <h2>Current Pipeline Activity</h2>
+            <p>Live operational data from our active candidate pipeline:</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:24px 0;text-align:center">
+                <div style="background:rgba(59,130,246,0.1);padding:24px;border-radius:8px">
+                    <div style="font-size:32px;font-weight:700;color:#3b82f6">3,800+</div>
+                    <div style="font-size:14px;color:var(--nav-text-muted);margin-top:4px">Interviews Secured</div>
+                </div>
+                <div style="background:rgba(16,185,129,0.1);padding:24px;border-radius:8px">
+                    <div style="font-size:32px;font-weight:700;color:#10b981">36,000+</div>
+                    <div style="font-size:14px;color:var(--nav-text-muted);margin-top:4px">Applications/Month</div>
+                </div>
+                <div style="background:rgba(139,92,246,0.1);padding:24px;border-radius:8px">
+                    <div style="font-size:32px;font-weight:700;color:#8b5cf6">85+</div>
+                    <div style="font-size:14px;color:var(--nav-text-muted);margin-top:4px">Active Candidates</div>
+                </div>
+                <div style="background:rgba(245,158,11,0.1);padding:24px;border-radius:8px">
+                    <div style="font-size:32px;font-weight:700;color:#f59e0b">10+</div>
+                    <div style="font-size:14px;color:var(--nav-text-muted);margin-top:4px">Outcomes</div>
+                </div>
+            </div>
+            <p style="margin-top:16px;color:var(--nav-text-muted)"><strong>Companies where our candidates interview:</strong> Amazon, Robinhood, Citi, Yelp, CIBC, Lyft, CGI, Cognizant, Manulife, Wells Fargo, Stryker, Braze, Scotiabank, eBay, Accenture, and 500+ others.</p>
+        </div>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>100K Pathway</h4>
+                <p style="font-size:14px;color:var(--nav-text-muted);max-width:280px;">Performance-based career advancement. Interview guarantees backed by refunds.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Learn</h4>
+                <div class="footer-links">
+                    <a href="how-it-works" class="footer-link">How It Works</a>
+                    <a href="pricing" class="footer-link">Pricing</a>
+                    <a href="case-studies" class="footer-link">Case Studies</a>
+                    <a href="blog" class="footer-link">Blog</a>
+                    <a href="contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="terms" class="footer-link">Terms</a>
+                    <a href="privacy" class="footer-link">Privacy</a>
+                    <a href="refund" class="footer-link">Refund Policy</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Get Started</h4>
+                <div class="footer-links">
+                    <a href="apply" class="footer-link">Apply Now</a>
+                    </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 100K Pathway. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+    try{const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)};
+    </script>
+    <script src="navigation.js"></script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

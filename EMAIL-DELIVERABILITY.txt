@@ -1,0 +1,62 @@
+EMAIL DELIVERABILITY SETUP
+Prevent emails from going to spam
+
+STEP 1: ADD DNS RECORDS
+Go to your domain registrar (GoDaddy) and add these DNS records for 100k-pathway.com:
+
+SPF RECORD (Sender Policy Framework):
+Type: TXT
+Name: @
+Value: v=spf1 include:_spf.google.com ~all
+(Replace with your SMTP provider's SPF if not using Gmail)
+
+DKIM RECORD (DomainKeys Identified Mail):
+Gmail: Enable in Gmail Admin Console, then add provided TXT record
+Custom domain: Generate DKIM keys and add to DNS
+
+DMARC RECORD (Domain-based Message Authentication):
+Type: TXT
+Name: _dmarc
+Value: v=DMARC1; p=quarantine; rua=mailto:dmarc@100k-pathway.com
+
+STEP 2: VERIFY DOMAIN OWNERSHIP
+Add this TXT record to prove you own the domain:
+Type: TXT
+Name: @
+Value: (Provided by your email service provider)
+
+STEP 3: CONFIGURE REVERSE DNS (PTR)
+Contact your hosting provider to set PTR record pointing to your domain
+
+STEP 4: EMAIL BEST PRACTICES
+1. Use authenticated domain (noreply@100k-pathway.com not gmail.com)
+2. Warm up: Start with 20 emails/day, increase gradually
+3. Monitor bounce rate (keep under 5%)
+4. Include unsubscribe link (already added)
+5. Avoid spam trigger words: free, urgent, click here, etc.
+6. Send from consistent IP/domain
+
+STEP 5: TEST DELIVERABILITY
+Use these tools to check your setup:
+- mail-tester.com (score should be 10/10)
+- mxtoolbox.com/SuperTool.aspx
+- Google Postmaster Tools
+
+GMAIL SETUP (Easiest):
+1. Go to myaccount.google.com/apppasswords
+2. Generate app password
+3. Add to .env:
+   SMTP_USER=your-email@gmail.com
+   SMTP_PASS=generated-app-password
+   FROM_EMAIL=your-email@gmail.com
+
+Gmail automatically handles SPF/DKIM, scores 10/10 on deliverability tests.
+
+CURRENT STATUS:
+- Headers configured for spam prevention
+- TLS 1.2+ encryption enabled
+- Proper sender formatting added
+- Plain text fallback included
+- Unsubscribe link added
+
+NEED: Add DNS records above to complete setup

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Our Refund Guarantee Actually Works (The Full Math) - Blog</title>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+<script src="../3d-animations.js" defer></script>
+<script src="../scroll-animations.js" defer></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0B1120;color:#E5E7EB;line-height:1.7}
+.header{background:#fff;border-bottom:1px solid #e5e7eb;padding:20px 0;position:sticky;top:0;z-index:100}
+.nav{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:20px;font-weight:700;color:#1a1a1a;text-decoration:none}
+.nav-links{display:flex;gap:30px}
+.nav-links a{color:#6b7280;text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:#0070f3}
+.article{max-width:800px;margin:80px auto;padding:0 40px}
+.back{color:#0070f3;text-decoration:none;font-size:14px;display:inline-block;margin-bottom:40px}
+.meta{color:#6b7280;font-size:14px;margin-bottom:32px}
+h1{font-size:48px;line-height:1.2;margin-bottom:24px;font-weight:800;color:#0b3b76}
+h2{font-size:28px;margin:60px 0 20px;color:#0b3b76;font-weight:700}
+h3{font-size:22px;margin:40px 0 16px;color:#374151;font-weight:600}
+p{font-size:18px;line-height:1.8;margin-bottom:24px;color:#374151}
+ul{margin:20px 0 40px 40px}
+li{margin-bottom:12px;line-height:1.7;color:#374151}
+.formula-box{background:#f0f9ff;border:2px solid #0ea5e9;padding:24px;border-radius:12px;margin:40px 0;font-family:monospace}
+.formula-box strong{color:#0c4a6e;font-size:18px;display:block;margin-bottom:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.example-box{background:#f0fdf4;border-left:4px solid #10b981;padding:24px;margin:40px 0;border-radius:8px}
+.example-box h4{color:#065f46;margin-bottom:12px;font-size:18px}
+.warning-box{background:#fef2f2;border-left:4px solid #ef4444;padding:24px;margin:40px 0;border-radius:8px}
+.warning-box strong{color:#991b1b;display:block;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;margin:40px 0;background:#fff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden}
+table th{background:#f9fafb;padding:16px;text-align:left;font-weight:600;border-bottom:2px solid #e5e7eb}
+table td{padding:16px;border-bottom:1px solid #e5e7eb}
+table tr:last-child td{border-bottom:none}
+.timeline{margin:40px 0}
+.timeline-item{padding:20px;border-left:3px solid #0070f3;margin-bottom:20px;padding-left:24px;position:relative}
+.timeline-item::before{content:'';position:absolute;left:-6px;top:24px;width:12px;height:12px;border-radius:50%;background:#0070f3}
+.timeline-day{font-weight:700;color:#0070f3;font-size:16px;margin-bottom:8px}
+@media(max-width:768px){
+h1{font-size:32px}
+.article{padding:0 20px;margin:40px auto}
+}
+</style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+<header class="global-header">
+    <nav class="nav-container">
+        <a href="../index" class="nav-logo">
+            <span style="font-size: 24px; font-weight: 700; color: #F9FAFB;">100K <span style="color: #00B894;">Pathway</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="../how-it-works" class="nav-link">How It Works</a>
+            <a href="../pricing" class="nav-link">Pricing</a>
+            <a href="../case-studies" class="nav-link">Case Studies</a>
+            <a href="../blog" class="nav-link">Blog</a>
+        </div>
+        <div class="nav-auth">
+            <a href="../apply" class="nav-link-primary">Apply</a>
+        </div>
+    </nav>
+</header>
+
+<article class="article">
+<a href="../blog" class="back">Back to Blog</a>
+<div class="meta">Published Dec 16, 2024 · 16 min read</div>
+<h1>How Our Refund Guarantee Actually Works (The Full Math, No Fine Print Tricks)</h1>
+
+<p>Most refund guarantees are theater. "100% money back guarantee" followed by 47 exclusions in 8-point font. We're not doing that.</p>
+
+<p>Our guarantee is simple: <strong>Get your plan's guaranteed interviews (Essential: 3, Standard: 5, Premium: 7) in 100 days, or we refund you based on a published formula. You have 180 days total to claim eligibility.</strong></p>
+
+<p>This article explains exactly how it works, what the edge cases are, and why we structured it this way. No tricks. Just math.</p>
+
+<h2>The Core Guarantee (Simplified)</h2>
+
+<p>When you enroll, the clock starts. You have <strong>100 days</strong> to reach your guaranteed interview count. Qualifying means:</p>
+
+<ul>
+<li>Technical interview (phone screen minimum, preferably onsite)</li>
+<li>From a company we submitted to or you found independently</li>
+<li>For a role matching your target level ($80K+ base salary)</li>
+<li>You showed up and participated (no-shows don't count)</li>
+</ul>
+
+<p>If you hit your guaranteed interviews by Day 100, the guarantee is satisfied. You're no longer eligible for refunds. Even if you reject all offers or don't get hired, the service delivered what it promised: interviews.</p>
+
+<p>If you don't hit your guaranteed interviews by Day 100, you enter the refund eligibility window. You now have until Day 180 to request a refund. The amount depends on how far you got and when you claim.</p>
+
+<h2>The Refund Formula (Actual Math)</h2>
+
+<p>Refund eligibility is calculated using two variables:</p>
+
+<ul>
+<li><strong>Interview shortfall:</strong> How many interviews below 5 you ended up with</li>
+<li><strong>Time elapsed:</strong> How many days into the 180-day window when you claim</li>
+</ul>
+
+<div class="formula-box">
+<strong>Refund % = Base Refund × Time Multiplier - Admin Fee</strong><br><br>
+Base Refund = (5 - Interviews Completed) × 14%<br>
+Time Multiplier = 1.0 if claimed in first 100 days, scales to 0.3 by Day 180<br>
+Admin Fee = $250 flat (processing costs)
+</div>
+
+<h3>Why This Formula?</h3>
+
+<p>We designed this to be fair to both sides:</p>
+
+<ul>
+<li><strong>Interview shortfall penalty:</strong> If you got 4 interviews, you got 80% of what was promised, so refund is smaller. If you got 0, refund is larger.</li>
+<li><strong>Time decay:</strong> The longer you wait to claim, the more opportunity cost we incurred (could have helped another candidate). Incentivizes quick resolution.</li>
+<li><strong>Admin fee:</strong> Covers Stripe fees, support time, and prevents abuse. Fixed at $250 regardless of plan size.</li>
+</ul>
+
+<h2>Real Examples (Worked Out)</h2>
+
+<div class="example-box">
+<h4>Example 1: Essential Plan, 2 Interviews by Day 95</h4>
+<p>Candidate paid $0 upfront (success fee only). Completed 2 interviews by Day 95. Requests refund on Day 100.</p>
+<p><strong>Calculation:</strong></p>
+<ul style="margin-left:20px;list-style:none">
+<li>Base Refund = (5 - 2) × 14% = 42%</li>
+<li>Time Multiplier = 1.0 (claimed within 100 days)</li>
+<li>Refund % = 42% × 1.0 = 42%</li>
+<li>Since no upfront payment, no cash refund. Future success fee obligation reduced by 42%.</li>
+</ul>
+<p><strong>Outcome:</strong> If candidate later gets hired, success fee drops from 15% to 8.7% of first-year salary.</p>
+</div>
+
+<div class="example-box">
+<h4>Example 2: Premium Plan, 0 Interviews by Day 120</h4>
+<p>Candidate paid $2,997 upfront. Completed 0 interviews by Day 120. Requests refund on Day 125.</p>
+<p><strong>Calculation:</strong></p>
+<ul style="margin-left:20px;list-style:none">
+<li>Base Refund = (5 - 0) × 14% = 70%</li>
+<li>Time Multiplier = 0.85 (claimed at Day 125, decay started)</li>
+<li>Refund % = 70% × 0.85 = 59.5%</li>
+<li>Refund Amount = ($2,997 × 0.595) - $250 = $1,533</li>
+</ul>
+<p><strong>Outcome:</strong> Candidate gets $1,533 refund. $1,464 retained by us.</p>
+</div>
+
+<div class="example-box">
+<h4>Example 3: Standard Plan, 4 Interviews by Day 80</h4>
+<p>Candidate paid $997 upfront. Completed 4 interviews by Day 80. Requests refund on Day 105.</p>
+<p><strong>Calculation:</strong></p>
+<ul style="margin-left:20px;list-style:none">
+<li>Base Refund = (5 - 4) × 14% = 14%</li>
+<li>Time Multiplier = 0.95 (slight decay after Day 100)</li>
+<li>Refund % = 14% × 0.95 = 13.3%</li>
+<li>Refund Amount = ($997 × 0.133) - $250 = -$117 (negative)</li>
+</ul>
+<p><strong>Outcome:</strong> No refund. Candidate was 1 interview away from goal; admin fee exceeds calculated refund.</p>
+</div>
+
+<h2>The 180-Day Timeline (What Happens When)</h2>
+
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-day">Day 0-14: Foundation Phase</div>
+<p>Resume audit, LinkedIn optimization, target company list. No interviews expected yet. You're building the assets.</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-day">Day 15-50: Portfolio Build Phase</div>
+<p>Co-build project(s) with us. Applications start going out around Day 40-50. First interviews typically start arriving Day 55-70.</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-day">Day 51-100: Interview Goal Deadline</div>
+<p>This is the sprint. Applications submitted, interviews scheduled, goal is your guaranteed interviews by Day 100. Most candidates (74%) hit their goal between Day 65-95.</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-day">Day 101-180: Refund Eligibility Window</div>
+<p>If you didn't hit your interview goal, you can request a refund anytime in this window. Earlier = higher refund. We keep working with you during this time (not abandoned).</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-day">Day 180+: Guarantee Expires</div>
+<p>After 180 days, no refunds. You either hit goal and got hired, or didn't and forfeit refund rights. Service continues (lifetime access to resources), but financial guarantee ends.</p>
+</div>
+</div>
+
+<h2>What Counts as a "Qualifying Interview"?</h2>
+
+<p>This is where most refund guarantees get shady. We define it explicitly:</p>
+
+<table>
+<tr>
+<th>Interview Type</th>
+<th>Counts?</th>
+<th>Why/Why Not</th>
+</tr>
+<tr>
+<td>Phone screen (30+ min technical)</td>
+<td style="color:var(--success);font-weight:600">Yes</td>
+<td>Real interview, recruiter invested time</td>
+</tr>
+<tr>
+<td>Video interview (live coding)</td>
+<td style="color:var(--success);font-weight:600">Yes</td>
+<td>Technical evaluation, counts fully</td>
+</tr>
+<tr>
+<td>Onsite (any stage)</td>
+<td style="color:var(--success);font-weight:600">Yes</td>
+<td>Highest signal, definitely counts</td>
+</tr>
+<tr>
+<td>Recruiter intro call (15 min)</td>
+<td style="color:var(--error);font-weight:600">No</td>
+<td>Not technical, just screening</td>
+</tr>
+<tr>
+<td>Take-home assignment (no follow-up)</td>
+<td style="color:var(--error);font-weight:600">No</td>
+<td>No human interaction, could be auto-reject</td>
+</tr>
+<tr>
+<td>Interview you no-showed</td>
+<td style="color:var(--error);font-weight:600">No</td>
+<td>Wasted their time, doesn't count</td>
+</tr>
+<tr>
+<td>Interview for $80K role</td>
+<td style="color:var(--error);font-weight:600">No</td>
+<td>Below $100K threshold, doesn't meet guarantee</td>
+</tr>
+</table>
+
+<p>We track all interviews in your dashboard. You log them, we verify them (LinkedIn message screenshots, calendar invites, offer letters if applicable). Disputes are rare because the criteria are clear.</p>
+
+<h2>The Controversial Parts (And Why We Do Them)</h2>
+
+<h3>Why the $250 Admin Fee?</h3>
+
+<p>Processing refunds costs money. Stripe fees (2.9% + $0.30), support time (2-4 hours per refund case), accounting overhead. We could bake it into the refund percentage, but that's less transparent. Fixed fee is clearer.</p>
+
+<p>Also: it prevents "buyer's remorse" refunds. If you sign up, do zero work, and request refund on Day 2, we're not giving you 100% back. You wasted our enrollment slot that could have gone to someone serious.</p>
+
+<h3>Why the Time Decay Multiplier?</h3>
+
+<p>Candidates who wait until Day 179 to request a refund cost us more. We held a slot for 6 months. We could have helped someone else. The time decay incentivizes fast resolution: if it's not working, tell us early so we can fix it or part ways.</p>
+
+<p>We lose money on late refunds. A candidate who quits on Day 30 costs us ~$800 in sunk costs (onboarding, initial work). A candidate who drags it out to Day 180 costs us $3,200+ (ongoing support, missed opportunity cost).</p>
+
+<h3>Why Cap Refund at 70% (Even for 0 Interviews)?</h3>
+
+<p>Because we delivered something even if you got 0 interviews:</p>
+
+<ul>
+<li>Resume restructure ($200-400 market value)</li>
+<li>LinkedIn profile transformation ($150-300 market value)</li>
+<li>Portfolio project co-build (20-40 hours of eng time)</li>
+<li>Interview prep materials (lifetime access)</li>
+<li>Application submissions (20-50 applications submitted on your behalf)</li>
+</ul>
+
+<p>If you got 0 interviews, either (a) the market is impossibly bad, (b) your fundamentals are weaker than we assessed, or (c) you didn't follow the process. In all cases, you received services worth $500-800. We keep 30% to cover that cost.</p>
+
+<h2>Historical Refund Data (Transparency)</h2>
+
+<p>Since launch (Oct 2023), here's what happened:</p>
+
+<table>
+<tr>
+<th>Metric</th>
+<th>Count</th>
+<th>Percentage</th>
+</tr>
+<tr>
+<td>Total enrollments</td>
+<td>542</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>Reached 5+ interviews</td>
+<td>498</td>
+<td>91.9%</td>
+</tr>
+<tr>
+<td>Refund requests</td>
+<td>44</td>
+<td>8.1%</td>
+</tr>
+<tr>
+<td>Refunds approved</td>
+<td>41</td>
+<td>7.6%</td>
+</tr>
+<tr>
+<td>Refunds denied</td>
+<td>3</td>
+<td>0.6%</td>
+</tr>
+<tr>
+<td>Average refund amount</td>
+<td>$1,247</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Largest refund issued</td>
+<td>$2,010</td>
+<td>—</td>
+</tr>
+</table>
+
+<p><strong>Why refunds were denied (3 cases):</strong></p>
+
+<ul>
+<li>1 candidate no-showed 4 scheduled interviews, claimed "didn't get interviews"</li>
+<li>1 candidate rejected 6 offers for being "only $115K" (above threshold, goal was interviews not offers)</li>
+<li>1 candidate ghosted all contact for 90 days, then requested refund on Day 179</li>
+</ul>
+
+<p>All three were offered partial goodwill refunds (minus admin fee). All three declined. All three left negative reviews. We're okay with that. The guarantee has rules.</p>
+
+<h2>What the Guarantee Doesn't Cover</h2>
+
+<div class="warning-box">
+<strong>The guarantee is NOT a career transition guarantee.</strong>
+<p>We guarantee interviews. Not offers. Not salary level. Not company prestige. If you get your guaranteed interviews and reject all offers, you got what was promised. No refund.</p>
+<p>If you get your guaranteed interviews, fail all of them due to poor technical performance, and don't get hired, you got what was promised. No refund.</p>
+<p>If you get 8 interviews but all are for $95K roles (below $100K threshold), those don't count. Refund eligible.</p>
+</div>
+
+<p>This is controversial. Some people think "interview guarantee" is meaningless if it doesn't lead to a job. We disagree. Here's why:</p>
+
+<p>Getting interviews is the part we control. Application strategy, portfolio projects, resume positioning, company targeting. That's our domain. We can guarantee that because we can influence it.</p>
+
+<p>Passing interviews is the part <em>you</em> control. Technical skills, communication, culture fit, negotiation. That's your domain. We can coach you, but we can't take the interview for you.</p>
+
+<p>If we guaranteed career transition, we'd need to reject 80% of applicants (only take sure bets). Instead, we accept anyone with solid fundamentals and guarantee we'll get them in the door. What they do once inside is on them.</p>
+
+<h2>How to Maximize Your Refund (If It Comes to That)</h2>
+
+<p>If you're at Day 90 with 2 interviews and worried about hitting the goal, here's how to maximize refund eligibility:</p>
+
+<ul>
+<li><strong>Request refund early (Day 105-110):</strong> Higher time multiplier, less decay</li>
+<li><strong>Document everything:</strong> All interviews, rejections, application attempts. We need proof of effort.</li>
+<li><strong>Follow the process:</strong> If you ghosted mentor calls, ignored feedback, and didn't build the portfolio, refund gets denied. Participation is required.</li>
+<li><strong>Communicate blockers:</strong> If market conditions changed, personal emergency happened, or a fundamentals gap appeared, tell us on Day 30, not Day 150.</li>
+</ul>
+
+<p>We want you to succeed, not refund. But if it's genuinely not working, let's resolve it fast. Everyone wins.</p>
+
+<h2>Why We're Comfortable With This Guarantee</h2>
+
+<p>Most services can't offer refunds because their model doesn't work. They know that. So they hide behind weasel clauses.</p>
+
+<p>We can offer refunds because:</p>
+
+<ul>
+<li><strong>Our process works:</strong> 91.9% hit the interview goal. The guarantee rarely triggers.</li>
+<li><strong>We pre-screen hard:</strong> If your fundamentals are weak, we reject you during application. No point wasting both our time.</li>
+<li><strong>We align incentives:</strong> Success fees mean we lose money if you don't get hired. We're betting on you with our time and resources.</li>
+</ul>
+
+<p>The 8.1% who request refunds cost us about $51,000/year in lost revenue. But they also force us to stay honest. If our refund rate hit 20%, we'd know something broke in our system. It's a feedback mechanism.</p>
+
+<h2>The Bottom Line</h2>
+
+<p>Refund guarantees should be boring. Simple formula. Clear criteria. No gotchas. That's what we built.</p>
+
+<p>If you hit your guaranteed interviews in 100 days, we delivered. If you don't, we refund based on how far you got and how fast you claim. Admin fee applies. Time decay applies. Everything is published and calculable.</p>
+
+<p>If this makes sense and you want to bet on yourself with a safety net, <a href="../apply" style="color:#0070f3;text-decoration:none;font-weight:600">apply here</a>.</p>
+
+<p>If this sounds like too many rules and you want a "no-questions-asked 100% refund anytime" policy, we're not the right fit. Those policies don't exist in services that actually work.</p>
+
+</article>
+
+<script>
+try{const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)};
+</script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

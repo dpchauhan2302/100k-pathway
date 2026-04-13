@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Legal - 100K Pathway</title>
+    <link rel="stylesheet" href="global-nav.css">
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+    <script src="3d-animations.js" defer></script>
+    <script src="mobile-nav.js" defer></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #050810;
+            --bg-card: rgba(17, 24, 39, 0.7);
+            --accent: #3B82F6;
+            --accent-glow: rgba(59, 130, 246, 0.4);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --text: #e5e7eb;
+            --text-muted: #9ca3af;
+            --text-heading: #f9fafb;
+            --border: rgba(255,255,255,0.1);
+            --glass: rgba(255,255,255,0.05);
+            --gradient-1: #3B82F6;
+            --gradient-2: #8b5cf6;
+            --gradient-3: #ec4899;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Page Loader */
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s, visibility 0.6s;
+        }
+        .page-loader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-bar {
+            width: 200px;
+            height: 3px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 20px auto 0;
+        }
+        .loader-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+            background-size: 200% 100%;
+            animation: loaderSlide 1.5s ease-in-out infinite;
+            width: 0;
+            transition: width 0.3s;
+        }
+        @keyframes loaderSlide { 0%{transform:translateX(-100%)} 100%{transform:translateX(200%)} }
+
+        /* Ambient Background */
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.12;
+            animation: orbFloat 25s ease-in-out infinite;
+        }
+        .orb-1 { width: 700px; height: 700px; background: var(--gradient-1); top: -250px; left: -250px; animation-delay: 0s; }
+        .orb-2 { width: 600px; height: 600px; background: var(--gradient-2); bottom: -200px; right: -200px; animation-delay: -10s; }
+        .orb-3 { width: 500px; height: 500px; background: var(--gradient-3); top: 50%; left: 50%; animation-delay: -5s; }
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -40px) scale(1.08); }
+            66% { transform: translate(-40px, 60px) scale(0.92); }
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        .content-wrapper { position: relative; z-index: 2; }
+
+        /* Hero */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 140px 24px 100px;
+            text-align: center;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: clamp(44px, 7vw, 72px);
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 20px;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        /* Legal Cards Grid */
+        .legal-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 120px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .legal-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 56px 48px;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(60px);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+        }
+        .legal-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(59, 130, 246, 0.03));
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .legal-card:hover::before { opacity: 1; }
+        .legal-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5), 0 0 80px rgba(59, 130, 246, 0.15);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 32px;
+            transition: all 0.5s;
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+        }
+        .legal-card:hover .card-icon {
+            transform: scale(1.08) rotate(-5deg);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5);
+        }
+
+        .legal-card h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .legal-card .subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .key-points {
+            list-style: none;
+            margin-bottom: 36px;
+        }
+        .key-points li {
+            padding: 14px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 15px;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .key-points li:last-child { border-bottom: none; }
+        .key-points li:hover {
+            color: var(--text-heading);
+            transform: translateX(6px);
+        }
+        .key-points li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-top: 7px;
+            flex-shrink: 0;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gradient-2), var(--gradient-3));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .card-link span { position: relative; z-index: 1; }
+        .card-link:hover::before { opacity: 1; }
+        .card-link:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+        }
+        .arrow {
+            display: inline-block;
+            transition: transform 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        .card-link:hover .arrow { transform: translateX(4px); }
+
+        /* Quick Links */
+        .quick-links {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+        }
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .quick-link-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.4s;
+            transform: translateY(40px);
+        }
+        .quick-link-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.2);
+        }
+        .quick-link-card h3 {
+            font-size: 18px;
+            color: var(--text-heading);
+            margin-bottom: 12px;
+        }
+        .quick-link-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .quick-link-card a {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .quick-link-card a:hover {
+            color: var(--text-heading);
+            transform: translateX(4px);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            max-width: 900px;
+            margin: 0 auto 100px;
+            padding: 64px 48px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            text-align: center;
+            transform: translateY(40px);
+        }
+        .contact-section h3 {
+            font-size: 32px;
+            color: var(--text-heading);
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        .contact-section p {
+            color: var(--text-muted);
+            font-size: 17px;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        .contact-btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 17px;
+            transition: all 0.4s;
+        }
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: #030508;
+            padding: 60px 24px 40px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            max-width: 1200px;
+            margin: 0 auto 48px;
+        }
+        .footer-section h4 {
+            color: var(--text-heading);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .footer-section p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .legal-grid { grid-template-columns: 1fr; gap: 32px; }
+            .quick-links-grid { grid-template-columns: 1fr; }
+            .legal-card { padding: 40px 32px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .card-icon { width: 64px; height: 64px; font-size: 28px; }
+            .legal-card h2 { font-size: 26px; }
+            .contact-section { padding: 48px 32px; }
+        }
+    </style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body>
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+        </div>
+    </div>
+
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="ambient-orb orb-1"></div>
+        <div class="ambient-orb orb-2"></div>
+        <div class="ambient-orb orb-3"></div>
+    </div>
+    <div class="noise-overlay"></div>
+
+    <div class="content-wrapper">
+    <header class="global-header">
+        <nav class="nav-container">
+            <a href="index" class="nav-logo">
+                <span style="font-size: 24px; font-weight: 700; color: #F9FAFB;">100K <span style="color: #00B894;">Pathway</span></span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="how-it-works" class="nav-link">How It Works</a>
+                <a href="pricing" class="nav-link">Pricing</a>
+                <a href="case-studies" class="nav-link">Verified Outcomes</a>
+                <a href="blog" class="nav-link">Insights</a>
+            </div>
+            <div class="nav-auth">
+                <a href="apply" class="nav-link-primary">Apply</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Legal & Policies</h1>
+        <p>Our commitment to transparency, data protection, and fair service terms. Every policy is designed to protect your rights while enabling us to deliver guaranteed results.</p>
+    </section>
+
+    <!-- Main Legal Cards -->
+    <div class="legal-grid">
+        <div class="legal-card" onclick="window.location = 'privacy'">
+            <div class="card-icon">P</div>
+            <h2>Privacy Policy</h2>
+            <p class="subtitle">How we collect, use, and protect your personal information</p>
+            <ul class="key-points">
+                <li>What data we collect and why</li>
+                <li>How we secure your information</li>
+                <li>Your privacy rights and controls</li>
+                <li>Third-party data sharing policies</li>
+                <li>International data transfer protocols</li>
+            </ul>
+            <a href="privacy" class="card-link">
+                <span>Read Privacy Policy</span>
+                <span class="arrow">→</span>
+            </a>
+        </div>
+
+        <div class="legal-card" onclick="window.location = 'terms'">
+            <div class="card-icon">T</div>
+            <h2>Terms of Service</h2>
+            <p class="subtitle">Your legal agreement for using 100K Pathway services</p>
+            <ul class="key-points">
+                <li>Service description and eligibility</li>
+                <li>Fees, payments, and refund policy</li>
+                <li>Your responsibilities as a client</li>
+                <li>Intellectual property and usage rights</li>
+                <li>Limitation of liability and dispute resolution</li>
+            </ul>
+            <a href="terms" class="card-link">
+                <span>Read Terms of Service</span>
+                <span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+        <div class="quick-links-grid">
+            <div class="quick-link-card">
+                <h3>Refund Policy</h3>
+                <p>Performance-based guarantees and refund calculation details</p>
+                <a href="refund">Learn More →</a>
+            </div>
+            <div class="quick-link-card">
+                <h3>Interview Guarantee</h3>
+                <p>Qualifying criteria and guarantee fulfillment timeline</p>
+                <a href="pricing#guarantee">View Details →</a>
+            </div>
+            <div class="quick-link-card">
+                <h3>FAQ</h3>
+                <p>Common questions about services, billing, and guarantees</p>
+                <a href="faq">Browse FAQ →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="quick-links">
+        <div class="contact-section">
+            <h3>Questions About Our Policies?</h3>
+            <p>If you have questions about our privacy practices, terms of service, or any legal matters, our team is here to help clarify.</p>
+            <a href="mailto:hello@100k-pathway.com" class="contact-btn">Contact Legal Team</a>
+        </div>
+    </div>
+
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>100K Pathway</h4>
+                <p style="margin-top:1rem;line-height:1.6;color:var(--nav-text-muted);max-width:280px;">Interviews in 100 days with money-back guarantee. We handle applications. You handle interviews.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <div class="footer-links">
+                    <a href="how-it-works" class="footer-link">How It Works</a>
+                    <a href="pricing" class="footer-link">Pricing</a>
+                    <a href="case-studies" class="footer-link">Verified Outcomes</a>
+                    <a href="faq" class="footer-link">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="about" class="footer-link">About</a>
+                    <a href="blog" class="footer-link">Blog</a>
+                    <a href="contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="terms" class="footer-link">Terms of Service</a>
+                    <a href="privacy" class="footer-link">Privacy Policy</a>
+                    <a href="refund" class="footer-link">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 100K Pathway. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Page Loader
+        let loadProgress = 0;
+        const progress = document.getElementById('loaderProgress');
+        const loader = document.getElementById('pageLoader');
+        const interval = setInterval(() => {
+            loadProgress += Math.random() * 30;
+            if (loadProgress >= 100) {
+                loadProgress = 100;
+                clearInterval(interval);
+                setTimeout(() => loader.classList.add('loaded'), 200);
+            }
+            progress.style.width = loadProgress + '%';
+        }, 100);
+
+        // Lenis Smooth Scroll
+        try{const lenis=new Lenis({
+            duration: 1.4,
+            easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true
+        });function raf(time){lenis.raf(time);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)}
+
+        // GSAP Scroll Animations
+        if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") { gsap.registerPlugin(ScrollTrigger); }
+
+        gsap.utils.toArray('.legal-card').forEach((card, i) => {
+            gsap.to(card, {
+                y: 0,
+                duration: 0.8,
+                delay: i * 0.15,
+                ease: 'power3.out',
+                scrollTrigger: { 
+                    trigger: card, 
+                    start: 'top 85%', 
+                    once: true 
+                }
+            });
+        });
+
+        gsap.utils.toArray('.quick-link-card').forEach((card, i) => {
+            gsap.to(card, {
+                y: 0,
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: 'power2.out',
+                scrollTrigger: { 
+                    trigger: card, 
+                    start: 'top 90%', 
+                    once: true 
+                }
+            });
+        });
+
+        gsap.to('.contact-section', {
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: { 
+                trigger: '.contact-section', 
+                start: 'top 85%', 
+                once: true 
+            }
+        });
+
+        // Parallax Orbs
+        document.addEventListener('mousemove', e => {
+            const orbs = document.querySelectorAll('.ambient-orb');
+            const x = (e.clientX / window.innerWidth - 0.5) * 2;
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            
+            orbs.forEach((orb, i) => {
+                const speed = (i + 1) * 20;
+                orb.style.transform = `translate(${x * speed}px, ${y * speed}px) scale(1)`;
+            });
+        });
+    </script>
+    <script src="navigation.js"></script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

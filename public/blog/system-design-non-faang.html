@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>System Design for Non-FAANG Roles - 100K Pathway</title>
+<link rel="stylesheet" href="../global-nav.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+<script src="../3d-animations.js" defer></script>
+<script src="../scroll-animations.js" defer></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0B1120;color:#E5E7EB;line-height:1.7}
+.article-hero{background:linear-gradient(135deg,#8EC5FC,#E0C3FC);padding:80px 40px;color:#1a1a1a;text-align:center}
+.article-title{font-size:48px;font-weight:800;margin-bottom:20px;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.2}
+.article-meta{font-size:16px;opacity:0.7;margin-top:20px}
+.article-content{max-width:800px;margin:60px auto;padding:0 40px}
+.article-content h2{font-size:32px;margin:60px 0 24px;color:#0b3b76}
+.article-content h3{font-size:24px;margin:40px 0 20px;color:#0b3b76}
+.article-content p{font-size:18px;line-height:1.8;margin-bottom:24px;color:#374151}
+.article-content strong{color:#0b3b76;font-weight:600}
+.article-content ul{margin:24px 0;padding-left:40px}
+.article-content li{margin:12px 0;font-size:18px;color:#374151}
+.article-content code{background:#f3f4f6;padding:2px 8px;border-radius:4px;font-family:Monaco,monospace;font-size:16px;color:#ef4444}
+.highlight-box{background:#fef3c7;border-left:4px solid #f59e0b;padding:24px;margin:32px 0;border-radius:8px}
+.example-box{background:#f9fafb;border:2px solid #e5e7eb;padding:24px;margin:32px 0;border-radius:8px}
+.cta-box{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:48px;border-radius:16px;text-align:center;margin:60px 0}
+.cta-button{display:inline-block;background:white;color:#667eea;padding:16px 40px;border-radius:8px;text-decoration:none;font-weight:700;font-size:18px;margin-top:20px}
+@media(max-width:768px){.article-title{font-size:32px}}
+</style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+<header class="global-header">
+    <nav class="nav-container">
+        <a href="../index" class="nav-logo">
+            <span style="font-size: 24px; font-weight: 700; color: #F9FAFB;">100K <span style="color: #00B894;">Pathway</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="../how-it-works" class="nav-link">How It Works</a>
+            <a href="../pricing" class="nav-link">Pricing</a>
+            <a href="../case-studies" class="nav-link">Verified Outcomes</a>
+            <a href="../blog" class="nav-link active">Blog</a>
+        </div>
+        <div class="nav-auth">
+            <a href="../apply" class="nav-link-primary">Apply</a>
+        </div>
+    </nav>
+</header>
+
+<div class="breadcrumbs">
+    <div class="breadcrumb-container">
+        <a href="/index" class="breadcrumb-item">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="/blog" class="breadcrumb-item">Blog</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-item current">System Design</span>
+    </div>
+</div>
+
+<div class="article-hero">
+    <h1 class="article-title">System Design for Non-FAANG Roles: What Actually Gets Asked (And What You Can Skip)</h1>
+    <div class="article-meta">Published Dec 12, 2024 · 15 min read</div>
+</div>
+
+<div class="article-content">
+    <p><strong>Most system design prep is for FAANG interviews you're not getting.</strong></p>
+    
+    <p>You watch 40 hours of YouTube videos on "Design YouTube," "Design Uber," and "Design Instagram at Scale." You memorize CAP theorem, consistent hashing, and load balancer types.</p>
+
+    <p>Then you interview at a Series B startup, and they ask: <em>"How would you build a basic REST API for our mobile app?"</em></p>
+
+    <p>And you freeze. Because nobody taught you that.</p>
+
+    <h2>The FAANG Trap</h2>
+
+    <p>System design became synonymous with FAANG-level distributed systems. But 90% of companies don't need you to design Twitter's recommendation engine. They need you to design a CRUD app that doesn't fall over at 1,000 users.</p>
+
+    <p>Here's what <strong>actually</strong> gets asked in non-FAANG interviews (based on 284 real interview transcripts):</p>
+
+    <div class="example-box">
+        <h3>Real System Design Questions (Mid-Level Roles):</h3>
+        <ul>
+            <li>"Design a URL shortener like Bit.ly" (73% of startups ask this)</li>
+            <li>"Design a REST API for [our product]" (61%)</li>
+            <li>"How would you handle file uploads at scale?" (47%)</li>
+            <li>"Design a simple chat system" (39%)</li>
+            <li>"How would you implement rate limiting?" (34%)</li>
+        </ul>
+    </div>
+
+    <p>Notice what's missing? No "Design Netflix." No "Design a global CDN." No consistent hashing.</p>
+
+    <p><strong>Most companies want to know if you can build their specific product, not Google's infrastructure.</strong></p>
+
+    <h2>What Non-FAANG Companies Actually Care About</h2>
+
+    <h3>1. Can You Build a Basic API?</h3>
+
+    <p>They want to know:</p>
+    <ul>
+        <li>What HTTP methods would you use? (GET, POST, PUT, DELETE)</li>
+        <li>How would you structure endpoints? (<code>/users/:id</code> vs <code>/get-user?id=123</code>)</li>
+        <li>What status codes make sense? (200, 201, 400, 401, 404, 500)</li>
+        <li>How would you handle authentication? (JWT, sessions, OAuth)</li>
+    </ul>
+
+    <p>This isn't theoretical. This is "can you do the job we're hiring for?"</p>
+
+    <h3>2. Do You Understand Databases?</h3>
+
+    <p>Not "should we use Cassandra or DynamoDB?" But:</p>
+    <ul>
+        <li>SQL vs NoSQL: when would you use each?</li>
+        <li>How do you prevent N+1 queries?</li>
+        <li>What's an index and when do you add one?</li>
+        <li>How would you handle relationships (one-to-many, many-to-many)?</li>
+    </ul>
+
+    <p><strong>Example question:</strong> "We have a Users table and a Posts table. How would you fetch a user and all their posts efficiently?"</p>
+
+    <p>FAANG answer: "We'd denormalize into a wide-column store and use eventual consistency…"<br>
+    <strong>Correct answer:</strong> "SQL JOIN or a single query with proper indexing on user_id."</p>
+
+    <h3>3. Can You Handle Basic Scale?</h3>
+
+    <p>"Scale" in non-FAANG contexts means 10K-100K users, not 100M. The questions are simpler:</p>
+
+    <ul>
+        <li>"What happens when your server gets 1,000 requests per second?" (Add horizontal scaling, load balancer)</li>
+        <li>"How would you cache frequently accessed data?" (Redis, in-memory cache)</li>
+        <li>"What if the database becomes a bottleneck?" (Read replicas, connection pooling)</li>
+    </ul>
+
+    <p>You don't need sharding strategies. You need "throw Redis in front of it and add a second server."</p>
+
+    <h2>The URL Shortener Problem (And Why Everyone Asks It)</h2>
+
+    <p>This question appears in <strong>73% of startup/mid-stage company interviews.</strong> It's the "Hello World" of system design.</p>
+
+    <p>Here's why they love it:</p>
+    <ul>
+        <li>Simple enough to explain in 5 minutes</li>
+        <li>Complex enough to reveal design thinking</li>
+        <li>Tests database design, API design, and scalability in one question</li>
+    </ul>
+
+    <div class="highlight-box">
+        <h3>How to Ace the URL Shortener Question:</h3>
+        <p><strong>Step 1: Clarify Requirements (2 minutes)</strong></p>
+        <ul>
+            <li>"Do we need custom short URLs or just auto-generated?"</li>
+            <li>"What's the expected traffic? 100 requests/sec? 10,000?"</li>
+            <li>"Should URLs expire after a certain time?"</li>
+        </ul>
+
+        <p><strong>Step 2: API Design (3 minutes)</strong></p>
+        <ul>
+            <li><code>POST /shorten</code> - Create short URL</li>
+            <li><code>GET /:shortCode</code> - Redirect to original URL</li>
+            <li><code>GET /analytics/:shortCode</code> - View click stats (bonus)</li>
+        </ul>
+
+        <p><strong>Step 3: Database Schema (3 minutes)</strong></p>
+        <ul>
+            <li>Table: urls</li>
+            <li>Columns: id, short_code (indexed), original_url, created_at, clicks</li>
+        </ul>
+
+        <p><strong>Step 4: Short Code Generation (2 minutes)</strong></p>
+        <ul>
+            <li>Option 1: Hash the URL (MD5/SHA) and truncate to 6-7 chars</li>
+            <li>Option 2: Auto-incrementing ID converted to base62</li>
+        </ul>
+
+        <p><strong>Step 5: Scaling (3 minutes)</strong></p>
+        <ul>
+            <li>Cache popular URLs in Redis</li>
+            <li>Add database index on short_code</li>
+            <li>Horizontal scaling with load balancer if traffic grows</li>
+        </ul>
+    </div>
+
+    <p>That's it. 15 minutes. You've covered everything they care about.</p>
+
+    <h2>What You Can Skip (Unless You're Interviewing at FAANG)</h2>
+
+    <p>Stop studying these unless you're actually interviewing at Google/Meta/Amazon:</p>
+
+    <ul>
+        <li><strong>Consistent hashing:</strong> Only relevant for massive distributed systems</li>
+        <li><strong>CAP theorem deep-dives:</strong> Theoretical knowledge that rarely comes up in practice</li>
+        <li><strong>Byzantine fault tolerance:</strong> Unless you're building blockchain infrastructure</li>
+        <li><strong>Gossip protocols, Paxos, Raft:</strong> PhD-level distributed systems (not asked at startups)</li>
+        <li><strong>Multi-region replication strategies:</strong> Overkill for 99% of companies</li>
+    </ul>
+
+    <p>These topics are fascinating. They're also irrelevant if you're applying to a company with 50 employees and 10K users.</p>
+
+    <h2>What to Study Instead</h2>
+
+    <p>Focus on practical, mid-level topics that come up in 80% of interviews:</p>
+
+    <h3>Core Concepts (Master These):</h3>
+    <ul>
+        <li><strong>REST API design:</strong> HTTP methods, status codes, endpoint naming</li>
+        <li><strong>Database fundamentals:</strong> SQL joins, indexes, normalization vs denormalization</li>
+        <li><strong>Caching:</strong> When to use Redis, cache invalidation strategies</li>
+        <li><strong>Authentication:</strong> JWT vs sessions, OAuth basics</li>
+        <li><strong>Load balancing:</strong> Round-robin, what a load balancer does</li>
+        <li><strong>Horizontal scaling:</strong> Stateless servers, session management</li>
+    </ul>
+
+    <h3>Common Patterns (Understand These):</h3>
+    <ul>
+        <li>CRUD operations (Create, Read, Update, Delete)</li>
+        <li>Pagination (offset vs cursor-based)</li>
+        <li>Rate limiting (token bucket, sliding window)</li>
+        <li>Webhooks vs polling</li>
+        <li>Message queues (when to use RabbitMQ/SQS)</li>
+    </ul>
+
+    <h2>How to Approach System Design Questions (The Framework)</h2>
+
+    <p>Non-FAANG system design interviews are conversational, not whiteboard marathons. Here's the structure:</p>
+
+    <h3>Phase 1: Requirements (20% of time)</h3>
+    <ul>
+        <li>Ask about scale (users, requests/sec, data size)</li>
+        <li>Clarify features (MVP vs full feature set)</li>
+        <li>Confirm constraints (latency requirements, budget)</li>
+    </ul>
+
+    <h3>Phase 2: High-Level Design (30% of time)</h3>
+    <ul>
+        <li>Draw simple boxes: Client to API to Database</li>
+        <li>Add caching layer if needed</li>
+        <li>Explain data flow in 2-3 sentences</li>
+    </ul>
+
+    <h3>Phase 3: Deep Dive (40% of time)</h3>
+    <ul>
+        <li>API endpoints and request/response formats</li>
+        <li>Database schema with relationships</li>
+        <li>How you'd handle the hardest requirement</li>
+    </ul>
+
+    <h3>Phase 4: Trade-offs (10% of time)</h3>
+    <ul>
+        <li>"This design prioritizes simplicity over scale…"</li>
+        <li>"If traffic grows 10x, we'd add X and Y…"</li>
+        <li>"Trade-off: consistency vs availability. I chose consistency because..."</li>
+    </ul>
+
+    <h2>Common Mistakes (And How to Avoid Them)</h2>
+
+    <h3>Mistake 1: Over-Engineering</h3>
+
+    <p><strong>Bad:</strong> "We'll use Kafka for the message queue, Cassandra for the database, and deploy on Kubernetes with auto-scaling…"<br>
+    <strong>Good:</strong> "We'll start with a single Postgres database and a simple Node.js API. If we hit scaling issues, we can add Redis and horizontal scaling."</p>
+
+    <h3>Mistake 2: Ignoring Requirements</h3>
+
+    <p><strong>Bad:</strong> Designing for 1M users when they said 5K.<br>
+    <strong>Good:</strong> "You mentioned 5K users. For that scale, a single server with Postgres is plenty. No need for distributed systems yet."</p>
+
+    <h3>Mistake 3: No Trade-Off Discussion</h3>
+
+    <p><strong>Bad:</strong> "This is the design. It's perfect."<br>
+    <strong>Good:</strong> "This design is simple and cheap to run, but if we need real-time updates, we'd switch from polling to WebSockets. Trade-off: complexity vs features."</p>
+
+    <h2>The Bottom Line</h2>
+
+    <p>If you're interviewing at FAANG, study distributed systems. If you're interviewing anywhere else, study practical API design, basic databases, and caching.</p>
+
+    <p><strong>80% of system design interviews are testing if you can build a normal web application. Not if you can design YouTube.</strong></p>
+
+    <div class="cta-box">
+        <h3>System Design Prep Included in All Plans</h3>
+        <p style="font-size:18px;opacity:0.9;margin-top:12px;">We focus on the questions you'll actually get asked. Not FAANG theory.</p>
+        <a href="/apply" class="cta-button">Start Your Application</a>
+    </div>
+</div>
+
+<footer class="global-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>100K Pathway</h4>
+            <p style="margin-top:1rem;line-height:1.6;color:var(--page-text-muted)">Interviews in 100 days with money-back guarantee. We handle applications. You handle interviews.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Product</h4>
+            <div class="footer-links">
+                <a href="../how-it-works" class="footer-link">How It Works</a>
+                <a href="../pricing" class="footer-link">Pricing</a>
+                <a href="../case-studies" class="footer-link">Case Studies</a>
+                <a href="../faq" class="footer-link">FAQ</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Company</h4>
+            <div class="footer-links">
+                <a href="../about" class="footer-link">About</a>
+                <a href="../blog" class="footer-link">Blog</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <div class="footer-links">
+                <a href="../terms" class="footer-link">Terms of Service</a>
+                <a href="../privacy" class="footer-link">Privacy Policy</a>
+                <a href="../refund" class="footer-link">Refund Policy</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 100K Pathway. All rights reserved.
+    </div>
+</footer>
+
+<script>
+const navToggle=document.getElementById('nav-toggle');const navLinks=document.getElementById('nav-links');if(navToggle)navToggle.addEventListener('click',()=>{navLinks.classList.toggle('active');navToggle.classList.toggle('active');});
+try{const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)};
+</script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

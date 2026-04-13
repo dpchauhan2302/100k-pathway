@@ -1,0 +1,253 @@
+<!-- INTERACTIVE COMPARISON TABLE
+     Shows 100 Days $100K vs alternatives
+     Keeps users engaged by revealing information progressively
+-->
+
+<style>
+.comparison-section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.comparison-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.comparison-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #0b3b76;
+}
+
+.comparison-subtitle {
+    font-size: 18px;
+    color: #6b7280;
+}
+
+.comparison-table {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.comparison-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    border-bottom: 1px solid #e5e7eb;
+    transition: background 0.2s;
+}
+
+.comparison-row:hover {
+    background: #f9fafb;
+}
+
+.comparison-row.header {
+    background: #0b3b76;
+    color: white;
+    font-weight: 700;
+}
+
+.comparison-cell {
+    padding: 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.comparison-cell.feature {
+    justify-content: flex-start;
+    text-align: left;
+    font-weight: 600;
+    color: #374151;
+}
+
+.comparison-row.header .comparison-cell {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.comparison-check {
+    font-size: 24px;
+    color: #10b981;
+}
+
+.comparison-cross {
+    font-size: 24px;
+    color: #ef4444;
+}
+
+.comparison-partial {
+    font-size: 14px;
+    color: #f59e0b;
+    font-weight: 600;
+}
+
+.comparison-highlight {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border-left: 4px solid #3b82f6;
+    border-right: 4px solid #3b82f6;
+}
+
+.comparison-cta {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    margin-top: 4rem;
+    border-radius: 16px;
+}
+
+.comparison-cta h3 {
+    font-size: 28px;
+    margin-bottom: 1rem;
+}
+
+.comparison-cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 1rem;
+    transition: all 0.2s;
+}
+
+.comparison-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 968px) {
+    .comparison-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .comparison-row.header {
+        display: none;
+    }
+    
+    .comparison-cell {
+        justify-content: space-between;
+        text-align: left;
+    }
+    
+    .comparison-cell::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #0b3b76;
+        margin-right: 1rem;
+    }
+}
+</style>
+
+<div class="comparison-section">
+    <div class="comparison-header">
+        <h2 class="comparison-title">How We Compare</h2>
+        <p class="comparison-subtitle">100 Days $100K vs traditional career services, bootcamps, and DIY job hunting</p>
+    </div>
+    
+    <div class="comparison-table">
+        <div class="comparison-row header">
+            <div class="comparison-cell feature">Feature</div>
+            <div class="comparison-cell">100 Days $100K</div>
+            <div class="comparison-cell">Career Coach</div>
+            <div class="comparison-cell">Bootcamp</div>
+            <div class="comparison-cell">DIY</div>
+        </div>
+        
+        <div class="comparison-row comparison-highlight">
+            <div class="comparison-cell feature">Portfolio Projects Built For You</div>
+            <div class="comparison-cell" data-label="100 Days $100K"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="Career Coach"><span class="comparison-cross">✗</span></div>
+            <div class="comparison-cell" data-label="Bootcamp"><span class="comparison-partial">Templates</span></div>
+            <div class="comparison-cell" data-label="DIY"><span class="comparison-cross">✗</span></div>
+        </div>
+        
+        <div class="comparison-row">
+            <div class="comparison-cell feature">Applications Submitted On Your Behalf</div>
+            <div class="comparison-cell" data-label="100 Days $100K"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="Career Coach"><span class="comparison-cross">✗</span></div>
+            <div class="comparison-cell" data-label="Bootcamp"><span class="comparison-cross">✗</span></div>
+            <div class="comparison-cell" data-label="DIY"><span class="comparison-cross">✗</span></div>
+        </div>
+        
+        <div class="comparison-row comparison-highlight">
+            <div class="comparison-cell feature">Interview Guarantee (5+ in 100 days)</div>
+            <div class="comparison-cell" data-label="100 Days $100K"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="Career Coach"><span class="comparison-cross">✗</span></div>
+            <div class="comparison-cell" data-label="Bootcamp"><span class="comparison-cross">✗</span></div>
+            <div class="comparison-cell" data-label="DIY"><span class="comparison-cross">✗</span></div>
+        </div>
+        
+        <div class="comparison-row">
+            <div class="comparison-cell feature">Money-Back Refund Policy</div>
+            <div class="comparison-cell" data-label="100 Days $100K"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="Career Coach"><span class="comparison-cross">✗</span></div>
+            <div class="comparison-cell" data-label="Bootcamp"><span class="comparison-partial">Rare</span></div>
+            <div class="comparison-cell" data-label="DIY"><span style="font-size:14px">N/A</span></div>
+        </div>
+        
+        <div class="comparison-row">
+            <div class="comparison-cell feature">Technical Interview Prep</div>
+            <div class="comparison-cell" data-label="100 Days $100K"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="Career Coach"><span class="comparison-partial">Basic</span></div>
+            <div class="comparison-cell" data-label="Bootcamp"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="DIY"><span class="comparison-partial">LeetCode</span></div>
+        </div>
+        
+        <div class="comparison-row">
+            <div class="comparison-cell feature">Resume & LinkedIn Optimization</div>
+            <div class="comparison-cell" data-label="100 Days $100K"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="Career Coach"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="Bootcamp"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="DIY"><span class="comparison-partial">Self</span></div>
+        </div>
+        
+        <div class="comparison-row comparison-highlight">
+            <div class="comparison-cell feature">Success-Based Pricing (Pay When Hired)</div>
+            <div class="comparison-cell" data-label="100 Days $100K"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="Career Coach"><span class="comparison-cross">✗</span></div>
+            <div class="comparison-cell" data-label="Bootcamp"><span class="comparison-partial">ISAs</span></div>
+            <div class="comparison-cell" data-label="DIY"><span style="font-size:14px">Free</span></div>
+        </div>
+        
+        <div class="comparison-row">
+            <div class="comparison-cell feature">Direct Employer Connections</div>
+            <div class="comparison-cell" data-label="100 Days $100K"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="Career Coach"><span class="comparison-partial">Maybe</span></div>
+            <div class="comparison-cell" data-label="Bootcamp"><span class="comparison-check">✓</span></div>
+            <div class="comparison-cell" data-label="DIY"><span class="comparison-cross">✗</span></div>
+        </div>
+        
+        <div class="comparison-row">
+            <div class="comparison-cell feature">Typical Time to First Interview</div>
+            <div class="comparison-cell" data-label="100 Days $100K"><strong>55-70 days</strong></div>
+            <div class="comparison-cell" data-label="Career Coach">3-6 months</div>
+            <div class="comparison-cell" data-label="Bootcamp">2-4 months</div>
+            <div class="comparison-cell" data-label="DIY">4-8 months</div>
+        </div>
+        
+        <div class="comparison-row comparison-highlight">
+            <div class="comparison-cell feature">Cost If You Don't Get Hired</div>
+            <div class="comparison-cell" data-label="100 Days $100K"><strong>$0-$2,997</strong></div>
+            <div class="comparison-cell" data-label="Career Coach">$2,000-$5,000</div>
+            <div class="comparison-cell" data-label="Bootcamp">$10,000-$20,000</div>
+            <div class="comparison-cell" data-label="DIY"><strong>$0</strong></div>
+        </div>
+    </div>
+    
+    <div class="comparison-cta">
+        <h3>Ready to stop comparing and start building?</h3>
+        <p style="margin-top:1rem;font-size:18px;opacity:0.9;">Join 542 engineers who chose results over promises.</p>
+        <a href="/apply" class="comparison-cta-button">Start Your Application →</a>
+    </div>
+</div>

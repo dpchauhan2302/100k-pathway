@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>terms - 100K Pathway</title>
+    <meta name="description" content="Terms of Service for 100 Days $100K interview guarantee program. Understand your rights, obligations, and our service agreement before enrolling.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://100k-pathway.com/terms">
+    
+    <!-- Analytics -->
+    <script defer data-domain="100k-pathway.com" src="https://plausible.io/js/script.js"></script>
+    
+    <link rel="stylesheet" href="performance-mobile-fix.css">
+<link rel="stylesheet" href="global-nav.css">
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #050810;
+            --bg-card: rgba(17, 24, 39, 0.7);
+            --bg-elevated: rgba(26, 34, 52, 0.8);
+            --accent: #3B82F6;
+            --accent-glow: rgba(59, 130, 246, 0.4);
+            --accent-hover: #60a5fa;
+            --warning: #f59e0b;
+            --warning-glow: rgba(245, 158, 11, 0.3);
+            --text: #e5e7eb;
+            --text-muted: #9ca3af;
+            --text-heading: #f9fafb;
+            --border: rgba(255,255,255,0.1);
+            --glass: rgba(255,255,255,0.05);
+            --gradient-1: #3B82F6;
+            --gradient-2: #8b5cf6;
+            --gradient-3: #ec4899;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }100%{background-position:200% 50%} }
+
+        /* Ambient Background */
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+        .orb-1 { width: 600px; height: 600px; background: var(--gradient-1); top: -200px; left: -200px; animation-delay: 0s; }
+        .orb-2 { width: 500px; height: 500px; background: var(--gradient-2); top: 40%; right: -150px; animation-delay: -7s; }
+        .orb-3 { width: 450px; height: 450px; background: var(--gradient-3); bottom: -100px; left: 30%; animation-delay: -14s; }
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(50px, -30px) scale(1.1) rotate(5deg); }
+            50% { transform: translate(-30px, 50px) scale(0.95) rotate(-3deg); }
+            75% { transform: translate(40px, 20px) scale(1.05) rotate(2deg); }
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        .content-wrapper { position: relative; z-index: 2; }
+
+        /* Hero */
+        .hero {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 140px 24px 80px;
+            text-align: center;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 64px);
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+        .effective-date {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 12px 24px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Legal Content */
+        .legal-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+        }
+        .legal-section {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 32px;
+            transform: translateY(40px);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .legal-section:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
+        }
+        .legal-section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .section-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+        .legal-section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin: 32px 0 16px;
+        }
+        .legal-section p {
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .legal-section ul, .legal-section ol {
+            margin: 16px 0 16px 24px;
+            color: var(--text);
+        }
+        .legal-section li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+        .legal-section strong {
+            color: var(--text-heading);
+            font-weight: 600;
+        }
+        .legal-section a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .legal-section a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+        .warning-box p {
+            margin-bottom: 0;
+            color: var(--text-heading);
+            font-weight: 500;
+        }
+        .highlight-box {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-heading);
+            font-weight: 500;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            text-align: center;
+            padding: 48px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid var(--border);
+            border-radius: 24px;
+        }
+        .contact-cta h3 {
+            font-size: 24px;
+            color: var(--text-heading);
+            margin-bottom: 16px;
+        }
+        .contact-cta p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        .contact-btn {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px var(--accent-glow);
+        }
+
+        /* Footer */
+        .footer {
+            background: #030508;
+            padding: 60px 24px 40px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            max-width: 1200px;
+            margin: 0 auto 48px;
+        }
+        .footer-section h4 {
+            color: var(--text-heading);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .footer-section p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .legal-section { padding: 32px 24px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .legal-section h2 { font-size: 22px; flex-direction: column; }
+            .section-number { width: 40px; height: 40px; font-size: 18px; }
+        }
+    </style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="ambient-orb orb-1"></div>
+        <div class="ambient-orb orb-2"></div>
+        <div class="ambient-orb orb-3"></div>
+    </div>
+    <div class="noise-overlay"></div>
+
+    <div class="content-wrapper">
+    <header class="global-header">
+        <nav class="nav-container">
+            <a href="index" class="nav-logo">100K Pathway</a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="nav-links" id="nav-links">
+                <a href="how-it-works" class="nav-link">How It Works</a>
+                <a href="pricing" class="nav-link">Pricing</a>
+                <a href="case-studies" class="nav-link">Outcomes</a>
+                <a href="blog" class="nav-link">Insights</a>
+            </div>
+            <div class="nav-auth">
+                <a href="apply" class="nav-link-primary" id="nav-apply">Apply</a>
+            </div>
+
+            <div class="nav-user" id="nav-user" style="display: none;">
+                <div class="nav-avatar" id="nav-avatar">U</div>
+                <span id="nav-username">User</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Terms of Service</h1>
+        <p>Your legal agreement for using 100 Days $100K services</p>
+        <span class="effective-date">Effective: January 1, 2026</span>
+    </section>
+
+    <!-- Legal Content -->
+    <div class="legal-content">
+        <div class="warning-box">
+            <p><strong>Important:</strong> By accessing or using 100 Days $100K services, you agree to be bound by these Terms. Please read them carefully before proceeding.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">1</span> Agreement to Terms</h2>
+            <p>These Terms of Service constitute a legally binding agreement between you and <strong>100K Pathway</strong> (doing business as "100 Days $100K"). By accessing, browsing, registering for, purchasing, or using any part of our services, you confirm that you have read, understood, and agree to be bound by these Terms and our Privacy Policy.</p>
+            <p>If you do not agree to these Terms, you must not use our services.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">2</span> Eligibility</h2>
+            <p>You may use our services only if:</p>
+            <ul>
+                <li>You are at least 18 years old</li>
+                <li>You have full legal capacity to enter binding agreements</li>
+                <li>All information you submit is accurate and verifiable</li>
+                <li>You have legal work authorization in your target country</li>
+            </ul>
+            <p>If any submitted information is false, incomplete, or misleading, we may immediately deny, suspend, or terminate access without refund.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">3</span> Service Description</h2>
+            <p>100 Days $100K provides career advancement services including:</p>
+            <ul>
+                <li>Application submission and management</li>
+                <li>Resume and LinkedIn optimization</li>
+                <li>Interview preparation and coaching</li>
+                <li>Salary negotiation support</li>
+                <li>Mentorship and guidance</li>
+            </ul>
+            
+            <h3>Services Do Not Include:</h3>
+            <ul>
+                <li>Guaranteed job career transitions</li>
+                <li>Immigration, legal, tax, or compliance advice</li>
+                <li>Direct representation to employers</li>
+                <li>Visa sponsorship or work authorization</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p>You are purchasing career support and application services. We do not guarantee employment outcomes.</p>
+            </div>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">4</span> Fees and Payments</h2>
+            <p>All payments are processed according to the pricing plan you select:</p>
+            <ul>
+                <li><strong>Upfront Fee:</strong> Must be paid in full before service begins</li>
+                <li><strong>Success Fee:</strong> Due within 30 days of accepting a qualifying offer</li>
+                <li>All fees are non-transferable between plans or individuals</li>
+            </ul>
+            
+            <h3>Payment Processing</h3>
+            <p>Payments are processed securely through Stripe. By making a payment, you agree to Stripe's terms and privacy policy.</p>
+            
+            <h3>Chargebacks</h3>
+            <p>Unauthorized chargebacks or payment disputes may result in immediate service termination and may be treated as breach of contract. We reserve the right to pursue collection of any amounts owed.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">5</span> Refund Policy</h2>
+            <p>Refunds are governed by our performance-based guarantee:</p>
+            <ul>
+                <li>If you do not receive your guaranteed minimum number of qualifying interviews within 100 days, you may request a refund until day 180</li>
+                <li>Refunds are calculated based on interview shortfall</li>
+                <li>Maximum refund is capped at 50% of upfront payment</li>
+                <li>Refund eligibility ends immediately upon fulfillment of guaranteed interview count</li>
+            </ul>
+            
+            <h3>Qualifying Interview Criteria</h3>
+            <p>A qualifying interview must meet all of these requirements:</p>
+            <ul>
+                <li>Technical screen or onsite interview</li>
+                <li>Role offering $80,000+ annual W-2 base salary</li>
+                <li>Company with 20+ employees</li>
+                <li>Candidate has legal work authorization</li>
+                <li>Interview occurs within 180 days of program completion</li>
+            </ul>
+            
+            <p>See our full <a href="refund">Refund Policy</a> for complete details.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">6</span> Your Responsibilities</h2>
+            <p>You agree to:</p>
+            <ul>
+                <li>Attend scheduled sessions and meetings</li>
+                <li>Respond to communications in a timely manner</li>
+                <li>Provide accurate and legitimate documentation</li>
+                <li>Complete assigned tasks and follow guidance</li>
+                <li>Maintain professional conduct at all times</li>
+                <li>Use services only for lawful and intended purposes</li>
+            </ul>
+            
+            <p>Failure to meet these obligations may result in reduced effectiveness of services and does not qualify for refund.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">7</span> Prohibited Conduct</h2>
+            <p>You are strictly prohibited from:</p>
+            <ul>
+                <li>Harassing or abusing staff, mentors, or other participants</li>
+                <li>Sharing proprietary content, curriculum, or materials externally</li>
+                <li>Attempting unauthorized access to our systems or data</li>
+                <li>Recording sessions without written permission</li>
+                <li>Misrepresenting your affiliation with 100 Days $100K</li>
+                <li>Using services for any illegal purpose</li>
+            </ul>
+            
+            <div class="warning-box">
+                <p>Any violation results in immediate termination without refund and may result in legal action.</p>
+            </div>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">8</span> Intellectual Property</h2>
+            <p>All content, materials, curriculum, processes, and documentation are owned exclusively by 100 Days $100K. Your license to use these materials is:</p>
+            <ul>
+                <li>Personal and non-transferable</li>
+                <li>Non-exclusive</li>
+                <li>Revocable at any time</li>
+                <li>Limited to your individual use during service</li>
+            </ul>
+            
+            <p>You may not reproduce, sell, distribute, publish, or commercialize any 100 Days $100K materials.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">9</span> No Guarantees</h2>
+            <p>While we provide interview guarantees based on our refund policy, we do not guarantee:</p>
+            <ul>
+                <li>Job offers or employment</li>
+                <li>Specific salary outcomes</li>
+                <li>Employer responses or decisions</li>
+                <li>Visa approvals or work authorization</li>
+                <li>Timeline to employment</li>
+            </ul>
+            
+            <p>Any testimonials, examples, or case studies are illustrative only and do not represent typical results.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">10</span> Service Availability</h2>
+            <p>We may modify, update, reschedule, or replace any part of our services at our discretion. We are not liable for:</p>
+            <ul>
+                <li>System outages or technical errors</li>
+                <li>Session rescheduling or mentor changes</li>
+                <li>Temporary service interruptions</li>
+                <li>Third-party service failures</li>
+            </ul>
+            
+            <p>Such events do not qualify for refunds or compensation beyond what is specified in our refund policy.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">11</span> Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law:</p>
+            <ul>
+                <li>100 Days $100K is not liable for indirect, incidental, punitive, or consequential damages</li>
+                <li>We are not liable for lost income, career opportunities, or employment prospects</li>
+                <li>We are not liable for acts or decisions of employers or third parties</li>
+                <li>Our total liability is limited to the amount you paid in the 12 months before the claim</li>
+            </ul>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">12</span> Indemnification</h2>
+            <p>You agree to indemnify and hold harmless 100 Days $100K from any claim, loss, cost, or damage resulting from:</p>
+            <ul>
+                <li>Your breach of these Terms</li>
+                <li>Your misuse of our services</li>
+                <li>Your violation of any law or third-party rights</li>
+                <li>False statements or fraudulent behavior</li>
+            </ul>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">13</span> Termination</h2>
+            <p>We may suspend or terminate your access immediately if:</p>
+            <ul>
+                <li>You violate any provision of these Terms</li>
+                <li>Your payment is reversed or disputed</li>
+                <li>You engage in prohibited conduct</li>
+                <li>You create operational or legal risk</li>
+            </ul>
+            
+            <p>Termination does not eliminate your financial obligations for services already provided.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">14</span> Dispute Resolution</h2>
+            <p>Any disputes must be resolved through:</p>
+            <ol>
+                <li>Written notice to 100 Days $100K</li>
+                <li>Good faith attempt at internal resolution</li>
+                <li>Binding arbitration if internal resolution fails</li>
+            </ol>
+            
+            <p>You waive the right to class action participation and jury trials. Arbitration will be conducted under the rules of the American Arbitration Association.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">15</span> Governing Law</h2>
+            <p>These Terms are governed by the laws of the State of Delaware, without regard to conflict of law principles. Any legal action must be brought in Delaware courts.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">16</span> Changes to Terms</h2>
+            <p>We may modify these Terms at any time. Changes will be effective upon posting to our website. Continued use of our services after changes constitutes acceptance of the updated Terms.</p>
+            <p>We encourage you to review these Terms periodically.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="section-number">17</span> Contact Information</h2>
+            <p><strong>100 Days $100K</strong><br>
+            Registered as Jobslink LLC<br>
+            5830 E 2nd St, Casper, WY 82609<br>
+            <a href="mailto:connect@jobslink-inc.com">connect@jobslink-inc.com</a></p>
+        </div>
+
+        <div class="contact-cta">
+            <h3>Questions About These Terms?</h3>
+            <p>If you have questions or need clarification about these Terms of Service, contact us.</p>
+            <a href="mailto:connect@jobslink-inc.com" class="contact-btn">Contact Us</a>
+        </div>
+    </div>
+
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>100K Pathway</h4>
+                <p style="margin-top:1rem;line-height:1.6;">Interview guarantees with performance-based refund protection. We handle applications. You handle interviews.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <div class="footer-links">
+                    <a href="how-it-works">How It Works</a>
+                    <a href="pricing">Pricing</a>
+                    <a href="case-studies">Case Studies</a>
+                    <a href="faq">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="about">About</a>
+                    <a href="blog">Blog</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="terms">Terms of Service</a>
+                    <a href="privacy">Privacy Policy</a>
+                    <a href="refund">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 100K Pathway. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Page Loader
+        let loadProgress = 0;
+        const progress = document.getElementById('loaderProgress');
+        const loader = document.getElementById('pageLoader');
+        const interval = setInterval(() => {
+            loadProgress += Math.random() * 30;
+            if (loadProgress >= 100) {
+                loadProgress = 100;
+                clearInterval(interval);
+                setTimeout(() => loader.classList.add('loaded'), 200);
+            }
+            progress.style.width = loadProgress + '%';
+        }, 100);
+
+        // Lenis Smooth Scroll
+        try{const lenis=new Lenis({
+            duration: 1.4,
+            easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true
+        });function raf(time){lenis.raf(time);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)}
+
+        // GSAP Scroll Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.legal-section').forEach((section, i) => {
+            gsap.to(section, {
+                y: 0,
+                duration: 0.8,
+                delay: i * 0.1,
+                ease: 'power3.out',
+                scrollTrigger: { 
+                    trigger: section, 
+                    start: 'top 85%', 
+                    once: true 
+                }
+            });
+        });
+
+        // Parallax Orbs
+        document.addEventListener('mousemove', e => {
+            const orbs = document.querySelectorAll('.ambient-orb');
+            const x = (e.clientX / window.innerWidth - 0.5) * 2;
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            
+            orbs.forEach((orb, i) => {
+                const speed = (i + 1) * 15;
+                orb.style.transform = `translate(${x * speed}px, ${y * speed}px) scale(1)`;
+            });
+        });
+    </script>
+    <script src="navigation.js"></script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

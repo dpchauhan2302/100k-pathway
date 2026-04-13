@@ -1,0 +1,165 @@
+<!-- UNIFIED NAVIGATION COMPONENT
+     Copy this into every page's <body>
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div> tag (after opening)
+     Update 'active' class and breadcrumbs per page
+-->
+
+<!-- Global Header -->
+<header class="global-header">
+    <nav class="nav-container">
+        <a href="index" class="nav-logo">100K Pathway</a>
+        <div class="nav-links">
+            <a href="how-it-works" class="nav-link">How It Works</a>
+            <a href="pricing" class="nav-link">Pricing</a>
+            <a href="case-studies" class="nav-link">Verified Outcomes</a>
+            <a href="blog" class="nav-link">Insights</a>
+        </div>
+        <div class="nav-auth">
+            <a href="apply" class="nav-link-primary">Apply</a>
+        </div>
+    </nav>
+</header>
+            </div> -->
+        </div>
+    </nav>
+</header>
+
+<!-- Breadcrumbs (Update per page) -->
+<div class="breadcrumbs">
+    <div class="breadcrumb-container">
+        <a href="/index" class="breadcrumb-item">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-item current">Page Title</span>
+        <!-- Add more levels as needed -->
+    </div>
+</div>
+
+<!-- Page Header (Optional - use for content pages) -->
+<div class="page-header">
+    <div class="page-header-container">
+        <h1 class="page-title">Page Title</h1>
+        <p class="page-subtitle">Brief description of what this page does or what the user will find here.</p>
+    </div>
+</div>
+
+<!-- Global Footer (Put at end of <body> before 
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>) -->
+<footer class="global-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>100K Pathway</h4>
+            <p style="margin-top:1rem;line-height:1.6;">We handle applications. You handle interviews. Get interviews at $100K+ companies in 100 days with money-back guarantee.</p>
+        </div>
+        
+        <div class="footer-section">
+            <h4>Product</h4>
+            <div class="footer-links">
+                <a href="/how-it-works" class="footer-link">How It Works</a>
+                <a href="/pricing" class="footer-link">Pricing</a>
+                <a href="/case-studies" class="footer-link">Verified Outcomes</a>
+                <a href="/faq" class="footer-link">FAQ</a>
+            </div>
+        </div>
+        
+        <div class="footer-section">
+            <h4>Company</h4>
+            <div class="footer-links">
+                <a href="/about" class="footer-link">About</a>
+                <a href="/blog" class="footer-link">Insights</a>
+                <a href="/contact" class="footer-link">Contact</a>
+            </div>
+        </div>
+        
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <div class="footer-links">
+                <a href="/terms" class="footer-link">Terms of Service</a>
+                <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+                <a href="/refund" class="footer-link">Refund Policy</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        © 2024 100K Pathway. All rights reserved.
+    </div>
+</footer>
+
+<!-- Navigation JavaScript -->
+<script>
+// Mobile menu toggle - attach to button if onclick not set
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    if (menuToggle && !menuToggle.onclick) {
+        menuToggle.onclick = toggleMobileMenu;
+    }
+});
+
+function toggleMobileMenu() {
+    const navLinks = document.getElementById('nav-links');
+    navLinks.classList.toggle('active');
+}
+
+// Check user authentication status
+async function checkAuthStatus() {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    
+    if (token && user) {
+        try {
+            const userData = JSON.parse(user);
+            
+            // Hide login/apply buttons
+            const loginLink = document.getElementById('nav-login');
+            const applyLink = document.getElementById('nav-apply');
+            if (loginLink) loginLink.style.display = 'none';
+            if (applyLink) applyLink.style.display = 'none';
+            
+            // Show user menu (if template exists)
+            const userMenu = document.getElementById('nav-user');
+            if (userMenu) {
+                userMenu.style.display = 'flex';
+                const avatar = document.getElementById('nav-avatar');
+                const username = document.getElementById('nav-username');
+                if (avatar) avatar.textContent = userData.full_name?.charAt(0).toUpperCase() || 'U';
+                if (username) username.textContent = userData.full_name || 'User';
+            }
+        } catch (e) {
+            // Auth check failed
+        }
+    }
+}
+
+// Set active nav link based on current page
+function setActiveNavLink() {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        const linkPath = new URL(link.href).pathname;
+        if (linkPath === currentPath || 
+            (currentPath === '/' && linkPath === '/index.html') ||
+            (currentPath === '/index.html' && linkPath === '/')) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', () => {
+    checkAuthStatus();
+    setActiveNavLink();
+});
+</script>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salary Progression Simulator - 100K Pathway</title>
+<link rel="stylesheet" href="global-nav.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+<script src="3d-animations.js" defer></script>
+<script src="mobile-nav.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0B1120;color:#E5E7EB;line-height:1.6}
+.sim-hero{background:linear-gradient(135deg,#00B894,#00a07f);padding:80px 40px;color:#0B1120;text-align:center}
+.sim-hero h1{font-size:48px;font-weight:800;margin-bottom:16px}
+.sim-hero p{font-size:20px;opacity:0.9}
+.simulator-container{max-width:1200px;margin:60px auto;padding:0 40px}
+.control-panel{background:rgba(26,37,55,0.6);backdrop-filter:blur(20px);padding:40px;border-radius:16px;border:1px solid rgba(255,255,255,0.08);margin-bottom:40px}
+.control-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-bottom:32px}
+.input-group{display:flex;flex-direction:column;gap:8px}
+.input-group label{font-weight:600;color:#E5E7EB;font-size:14px}
+.input-group input{padding:12px;border:1px solid rgba(255,255,255,0.15);border-radius:8px;font-size:16px;background:rgba(11,17,32,0.6);color:#E5E7EB}
+.input-group input:focus{outline:none;border-color:#00B894}
+.slider-group{display:flex;flex-direction:column;gap:8px}
+.slider-group label{font-weight:600;color:#E5E7EB;font-size:14px;display:flex;justify-content:space-between}
+.slider-group input[type="range"]{width:100%;height:8px;border-radius:4px;background:rgba(255,255,255,0.1);outline:none;-webkit-appearance:none;appearance:none}
+.slider-group input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:#00B894;cursor:pointer}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:40px}
+.result-card{background:rgba(26,37,55,0.6);backdrop-filter:blur(20px);padding:32px;border-radius:16px;border:1px solid rgba(255,255,255,0.08);text-align:center}
+.result-value{font-size:48px;font-weight:800;color:#00B894;margin-bottom:8px}
+.result-label{color:#9CA3AF;font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.result-description{color:#E5E7EB;font-size:14px;line-height:1.6}
+.chart-container{background:rgba(26,37,55,0.6);backdrop-filter:blur(20px);padding:40px;border-radius:16px;border:1px solid rgba(255,255,255,0.08);margin-bottom:40px}
+.chart-container h3{font-size:24px;font-weight:700;color:#FFFFFF;margin-bottom:24px;text-align:center}
+.assumptions{background:rgba(0,184,148,0.1);border-left:4px solid #00B894;padding:24px;border-radius:8px;margin-top:40px}
+.assumptions h4{color:#FFFFFF;margin-bottom:12px}
+.assumptions ul{margin-left:24px}
+.assumptions li{margin:8px 0;color:#E5E7EB}
+@media(max-width:768px){
+.sim-hero h1{font-size:32px}
+.control-grid{grid-template-columns:1fr}
+}
+</style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+<header class="global-header">
+    <nav class="nav-container">
+        <a href="index" class="nav-logo">
+            <span style="font-size: 24px; font-weight: 700; color: #F9FAFB;">100K <span style="color: #00B894;">Pathway</span></span>
+        </a>
+        
+        <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <div class="nav-links" id="nav-links">
+            <a href="how-it-works" class="nav-link">How It Works</a>
+            <a href="pricing" class="nav-link">Pricing</a>
+            <a href="case-studies" class="nav-link">Verified Outcomes</a>
+            <a href="blog" class="nav-link">Insights</a>
+        </div>
+        <div class="nav-auth">
+            <a href="apply" class="nav-link-primary" id="nav-apply">Apply</a>
+        </div>
+
+        <div class="nav-user" id="nav-user" style="display: none;">
+            <div class="nav-avatar" id="nav-avatar">U</div>
+            <span id="nav-username">User</span>
+        </div>
+    </nav>
+</header>
+
+<div class="breadcrumbs">
+    <div class="breadcrumb-container">
+        <a href="/index" class="breadcrumb-item">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-item current">Salary Simulator</span>
+    </div>
+</div>
+
+<div class="sim-hero">
+    <h1>Salary Trajectory Model</h1>
+    <p>5-year earnings projection comparing current compensation path vs accelerated outcome scenario. Accounts for success fees, compound raises, and opportunity cost.</p>
+</div>
+
+<div class="simulator-container">
+    <div class="control-panel">
+        <h2 style="font-size:28px;font-weight:700;color:#0b3b76;margin-bottom:24px">Your Inputs</h2>
+        <div class="control-grid">
+            <div class="input-group">
+                <label>Current Salary (or last salary if unemployed)</label>
+                <input type="number" id="current-salary" value="65000" min="0" step="1000">
+            </div>
+            <div class="input-group">
+                <label>Target New Salary</label>
+                <input type="number" id="target-salary" value="120000" min="0" step="1000">
+            </div>
+            <div class="input-group">
+                <label>Which Plan?</label>
+                <select id="plan-select" style="padding:12px;border:2px solid #e5e7eb;border-radius:8px;font-size:16px">
+                    <option value="essential">Essential (15% success fee)</option>
+                    <option value="standard" selected>Standard (12% success fee)</option>
+                    <option value="premium">Premium (10% success fee)</option>
+                </select>
+            </div>
+        </div>
+        <div class="slider-group" style="margin-top:24px">
+            <label>
+                <span>Annual Raise % (After Year 1)</span>
+                <span id="raise-display">4%</span>
+            </label>
+            <input type="range" id="raise-slider" min="0" max="10" value="4" step="0.5">
+        </div>
+        <button onclick="calculate()" style="margin-top:24px;width:100%;padding:16px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-weight:700;font-size:18px;cursor:pointer">Calculate 5-Year Impact →</button>
+    </div>
+
+    <div class="results-grid" id="results" style="display:none">
+        <div class="result-card">
+            <div class="result-value" id="year1-gain"></div>
+            <div class="result-label">Year 1 Net Gain</div>
+            <div class="result-description">After paying success fee</div>
+        </div>
+        <div class="result-card">
+            <div class="result-value" id="five-year-total"></div>
+            <div class="result-label">5-Year Total Gain</div>
+            <div class="result-description">Compounding with raises</div>
+        </div>
+        <div class="result-card">
+            <div class="result-value" id="roi-multiple"></div>
+            <div class="result-label">ROI Multiple</div>
+            <div class="result-description">Return on investment</div>
+        </div>
+    </div>
+
+    <div class="chart-container" id="chart-container" style="display:none">
+        <h3>Your Salary Trajectory Over 5 Years</h3>
+        <canvas id="salary-chart"></canvas>
+    </div>
+
+    <div class="assumptions" id="assumptions" style="display:none">
+        <h4>Assumptions Used:</h4>
+        <ul>
+            <li>Current trajectory: Staying at current salary with <span id="current-raise">3%</span> annual raises</li>
+            <li>New trajectory: Starting at target salary with <span id="new-raise">4%</span> annual raises</li>
+            <li>Success fee paid only in Year 1 (one-time cost)</li>
+            <li>No job changes after Year 1 (conservative estimate)</li>
+            <li>Pre-tax calculations (your take-home will vary by location)</li>
+        </ul>
+    </div>
+</div>
+
+<footer class="global-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>100K Pathway</h4>
+            <p style="margin-top:1rem;line-height:1.6;color:var(--page-text-muted)">Interviews in 100 days with money-back guarantee. We handle applications. You handle interviews.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Product</h4>
+            <div class="footer-links">
+                <a href="how-it-works" class="footer-link">How It Works</a>
+                <a href="pricing" class="footer-link">Pricing</a>
+                <a href="case-studies" class="footer-link">Verified Outcomes</a>
+                <a href="faq" class="footer-link">FAQ</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Company</h4>
+            <div class="footer-links">
+                <a href="about" class="footer-link">About</a>
+                <a href="blog" class="footer-link">Blog</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <div class="footer-links">
+                <a href="terms" class="footer-link">Terms of Service</a>
+                <a href="privacy" class="footer-link">Privacy Policy</a>
+                <a href="refund" class="footer-link">Refund Policy</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 100K Pathway. All rights reserved.
+    </div>
+</footer>
+
+<script>
+let salaryChart = null;
+
+document.getElementById('raise-slider').addEventListener('input', (e) => {
+    document.getElementById('raise-display').textContent = e.target.value + '%';
+});
+
+function calculate() {
+    const currentSalary = parseInt(document.getElementById('current-salary').value);
+    const targetSalary = parseInt(document.getElementById('target-salary').value);
+    const plan = document.getElementById('plan-select').value;
+    const raisePercent = parseFloat(document.getElementById('raise-slider').value);
+    
+    const successFees = {essential: 0.15, standard: 0.12, premium: 0.10};
+    const upfronts = {essential: 1299, standard: 1999, premium: 2999};
+    
+    const successFee = targetSalary * successFees[plan];
+    const upfront = upfronts[plan];
+    const totalCost = successFee + upfront;
+    
+    // Year 1
+    const salaryIncrease = targetSalary - currentSalary;
+    const year1NetGain = salaryIncrease - totalCost;
+    
+    // 5-year projection
+    const currentTrajectory = [];
+    const newTrajectory = [];
+    let currentAccum = currentSalary;
+    let newAccum = targetSalary;
+    
+    for (let i = 0; i < 5; i++) {
+        currentTrajectory.push(Math.round(currentAccum));
+        newTrajectory.push(Math.round(newAccum));
+        currentAccum *= (1 + 0.03); // Conservative 3% raises on current path
+        newAccum *= (1 + raisePercent / 100); // User-defined raises on new path
+    }
+    
+    const fiveYearCurrent = currentTrajectory.reduce((a, b) => a + b, 0);
+    const fiveYearNew = newTrajectory.reduce((a, b) => a + b, 0);
+    const fiveYearGain = fiveYearNew - fiveYearCurrent - totalCost;
+    
+    const roiMultiple = (fiveYearGain / totalCost).toFixed(1);
+    
+    // Update UI
+    document.getElementById('year1-gain').textContent = '$' + year1NetGain.toLocaleString();
+    document.getElementById('five-year-total').textContent = '$' + Math.round(fiveYearGain).toLocaleString();
+    document.getElementById('roi-multiple').textContent = roiMultiple + 'x';
+    
+    document.getElementById('results').style.display = 'grid';
+    document.getElementById('chart-container').style.display = 'block';
+    document.getElementById('assumptions').style.display = 'block';
+    
+    document.getElementById('current-raise').textContent = '3%';
+    document.getElementById('new-raise').textContent = raisePercent + '%';
+    
+    // Draw chart
+    drawChart(currentTrajectory, newTrajectory);
+    
+    // Scroll to results
+    document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'nearest'});
+}
+
+function drawChart(current, newSalaries) {
+    const ctx = document.getElementById('salary-chart').getContext('2d');
+    
+    if (salaryChart) {
+        salaryChart.destroy();
+    }
+    
+    salaryChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+            datasets: [
+                {
+                    label: 'Current Path (3% raises)',
+                    data: current,
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                },
+                {
+                    label: 'With 100K Pathway',
+                    data: newSalaries,
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {size: 14, weight: 'bold'},
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': $' + context.parsed.y.toLocaleString();
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + (value / 1000).toFixed(0) + 'K';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Mobile nav
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
+}
+
+// Smooth scroll
+try{const lenis=new Lenis({duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)}
+</script>
+    <script src="navigation.js"></script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

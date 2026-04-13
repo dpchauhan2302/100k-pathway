@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Are You Ready? Take the Assessment - 100 Days $100K</title>
+<link rel="stylesheet" href="global-nav.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Newsreader',Georgia,serif;background:#0B1120;color:#E8EDF2;line-height:1.65;letter-spacing:-0.01em;font-size:17px}
+.quiz-hero{background:rgba(26,37,55,0.4);padding:80px 40px;color:#E8EDF2;text-align:center;border-bottom:1px solid rgba(255,255,255,0.08)}
+.quiz-hero h1{font-size:48px;font-weight:700;margin-bottom:16px;font-family:'Newsreader',Georgia,serif;letter-spacing:-0.03em}
+.quiz-hero p{font-size:20px;opacity:0.85;max-width:700px;margin:0 auto;font-style:italic}
+.quiz-container{max-width:800px;margin:60px auto;padding:0 40px}
+.progress-bar{background:rgba(11,17,32,0.6);height:8px;border-radius:2px;margin-bottom:40px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)}
+.progress-fill{background:linear-gradient(90deg,#FF6B35,#C44327);height:100%;width:0%;transition:width 0.3s ease}
+.question-card{background:rgba(26,37,55,0.4);padding:40px;border-radius:2px;box-shadow:0 2px 8px rgba(0,0,0,0.5);margin-bottom:40px;opacity:0;transform:translateY(20px);transition:all 0.4s ease;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08)}
+.question-card.active{opacity:1;transform:translateY(0)}
+.question-number{color:#FF6B35;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;font-family:'IBM Plex Mono',monospace}
+.question-text{font-size:24px;font-weight:600;color:#FFFFFF;margin-bottom:32px;line-height:1.4;font-family:'Newsreader',Georgia,serif}
+.options{display:flex;flex-direction:column;gap:16px}
+.option{background:rgba(26,37,55,0.3);border:1px solid rgba(255,255,255,0.08);padding:20px 24px;border-radius:2px;cursor:pointer;transition:all 0.15s cubic-bezier(0.4,0,0.2,1);display:flex;align-items:center;gap:16px;font-size:18px;color:#E8EDF2}
+.option:hover{border-color:#FF6B35;background:rgba(255,107,53,0.1);transform:translateX(4px)}
+.option.selected{border-color:#FF6B35;background:rgba(255,107,53,0.15);box-shadow:0 2px 8px rgba(255,107,53,0.3)}
+.option-letter{width:40px;height:40px;background:#FF6B35;color:white;border-radius:2px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-family:'IBM Plex Mono',monospace}
+.option.selected .option-letter{background:#C44327}
+.nav-buttons{display:flex;gap:16px;justify-content:space-between;margin-top:32px}
+.btn{padding:14px 32px;border-radius:2px;font-weight:700;font-size:16px;cursor:pointer;border:none;transition:all 0.15s cubic-bezier(0.4,0,0.2,1);font-family:'IBM Plex Mono',monospace;letter-spacing:0.02em}
+.btn-next{background:linear-gradient(135deg,#FF6B35,#C44327);color:white}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(102,126,234,0.3)}
+.btn-next:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.btn-back{background:white;color:#667eea;border:2px solid #667eea}
+.btn-back:hover{background:#f0f4ff}
+.results{background:white;padding:48px;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.08);text-align:center}
+.results.hidden{display:none}
+.score-circle{width:200px;height:200px;margin:0 auto 32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:800;color:white;position:relative}
+.score-circle.high{background:linear-gradient(135deg,#00D68F,#00A86B)}
+.score-circle.medium{background:linear-gradient(135deg,#FFB800,#E5A600)}
+.score-circle.low{background:linear-gradient(135deg,#FF3860,#E02850)}
+.result-title{font-size:36px;font-weight:700;color:#FFFFFF;margin-bottom:16px;font-family:'Newsreader',Georgia,serif;letter-spacing:-0.03em}
+.result-description{font-size:18px;color:#8B95A5;line-height:1.8;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
+.recommendation{background:rgba(255,107,53,0.1);border-left:2px solid #FF6B35;padding:24px;margin:32px 0;text-align:left;border-radius:2px}
+.recommendation h3{color:#FFFFFF;margin-bottom:12px;font-size:20px;font-family:'Newsreader',Georgia,serif;font-weight:600}
+.recommendation ul{margin:16px 0;padding-left:24px}
+.recommendation li{margin:8px 0;color:#E8EDF2}
+.cta-button{display:inline-block;background:linear-gradient(135deg,#FF6B35,#C44327);color:white;padding:18px 48px;border-radius:2px;text-decoration:none;font-weight:700;font-size:18px;margin-top:24px;transition:transform 0.15s cubic-bezier(0.4,0,0.2,1);font-family:'IBM Plex Mono',monospace;letter-spacing:0.02em}
+.cta-button:hover{transform:translateX(4px)}
+@media(max-width:768px){
+.quiz-hero h1{font-size:32px}
+.question-text{font-size:20px}
+.option{font-size:16px;padding:16px 20px}
+}
+</style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body class="unified-theme">
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+
+<header class="global-header">
+    <nav class="nav-container">
+        <a href="index" class="nav-logo">100K Pathway</a>
+        
+        <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <div class="nav-links" id="nav-links">
+            <a href="how-it-works" class="nav-link">How It Works</a>
+            <a href="pricing" class="nav-link">Pricing</a>
+            <a href="case-studies" class="nav-link">Case Studies</a>
+            <a href="blog" class="nav-link">Blog</a>
+        </div>
+        <div class="nav-auth">
+            <a href="apply" class="nav-link-primary" id="nav-apply">Apply</a>
+        </div>
+
+        <div class="nav-user" id="nav-user" style="display: none;">
+            <div class="nav-avatar" id="nav-avatar">U</div>
+            <span id="nav-username">User</span>
+        </div>
+    </nav>
+</header>
+
+<div class="breadcrumbs">
+    <div class="breadcrumb-container">
+        <a href="/index" class="breadcrumb-item">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-item current">Readiness Assessment</span>
+    </div>
+</div>
+
+<div class="quiz-hero">
+    <h1>Program Fit Assessment</h1>
+    <p>Diagnostic evaluation of employment status, technical readiness, and urgency factors. Algorithmic scoring determines program suitability. 3 minutes to complete.</p>
+</div>
+
+<div class="quiz-container">
+    <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+    </div>
+
+    <div id="quiz-questions"></div>
+
+    <div class="results hidden" id="results"></div>
+</div>
+
+<footer class="global-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>100 Days $100K</h4>
+            <p style="margin-top:1rem;line-height:1.6;color:var(--page-text-muted)">Interviews in 100 days with money-back guarantee. We handle applications. You handle interviews.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Product</h4>
+            <div class="footer-links">
+                <a href="how-it-works" class="footer-link">How It Works</a>
+                <a href="pricing" class="footer-link">Pricing</a>
+                <a href="case-studies" class="footer-link">Case Studies</a>
+                <a href="faq" class="footer-link">FAQ</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Company</h4>
+            <div class="footer-links">
+                <a href="about" class="footer-link">About</a>
+                <a href="blog" class="footer-link">Blog</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <div class="footer-links">
+                <a href="terms" class="footer-link">Terms of Service</a>
+                <a href="privacy" class="footer-link">Privacy Policy</a>
+                <a href="refund" class="footer-link">Refund Policy</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 100K Pathway. All rights reserved.
+    </div>
+</footer>
+
+<script>
+const questions = [
+    {
+        text: "What's your current employment status?",
+        options: [
+            {text: "Unemployed, actively job hunting", value: 10},
+            {text: "Employed, looking for better role", value: 3},
+            {text: "Student/Recent grad", value: 7},
+            {text: "Career break/Gap year", value: 8}
+        ]
+    },
+    {
+        text: "How many applications have you submitted in the last 30 days?",
+        options: [
+            {text: "0-5", value: 3},
+            {text: "6-20", value: 7},
+            {text: "21-50", value: 10},
+            {text: "50+", value: 8}
+        ]
+    },
+    {
+        text: "How many technical interviews have you had in the last 60 days?",
+        options: [
+            {text: "0 (I'm not getting interviews)", value: 10},
+            {text: "1-2", value: 8},
+            {text: "3-5", value: 5},
+            {text: "6+", value: 2}
+        ]
+    },
+    {
+        text: "Do you have a portfolio with deployed, live projects?",
+        options: [
+            {text: "No portfolio at all", value: 10},
+            {text: "GitHub repos only (no live demos)", value: 7},
+            {text: "1-2 deployed projects", value: 4},
+            {text: "3+ production-grade projects", value: 1}
+        ]
+    },
+    {
+        text: "Rate your interview confidence (technical + behavioral):",
+        options: [
+            {text: "I freeze/blank on questions", value: 10},
+            {text: "I struggle but get through it", value: 7},
+            {text: "I'm decent, but could be better", value: 4},
+            {text: "I'm confident and prepared", value: 2}
+        ]
+    },
+    {
+        text: "How long have you been job hunting?",
+        options: [
+            {text: "Just started (< 1 month)", value: 5},
+            {text: "1-3 months", value: 8},
+            {text: "3-6 months", value: 10},
+            {text: "6+ months (I'm exhausted)", value: 10}
+        ]
+    },
+    {
+        text: "What's your biggest obstacle right now?",
+        options: [
+            {text: "Not getting any interviews", value: 10},
+            {text: "Failing technical interviews", value: 8},
+            {text: "Can't decide which companies to apply to", value: 6},
+            {text: "Don't know what's wrong with my approach", value: 9}
+        ]
+    },
+    {
+        text: "Do you have coding skills (any language)?",
+        options: [
+            {text: "Yes, I can build functional apps", value: 10},
+            {text: "Yes, but rusty/gaps in knowledge", value: 7},
+            {text: "Learning/beginner level", value: 3},
+            {text: "No coding experience yet", value: 0}
+        ]
+    },
+    {
+        text: "How urgent is finding a job for you?",
+        options: [
+            {text: "Critical - rent/bills due soon", value: 10},
+            {text: "Urgent - savings running low", value: 9},
+            {text: "Moderate - can wait 3-6 months", value: 5},
+            {text: "Not urgent - just exploring options", value: 2}
+        ]
+    },
+    {
+        text: "Are you willing to invest time (2-3 hours/day for 100 days)?",
+        options: [
+            {text: "Yes, I'm all in", value: 10},
+            {text: "Yes, but I have some constraints", value: 7},
+            {text: "Maybe - depends on workload", value: 4},
+            {text: "No, I can't commit that much", value: 0}
+        ]
+    }
+];
+
+let currentQuestion = 0;
+let answers = [];
+
+function renderQuestion() {
+    const container = document.getElementById('quiz-questions');
+    const q = questions[currentQuestion];
+    
+    container.innerHTML = `
+        <div class="question-card active">
+            <div class="question-number">Question ${currentQuestion + 1} of ${questions.length}</div>
+            <div class="question-text">${q.text}</div>
+            <div class="options">
+                ${q.options.map((opt, idx) => `
+                    <div class="option" onclick="selectOption(${idx})" data-option="${idx}">
+                        <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                        <div>${opt.text}</div>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="previousQuestion()" ${currentQuestion === 0 ? 'style="visibility:hidden"' : ''}>
+                    ← Back
+                </button>
+                <button class="btn btn-next" id="next-btn" onclick="nextQuestion()" disabled>
+                    ${currentQuestion === questions.length - 1 ? 'See Results' : 'Next →'}
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Restore previous answer if exists
+    if (answers[currentQuestion] !== undefined) {
+        const options = document.querySelectorAll('.option');
+        options[answers[currentQuestion]].classList.add('selected');
+        document.getElementById('next-btn').disabled = false;
+    }
+    
+    updateProgress();
+}
+
+function selectOption(idx) {
+    document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+    document.querySelector(`[data-option="${idx}"]`).classList.add('selected');
+    answers[currentQuestion] = idx;
+    document.getElementById('next-btn').disabled = false;
+}
+
+function nextQuestion() {
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function previousQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+    }
+}
+
+function updateProgress() {
+    const progress = ((currentQuestion + 1) / questions.length) * 100;
+    document.getElementById('progress-fill').style.width = progress + '%';
+}
+
+function calculateScore() {
+    let total = 0;
+    answers.forEach((answerIdx, questionIdx) => {
+        total += questions[questionIdx].options[answerIdx].value;
+    });
+    return total;
+}
+
+function showResults() {
+    const score = calculateScore();
+    const maxScore = 100;
+    const percentage = Math.round((score / maxScore) * 100);
+    
+    let scoreClass, resultTitle, resultDesc, recommendation;
+    
+    if (percentage >= 75) {
+        scoreClass = 'high';
+        resultTitle = 'You\'re a Perfect Fit';
+        resultDesc = 'Based on your answers, 100 Days $100K is exactly what you need right now. You have the skills but lack the strategy, volume, or interview confidence to convert that into offers.';
+        recommendation = `
+            <h3>Why You Should Join:</h3>
+            <ul>
+                <li>You're unemployed/urgently job hunting (our core audience)</li>
+                <li>You have coding skills but interviews aren't converting</li>
+                <li>You're ready to commit time and effort to a structured plan</li>
+                <li>The 100-day deadline will force action (vs endless prep)</li>
+            </ul>
+            <p style="margin-top:16px;"><strong>Recommended Plan:</strong> Standard or Premium (you need full support + application volume)</p>
+        `;
+    } else if (percentage >= 50) {
+        scoreClass = 'medium';
+        resultTitle = 'You Could Benefit, But...';
+        resultDesc = 'You have some of what we need, but there are gaps. Either your urgency is low, your skills need work, or you\'re not ready to commit the time required.';
+        recommendation = `
+            <h3>What to Consider:</h3>
+            <ul>
+                <li>If you're employed and just exploring: you probably don't need us yet</li>
+                <li>If your coding skills are rusty: spend 2-4 weeks brushing up first</li>
+                <li>If you can't commit 2-3 hours/day: wait until you can</li>
+                <li>If you're getting 6+ interviews already: you need interview coaching, not us</li>
+            </ul>
+            <p style="margin-top:16px;"><strong>Recommendation:</strong> Fix your biggest gap first, then come back. Or book a call to discuss your specific situation.</p>
+        `;
+    } else {
+        scoreClass = 'low';
+        resultTitle = 'Not Ready Yet (And That\'s Okay)';
+        resultDesc = 'Based on your answers, 100 Days $100K isn\'t the right fit right now. You either lack foundational coding skills, aren\'t urgent enough, or can\'t commit the required time.';
+        recommendation = `
+            <h3>What to Do Instead:</h3>
+            <ul>
+                <li><strong>If you're brand new to coding:</strong> Complete a bootcamp or 3-6 months of self-study first</li>
+                <li><strong>If you're not urgent:</strong> Keep applying on your own, read our blog for free advice</li>
+                <li><strong>If you can't commit time:</strong> Wait until your schedule clears up</li>
+                <li><strong>If you're employed and exploring:</strong> You don't need this level of support yet</li>
+            </ul>
+            <p style="margin-top:16px;"><strong>Come back when:</strong> You're unemployed + have coding skills + ready to go all-in for 100 days.</p>
+        `;
+    }
+    
+    document.getElementById('quiz-questions').classList.add('hidden');
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = `
+        <div class="score-circle ${scoreClass}">
+            ${percentage}%
+        </div>
+        <div class="result-title">${resultTitle}</div>
+        <div class="result-description">${resultDesc}</div>
+        <div class="recommendation">
+            ${recommendation}
+        </div>
+        ${percentage >= 50 ? '<a href="/apply" class="cta-button">Start Application →</a>' : '<a href="/blog" class="cta-button">Read Our Blog Instead</a>'}
+        <div style="margin-top:24px">
+            <button class="btn btn-back" onclick="restartQuiz()">← Retake Quiz</button>
+        </div>
+    `;
+    resultsDiv.classList.remove('hidden');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function restartQuiz() {
+    currentQuestion = 0;
+    answers = [];
+    document.getElementById('quiz-questions').classList.remove('hidden');
+    document.getElementById('results').classList.add('hidden');
+    renderQuestion();
+}
+
+// Initialize
+renderQuestion();
+
+// Mobile nav
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
+}
+
+// Smooth scroll
+try{const lenis=new Lenis({duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}catch(e){console.warn("Lenis smooth scroll unavailable:",e.message)}
+</script>
+    <script src="navigation.js"></script>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

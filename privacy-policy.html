@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - 100 Days $100K</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
+    <style>
+        .privacy-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .privacy-header {
+            border-bottom: 2px solid #000;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        .privacy-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .privacy-header .last-updated {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        .toc {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 6px;
+            margin: 30px 0;
+        }
+        .toc h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .toc li {
+            padding: 8px 0;
+        }
+        .toc a {
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .toc a:hover {
+            border-bottom-color: #000;
+        }
+        .section {
+            margin: 50px 0;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+        .section h3 {
+            font-size: 1.3rem;
+            margin: 25px 0 15px;
+        }
+        .section p, .section li {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .highlight-box {
+            background: #fffbea;
+            border-left: 4px solid #000;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .category-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .category-table th,
+        .category-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .category-table th {
+            background: #000;
+            color: white;
+            font-weight: 600;
+        }
+        .contact-info {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 6px;
+            margin-top: 40px;
+        }
+    </style>
+
+<!-- 100K Pathway Branded Page Loader CSS -->
+<style id="pk-loader-styles">
+  #pk-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;opacity:1;transition:opacity .5s ease,visibility .5s ease}
+  #pk-page-loader.pk-loaded{opacity:0;visibility:hidden;pointer-events:none}
+  .pk-loader-brand{text-align:center;position:relative}
+  .pk-loader-100k{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-3px;line-height:1;opacity:0;animation:pkFade100k .7s ease .1s forwards}
+  .pk-loader-pathway{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:20px;font-weight:700;color:#00B894;letter-spacing:10px;text-transform:uppercase;margin-top:4px;opacity:0;transform:translateY(8px);animation:pkFadePathway .6s ease .5s forwards}
+  .pk-loader-bar-wrap{position:absolute;bottom:0;left:0;width:100%;height:3px}
+  .pk-loader-bar{height:100%;background:linear-gradient(90deg,transparent,#00B894,#00d4aa,#00B894,transparent);background-size:300% 100%;animation:pkBarShimmer 1.8s ease-in-out infinite;border-radius:2px}
+  .pk-loader-glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,148,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pkGlowPulse 2s ease-in-out infinite}
+  @keyframes pkFade100k{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+  @keyframes pkFadePathway{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pkBarShimmer{0%{background-position:300% 0}100%{background-position:-300% 0}}
+  @keyframes pkGlowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.3)}}
+</style>
+</head>
+<body>
+<!-- 100K Pathway Branded Page Loader -->
+<div id="pk-page-loader">
+  <div class="pk-loader-glow"></div>
+  <div class="pk-loader-brand">
+    <div class="pk-loader-100k">100K</div>
+    <div class="pk-loader-pathway">Pathway</div>
+  </div>
+  <div class="pk-loader-bar-wrap"><div class="pk-loader-bar"></div></div>
+</div>
+    <header class="global-header">
+        <nav class="nav-container">
+            <a href="index" class="nav-logo">100K Pathway</a>
+            <div class="nav-links">
+                <a href="how-it-works" class="nav-link">How It Works</a>
+                <a href="pricing" class="nav-link">Pricing</a>
+                <a href="case-studies" class="nav-link">Case Studies</a>
+                <a href="blog" class="nav-link">Blog</a>
+            </div>
+            <div class="nav-auth">
+                <a href="apply" class="nav-link-primary">Apply</a>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="privacy-container">
+        <div class="privacy-header">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last updated: December 17, 2024</p>
+        </div>
+
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#effective-date">1. Effective Date</a></li>
+                <li><a href="#information-collect">2. What Information Do We Collect?</a></li>
+                <li><a href="#process-information">3. How Do We Process Your Information?</a></li>
+                <li><a href="#share-information">4. When and With Whom Do We Share Your Personal Information?</a></li>
+                <li><a href="#keep-safe">5. How Do We Keep Your Information Safe?</a></li>
+                <li><a href="#privacy-rights">6. What Are Your Privacy Rights?</a></li>
+                <li><a href="#us-residents">7. Do United States Residents Have Specific Privacy Rights?</a></li>
+                <li><a href="#contact">8. How Can You Contact Us About This Notice?</a></li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3>SUMMARY OF KEY POINTS</h3>
+            <p><strong>What personal information do we process?</strong> When you visit, use, or navigate our Services, we may process personal information depending on how you interact with us and the Services, the choices you make, and the products and features you use.</p>
+            
+            <p><strong>Do we process any sensitive personal information?</strong> We may process sensitive personal information when necessary with your consent or as otherwise permitted by applicable law.</p>
+            
+            <p><strong>Do we collect any information from third parties?</strong> We do not collect any information from third parties.</p>
+            
+            <p><strong>How do we process your information?</strong> We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to comply with law.</p>
+            
+            <p><strong>How do we keep your information safe?</strong> We have adequate organizational and technical processes and procedures in place to protect your personal information.</p>
+        </div>
+
+        <section id="effective-date" class="section">
+            <h2>1. EFFECTIVE DATE</h2>
+            <p>This Privacy Notice is effective as of December 17, 2024.</p>
+            <p>This Privacy Notice for 100 Days $100K ("we," "us," or "our"), describes how and why we might access, collect, store, use, and/or share ("process") your personal information when you use our services ("Services"), including when you:</p>
+            <ul>
+                <li>Visit our website at https://100k-pathway.com, or any website of ours that links to this Privacy Notice</li>
+                <li>Engage with us in other related ways, including any sales, marketing, or events</li>
+            </ul>
+            <p><strong>Questions or concerns?</strong> Reading this Privacy Notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at privacy@100k-pathway.com.</p>
+        </section>
+
+        <section id="information-collect" class="section">
+            <h2>2. WHAT INFORMATION DO WE COLLECT?</h2>
+            
+            <h3>Personal Information You Disclose to Us</h3>
+            <p><em>In Short: We collect personal information that you provide to us.</em></p>
+            
+            <p>We collect personal information that you voluntarily provide to us when you register for the program, express an interest in obtaining information about us or our products and Services, when you participate in activities on the Services, or otherwise when you contact us.</p>
+            
+            <h3>Personal Information Provided by You</h3>
+            <p>The personal information that we collect depends on the context of your interactions with us and the Services, the choices you make, and the products and features you use. The personal information we collect may include the following:</p>
+            <ul>
+                <li>Names</li>
+                <li>Phone numbers</li>
+                <li>Email addresses</li>
+                <li>Mailing addresses</li>
+                <li>Billing addresses</li>
+                <li>Educational background</li>
+                <li>Employment history</li>
+                <li>Professional goals and motivation</li>
+            </ul>
+            
+            <h3>Sensitive Information</h3>
+            <p>When necessary, with your consent or as otherwise permitted by applicable law, we process the following categories of sensitive information:</p>
+            <ul>
+                <li>Social security numbers or other government identifiers (for verification purposes)</li>
+                <li>Visa status (for employment eligibility verification)</li>
+            </ul>
+            
+            <h3>Payment Data</h3>
+            <p>We may collect data necessary to process your payment if you choose to make purchases, such as your payment instrument number, and the security code associated with your payment instrument. All payment data is handled and stored by Stripe. You may find their privacy notice at: <a href="https://stripe.com/privacy" target="_blank">https://stripe.com/privacy</a>.</p>
+            
+            <p><strong>Important:</strong> All personal information that you provide to us must be true, complete, and accurate, and you must notify us of any changes to such personal information.</p>
+        </section>
+
+        <section id="process-information" class="section">
+            <h2>3. HOW DO WE PROCESS YOUR INFORMATION?</h2>
+            
+            <p><em>In Short: We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to comply with law.</em></p>
+            
+            <p>We process your personal information for a variety of reasons, depending on how you interact with our Services, including:</p>
+            <ul>
+                <li><strong>To deliver and facilitate delivery of services to the user.</strong> We may process your information to provide you with the requested service, including program enrollment, interview preparation, and career career transition support.</li>
+                <li><strong>To respond to user inquiries/offer support to users.</strong> We may process your information to respond to your inquiries and solve any potential issues you might have with the requested service.</li>
+                <li><strong>To fulfill and manage your orders.</strong> We may process your information to fulfill and manage your orders, payments, returns, and exchanges made through the Services.</li>
+                <li><strong>To request feedback.</strong> We may process your information when necessary to request feedback and to contact you about your use of our Services.</li>
+                <li><strong>To send you marketing and promotional communications.</strong> We may process the personal information you send to us for our marketing purposes, if this is in accordance with your marketing preferences.</li>
+                <li><strong>To post testimonials.</strong> We post testimonials on our Services that may contain personal information with your explicit consent.</li>
+                <li><strong>To protect our Services.</strong> We may process your information as part of our efforts to keep our Services safe and secure, including fraud monitoring and prevention.</li>
+                <li><strong>To evaluate and improve our Services.</strong> We may process your information when we believe it is necessary to identify usage trends, determine the effectiveness of our programs, and to evaluate and improve our Services.</li>
+                <li><strong>To comply with our legal obligations.</strong> We may process your information to comply with our legal obligations, respond to legal requests, and exercise, establish, or defend our legal rights.</li>
+            </ul>
+        </section>
+
+        <section id="share-information" class="section">
+            <h2>4. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?</h2>
+            
+            <p><em>In Short: We may share information in specific situations described in this section and/or with third parties.</em></p>
+            
+            <p>We may need to share your personal information in the following situations:</p>
+            <ul>
+                <li><strong>Business Transfers.</strong> We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
+                <li><strong>Career Transition Partners.</strong> With your explicit consent, we may share your resume, portfolio, and interview performance data with potential employers to facilitate career transition.</li>
+                <li><strong>Service Providers.</strong> We may share your information with third-party service providers who perform services for us, such as payment processing, data analysis, email delivery, and customer service.</li>
+            </ul>
+        </section>
+
+        <section id="keep-safe" class="section">
+            <h2>5. HOW DO WE KEEP YOUR INFORMATION SAFE?</h2>
+            
+            <p><em>In Short: We aim to protect your personal information through a system of organizational and technical security measures.</em></p>
+            
+            <p>We have implemented appropriate and reasonable technical and organizational security measures designed to protect the security of any personal information we process. These measures include:</p>
+            <ul>
+                <li>Encryption of data in transit using TLS/SSL</li>
+                <li>Encryption of sensitive data at rest</li>
+                <li>Regular security audits and vulnerability assessments</li>
+                <li>Access controls and authentication mechanisms</li>
+                <li>Employee training on data protection and privacy</li>
+            </ul>
+            
+            <p>However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure. We cannot promise or guarantee that hackers, cybercriminals, or other unauthorized third parties will not be able to defeat our security and improperly collect, access, steal, or modify your information.</p>
+            
+            <p>Although we will do our best to protect your personal information, transmission of personal information to and from our Services is at your own risk. You should only access the Services within a secure environment.</p>
+        </section>
+
+        <section id="privacy-rights" class="section">
+            <h2>6. WHAT ARE YOUR PRIVACY RIGHTS?</h2>
+            
+            <p><em>In Short: Depending on your state of residence in the US or in some regions, such as Canada, you have rights that allow you greater access to and control over your personal information.</em></p>
+            
+            <p>In some regions (like Canada and the European Economic Area), you have certain rights under applicable data protection laws. These may include the right:</p>
+            <ul>
+                <li>(i) to request access and obtain a copy of your personal information</li>
+                <li>(ii) to request rectification or erasure</li>
+                <li>(iii) to restrict the processing of your personal information</li>
+                <li>(iv) if applicable, to data portability</li>
+                <li>(v) not to be subject to automated decision-making</li>
+            </ul>
+            
+            <p>In certain circumstances, you may also have the right to object to the processing of your personal information. You can make such a request by contacting us using the contact details provided in the section "HOW CAN YOU CONTACT US ABOUT THIS NOTICE?" below.</p>
+            
+            <h3>Withdrawing Your Consent</h3>
+            <p>If we are relying on your consent to process your personal information, you have the right to withdraw your consent at any time. You can withdraw your consent at any time by contacting us using the contact details provided below.</p>
+            
+            <h3>Opting Out of Marketing and Promotional Communications</h3>
+            <p>You can unsubscribe from our marketing and promotional communications at any time by clicking on the unsubscribe link in the emails that we send, or by contacting us using the details provided below. You will then be removed from the marketing lists.</p>
+            
+            <p>If you have questions or comments about your privacy rights, you may email us at privacy@100k-pathway.com.</p>
+        </section>
+
+        <section id="us-residents" class="section">
+            <h2>7. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</h2>
+            
+            <p><em>In Short: If you are a resident of certain US states, you may have the right to request access to and receive details about the personal information we maintain about you.</em></p>
+            
+            <h3>Categories of Personal Information We Collect</h3>
+            <p>We have collected the following categories of personal information in the past twelve (12) months:</p>
+            
+            <table class="category-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Examples</th>
+                        <th>Collected</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A. Identifiers</td>
+                        <td>Contact details, such as real name, alias, postal address, telephone or mobile contact number, unique personal identifier, online identifier, Internet Protocol address, email address, and account name</td>
+                        <td>YES</td>
+                    </tr>
+                    <tr>
+                        <td>B. Personal information as defined in the California Customer Records statute</td>
+                        <td>Name, contact information, education, employment, employment history, and financial information</td>
+                        <td>YES</td>
+                    </tr>
+                    <tr>
+                        <td>C. Protected classification characteristics under state or federal law</td>
+                        <td>Gender, age, date of birth, race and ethnicity, national origin, marital status, and other demographic data</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>D. Commercial information</td>
+                        <td>Transaction information, purchase history, financial details, and payment information</td>
+                        <td>YES</td>
+                    </tr>
+                    <tr>
+                        <td>E. Biometric information</td>
+                        <td>Fingerprints and voiceprints</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>F. Internet or other similar network activity</td>
+                        <td>Browsing history, search history, online behavior, interest data, and interactions with our websites, applications, systems, and advertisements</td>
+                        <td>YES</td>
+                    </tr>
+                    <tr>
+                        <td>G. Geolocation data</td>
+                        <td>Device location</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>H. Audio, electronic, visual, thermal, olfactory, or similar information</td>
+                        <td>Images and audio, video or call recordings created in connection with our business activities</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>I. Professional or employment-related information</td>
+                        <td>Business contact details, job title, work history, and professional qualifications</td>
+                        <td>YES</td>
+                    </tr>
+                    <tr>
+                        <td>J. Education Information</td>
+                        <td>Student records and directory information</td>
+                        <td>YES</td>
+                    </tr>
+                    <tr>
+                        <td>K. Inferences drawn from collected personal information</td>
+                        <td>Inferences drawn from any of the collected personal information to create a profile about a consumer</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>L. Sensitive personal information</td>
+                        <td>Government identifiers (such as Social Security Number), visa status</td>
+                        <td>YES</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>We will use and retain the collected personal information as needed to provide the Services or for as long as necessary to fulfill the purposes outlined in this Privacy Notice, unless otherwise required by law.</p>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>8. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</h2>
+            
+            <div class="contact-info">
+                <p>If you have questions or comments about this notice, you may contact us by:</p>
+                <p><strong>Email:</strong> privacy@100k-pathway.com</p>
+                <p><strong>Mail:</strong> 100 Days $100K<br>
+                [Your Business Address]<br>
+                [City, State ZIP]</p>
+                
+                <h3>Data Subject Access Request</h3>
+                <p>You can submit a data subject access request to exercise your privacy rights by emailing us at: <strong>privacy@100k-pathway.com</strong></p>
+                
+                <p>We will consider and act upon any request in accordance with applicable data protection laws.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="global-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>100 Days $100K</h4>
+                <p style="margin-top:1rem;line-height:1.6;color:var(--page-text-muted)">Interviews in 100 days with money-back guarantee. We handle applications. You handle interviews.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <div class="footer-links">
+                    <a href="how-it-works" class="footer-link">How It Works</a>
+                    <a href="pricing" class="footer-link">Pricing</a>
+                    <a href="case-studies" class="footer-link">Case Studies</a>
+                    <a href="faq" class="footer-link">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="about" class="footer-link">About</a>
+                    <a href="blog" class="footer-link">Blog</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="terms" class="footer-link">Terms of Service</a>
+                    <a href="privacy" class="footer-link">Privacy Policy</a>
+                    <a href="refund" class="footer-link">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 100K Pathway. All rights reserved.
+        </div>
+    </footer>
+
+<!-- 100K Pathway Loader Dismiss Script -->
+<script id="pk-loader-script">
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+</script>
+</body>
+</html>

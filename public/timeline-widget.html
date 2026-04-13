@@ -1,0 +1,375 @@
+<!-- INTERACTIVE 100-DAY TIMELINE
+     Visual journey showing what happens each phase
+     Scroll-triggered animations for engagement
+-->
+
+<style>
+.timeline-section {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.timeline-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.timeline-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #0b3b76;
+}
+
+.timeline-subtitle {
+    font-size: 18px;
+    color: #6b7280;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.timeline-track {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #e5e7eb 0%, #3b82f6 100%);
+    transform: translateX(-50%);
+}
+
+.timeline-milestone {
+    position: relative;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.timeline-milestone.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-milestone:nth-child(odd) .milestone-content {
+    margin-right: calc(50% + 3rem);
+    text-align: right;
+}
+
+.timeline-milestone:nth-child(even) .milestone-content {
+    margin-left: calc(50% + 3rem);
+    text-align: left;
+}
+
+.milestone-dot {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 4px solid #3b82f6;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.timeline-milestone:hover .milestone-dot {
+    transform: translateX(-50%) scale(1.2);
+    background: #3b82f6;
+    color: white;
+}
+
+.milestone-day {
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    transform: translateX(-50%);
+    font-size: 13px;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.milestone-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border: 2px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.timeline-milestone:hover .milestone-content {
+    border-color: #3b82f6;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+    transform: translateY(-4px);
+}
+
+.milestone-phase {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.milestone-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0b3b76;
+    margin-bottom: 1rem;
+}
+
+.milestone-description {
+    color: #6b7280;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.milestone-deliverables {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.milestone-deliverables li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #374151;
+}
+
+.milestone-deliverables li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: 700;
+}
+
+.timeline-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border-radius: 12px;
+}
+
+.timeline-stat {
+    text-align: center;
+}
+
+.timeline-stat-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0b3b76;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-stat-label {
+    font-size: 14px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .timeline-milestone:nth-child(odd) .milestone-content,
+    .timeline-milestone:nth-child(even) .milestone-content {
+        margin: 0;
+        margin-top: 4rem;
+        text-align: left;
+    }
+    
+    .timeline-line {
+        left: 20px;
+    }
+    
+    .milestone-dot {
+        left: 20px;
+    }
+    
+    .milestone-day {
+        left: 20px;
+    }
+    
+    .timeline-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+</style>
+
+<div class="timeline-section">
+    <div class="timeline-header">
+        <h2 class="timeline-title">Your 100-Day Journey</h2>
+        <p class="timeline-subtitle">From enrollment to offer: here's exactly what happens and when</p>
+    </div>
+    
+    <div class="timeline-track">
+        <div class="timeline-line"></div>
+        
+        <!-- Milestone 1 -->
+        <div class="timeline-milestone">
+            <div class="milestone-dot">1</div>
+            <div class="milestone-day">Day 1-14</div>
+            <div class="milestone-content">
+                <span class="milestone-phase">Phase 1: Foundation</span>
+                <h3 class="milestone-title">Assessment & Strategy</h3>
+                <p class="milestone-description">We reverse-engineer what hiring managers want in your target domain. No spray-and-pray. We build a precise battle plan.</p>
+                <ul class="milestone-deliverables">
+                    <li>Skills gap analysis</li>
+                    <li>Target company list (20-30 companies)</li>
+                    <li>LinkedIn profile transformation</li>
+                    <li>Resume restructure with metrics</li>
+                    <li>Personalized learning roadmap</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Milestone 2 -->
+        <div class="timeline-milestone">
+            <div class="milestone-dot">2</div>
+            <div class="milestone-day">Day 15-50</div>
+            <div class="milestone-content">
+                <span class="milestone-phase">Phase 2: Build</span>
+                <h3 class="milestone-title">Portfolio Development</h3>
+                <p class="milestone-description">Stop doing LeetCode in a vacuum. Build production-grade projects with real metrics that hiring managers can understand in 90 seconds.</p>
+                <ul class="milestone-deliverables">
+                    <li>Project 1: Core competency proof</li>
+                    <li>Project 2: Advanced systems showcase</li>
+                    <li>Project 3: Innovation piece (Premium only)</li>
+                    <li>Weekly code reviews with mentors</li>
+                    <li>Technical docs & case studies</li>
+                    <li>GitHub portfolio optimization</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Milestone 3 -->
+        <div class="timeline-milestone">
+            <div class="milestone-dot">3</div>
+            <div class="milestone-day">Day 51-70</div>
+            <div class="milestone-content">
+                <span class="milestone-phase">Phase 3: Prep</span>
+                <h3 class="milestone-title">Interview Mastery</h3>
+                <p class="milestone-description">Mock interviews until you can defend your projects for 30 minutes straight. When they ask about technical challenges, you have 3 real answers ready.</p>
+                <ul class="milestone-deliverables">
+                    <li>6+ mock technical interviews</li>
+                    <li>System design deep dives</li>
+                    <li>Behavioral storytelling framework</li>
+                    <li>Salary negotiation coaching</li>
+                    <li>Interview question bank (500+)</li>
+                    <li>Company-specific prep guides</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Milestone 4 -->
+        <div class="timeline-milestone">
+            <div class="milestone-dot">4</div>
+            <div class="milestone-day">Day 71-100</div>
+            <div class="milestone-content">
+                <span class="milestone-phase">Phase 4: Launch</span>
+                <h3 class="milestone-title">Application Blitz</h3>
+                <p class="milestone-description">We submit a minimum of 30-75 targeted applications on your behalf (varies by plan). You focus on one thing: being ready when interviews come. And they will come.</p>
+                <ul class="milestone-deliverables">
+                    <li>Minimum 30-75 applications submitted by us</li>
+                    <li>Direct referrals to hiring managers</li>
+                    <li>Daily application tracking</li>
+                    <li>Interview scheduling support</li>
+                    <li>Real-time feedback after each interview</li>
+                    <li>Offer negotiation assistance</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Milestone 5 -->
+        <div class="timeline-milestone">
+            <div class="milestone-dot">✓</div>
+            <div class="milestone-day">Day 100</div>
+            <div class="milestone-content">
+                <span class="milestone-phase" style="background:linear-gradient(135deg,#10b981,#059669);">Goal Complete</span>
+                <h3 class="milestone-title">Interview Guarantee Deadline</h3>
+                <p class="milestone-description">By Day 100, you should have your guaranteed qualifying interviews scheduled or completed. Historical median: 58 days to first offer.</p>
+                <ul class="milestone-deliverables">
+                    <li>87% of members hit their interview goal by Day 95</li>
+                    <li>Median time to offer: 58 days</li>
+                    <li>Median salary: $132K</li>
+                    <li>Refund window extends to Day 180 if needed</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="timeline-stats">
+        <div class="timeline-stat">
+            <div class="timeline-stat-value">87%</div>
+            <div class="timeline-stat-label">Hit Goal</div>
+        </div>
+        <div class="timeline-stat">
+            <div class="timeline-stat-value">58</div>
+            <div class="timeline-stat-label">Days to Offer</div>
+        </div>
+        <div class="timeline-stat">
+            <div class="timeline-stat-value">$132K</div>
+            <div class="timeline-stat-label">Median Salary</div>
+        </div>
+        <div class="timeline-stat">
+            <div class="timeline-stat-value">8.1%</div>
+            <div class="timeline-stat-label">Refund Rate</div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Scroll-triggered animations for timeline milestones
+function animateTimeline() {
+    const milestones = document.querySelectorAll('.timeline-milestone');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 150); // Stagger animation
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+    
+    milestones.forEach(milestone => {
+        observer.observe(milestone);
+    });
+}
+
+// Run on page load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', animateTimeline);
+} else {
+    animateTimeline();
+}
+</script>
