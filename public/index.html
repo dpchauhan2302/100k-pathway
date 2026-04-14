@@ -141,10 +141,10 @@
     
         
 <!-- Optimized: Load only critical scripts -->
-<script src="optimize-assets.js"></script>
-<script src="lazy-load.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
+<script src="optimize-assets.js" defer></script>
+<script src="lazy-load.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
 <script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
     <script src="premium-enhancements.js" defer></script>
     
@@ -2655,11 +2655,11 @@
         };
     });
     </script>
-    <script src="navigation.js"></script>
+    <script src="navigation.js" defer></script>
 
 <!-- 100K Pathway Loader Dismiss Script -->
 <script id="pk-loader-script">
-(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},0)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},4000)})();
 </script>
 </body>
 </html>

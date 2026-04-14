@@ -31,8 +31,8 @@
 <script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
     <script src="3d-animations.js" defer></script>
     <script src="premium-enhancements.js" defer></script>
-    <script src="/config.js"></script>
-    <script src="/api-client.js"></script>
+    <script src="/config.js" defer></script>
+    <script src="/api-client.js" defer></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { overflow-x: hidden; }
@@ -750,11 +750,11 @@
         if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") { gsap.registerPlugin(ScrollTrigger); }
     </script>
     <script src="mobile-nav.js" defer></script>
-    <script src="navigation.js"></script>
+    <script src="navigation.js" defer></script>
 
 <!-- 100K Pathway Loader Dismiss Script -->
 <script id="pk-loader-script">
-(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},0)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},4000)})();
 </script>
 </body>
 </html>

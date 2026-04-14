@@ -1,7 +1,44 @@
+# ─── Dependencies ─────────────────────────────────────────────────────────────
 node_modules/
+
+# ─── Environment & secrets ────────────────────────────────────────────────────
+# NEVER commit real .env files. Use .env.example as a template.
 .env
 .env.*
-server.log
+!.env.example
+
+# ─── Runtime data (local dev only) ───────────────────────────────────────────
+# users.json, interviews.json, refunds.json, application JSON files.
+# These are the file-backed data store. Never commit real user data.
+data/
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
 *.log
-dist/
+logs/
+server.log
+
+# ─── Candidate data (PII — must never be committed) ──────────────────────────
+# Monthly reporting sheets and interview tracking files contain real personal
+# data. They are excluded by .gitignore AND .vercelignore.
 Candidate Data/
+
+# ─── Build artifacts ──────────────────────────────────────────────────────────
+dist/
+build/
+.cache/
+
+# ─── Vercel ───────────────────────────────────────────────────────────────────
+.vercel/
+.vercel-tmp/
+
+# ─── OS & editor noise ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ─── Test artefacts ───────────────────────────────────────────────────────────
+coverage/
+.nyc_output/

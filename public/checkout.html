@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Secure Checkout – 100K Pathway</title>
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script>if(typeof gsap==='undefined'){window.gsap={to:function(){},from:function(){},set:function(){},registerPlugin:function(){},utils:{toArray:function(s){return [].slice.call(document.querySelectorAll(s))}}};window.ScrollTrigger={}}</script>
@@ -281,8 +281,8 @@
         </div>
     </div>
 
-    <script src="/config.js"></script>
-    <script src="/api-client.js"></script>
+    <script src="/config.js" defer></script>
+    <script src="/api-client.js" defer></script>
     <script>
         // Initialize Stripe
         const stripe = Stripe(window.API_CONFIG && window.API_CONFIG.STRIPE_PUBLISHABLE_KEY || 'pk_test_51QT5NzP8pJQLBmyOxMVvFD7X1CzYQwJH4eGAJh2kVMLdcIvQfNvGzLmm5cOVnbAYOV7xSZhQGCbh8pP7kkIBJZbx00jN3C7XGg');
@@ -397,7 +397,7 @@
 
 <!-- 100K Pathway Loader Dismiss Script -->
 <script id="pk-loader-script">
-(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},0)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},4000)})();
 </script>
 </body>
 </html>

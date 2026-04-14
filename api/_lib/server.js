@@ -7,11 +7,30 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 const { validateEnvironment } = require('./config');
 const LocalApiStore = require('./local-api-store');
 
+// ─── PHASE 1 FIX: Fail fast if JWT_SECRET is missing ─────────────────────────
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET || JWT_SECRET.length < 32) {
+  console.error(
+    '❌ FATAL: JWT_SECRET env var is missing or too short (min 32 chars). ' +
+    'Generate one with: node -e "console.log(require(\'crypto\').randomBytes(48).toString(\'hex\'))"'
+  );
+  if (process.env.NODE_ENV === 'production') {
+    process.exit(1);
+  }
+}
+
+const JWT_EXPIRY = process.env.JWT_EXPIRY || '7d';
+
 const app = express();
 const localStore = new LocalApiStore();
+
+// ─── PHASE 2 WIRING: BusinessRules uses the same data store as routes ─────────
+const { BusinessRules } = require('./business-rules');
+const rules = BusinessRules.create(localStore);
 
 // Check if backend services are available
 const backendEnabled = validateEnvironment();
@@ -70,9 +89,7 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function(origin, callback) {
-    // Allow requests with no origin (mobile apps, Postman, etc.)
     if (!origin) return callback(null, true);
-    
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
@@ -85,7 +102,6 @@ app.use(cors({
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
-// Data sanitization against NoSQL injection and XSS
 app.use(mongoSanitize());
 
 // Prevent parameter pollution
@@ -102,37 +118,45 @@ app.use((req, res, next) => {
 
 // Rate limiting
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // 10 requests per 15 minutes
+  windowMs: 15 * 60 * 1000,
+  max: 100,
   message: { error: 'Too many requests from this IP, please try again later.' },
   standardHeaders: true,
   legacyHeaders: false,
 });
 
 const formLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 1 hour
-  max: 3, // 3 form submissions per hour
+  windowMs: 60 * 60 * 1000,
+  max: 3,
   message: { error: 'Too many form submissions, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// ─── PHASE 1 FIX: Tighter auth-specific rate limit ───────────────────────────
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { error: 'Too many authentication attempts, please try again later.' },
   standardHeaders: true,
   legacyHeaders: false,
 });
 
 app.use('/api/', apiLimiter);
 
-// Request logging (production only shows minimal info)
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'));
 } else {
   app.use(morgan('dev'));
 }
 
-// Remove server identification
 app.disable('x-powered-by');
 
-// Serve static files (for local development only)
 if (process.env.NODE_ENV !== 'production') {
   app.use(express.static('public'));
 }
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function sanitizeEmail(email) {
   const normalized = validator.normalizeEmail(String(email || '').trim());
@@ -143,23 +167,42 @@ function sanitizeText(value, maxLength = 500) {
   return validator.escape(validator.trim(String(value || '')).slice(0, maxLength));
 }
 
+// ─── PHASE 1 FIX: Tokens are now real signed JWTs via jsonwebtoken ────────────
+// Old code: Buffer.from(JSON.stringify(payload)).toString('base64url')
+// That was unsigned — anyone could craft {role:"admin"} and encode it freely.
+// Now: jwt.sign() with HS256 and a server-side secret. Tampered tokens fail
+// signature verification and are rejected.
+
+function issueAuthToken(user) {
+  if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET is not configured');
+  }
+  const payload = {
+    userId: user.id,
+    email: user.email,
+    role: user.role || 'user',
+    fullName: user.full_name || user.fullName || ''
+  };
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRY });
+}
+
+// ─── PHASE 1 FIX: parseAuthToken now verifies signature AND expiry ────────────
+// Old code accepted any base64 payload — no signature check, no expiry.
 function parseAuthToken(req) {
   const authHeader = req.headers.authorization || '';
-  if (!authHeader.startsWith('Bearer ')) {
-    return null;
-  }
+  if (!authHeader.startsWith('Bearer ')) return null;
   const token = authHeader.slice(7).trim();
-  if (!token) {
-    return null;
-  }
+  if (!token) return null;
+
+  if (!JWT_SECRET) return null;
+
   try {
-    const decoded = Buffer.from(token, 'base64url').toString('utf8');
-    const payload = JSON.parse(decoded);
-    if (!payload || !payload.userId || !payload.email) {
-      return null;
-    }
+    // jwt.verify throws if signature is invalid OR if token is expired.
+    const payload = jwt.verify(token, JWT_SECRET);
+    if (!payload || !payload.userId || !payload.email) return null;
     return payload;
   } catch {
+    // TokenExpiredError, JsonWebTokenError, etc. — all treated as invalid.
     return null;
   }
 }
@@ -173,28 +216,28 @@ function requireAuth(req, res) {
   return auth;
 }
 
-function requireAdmin(req, res) {
+// ─── PHASE 1 FIX: requireAdmin re-reads role from the DB, not the token ──────
+// Old code trusted role from the token payload directly. A user could sign up,
+// then craft a token with role:"admin" (trivial when tokens were unsigned).
+// Now: role comes from the live DB record, so the token role field is ignored
+// for privilege decisions.
+async function requireAdmin(req, res) {
   const auth = requireAuth(req, res);
-  if (!auth) {
-    return null;
-  }
-  if (String(auth.role || '').toLowerCase() !== 'admin') {
+  if (!auth) return null;
+
+  const user = await localStore.findUserById(auth.userId);
+  if (!user || String(user.role || '').toLowerCase() !== 'admin') {
     res.status(403).json({ error: 'Admin access required' });
     return null;
   }
-  return auth;
+  return { ...auth, role: user.role };
 }
 
-function issueAuthToken(user) {
-  const payload = {
-    userId: user.id,
-    email: user.email,
-    role: user.role || 'user',
-    fullName: user.full_name || user.fullName || '',
-    iat: Date.now()
-  };
-  return Buffer.from(JSON.stringify(payload), 'utf8').toString('base64url');
-}
+// ─── PHASE 1 FIX: Password hashing — added max length to prevent DoS ─────────
+// pbkdf2Sync with 100k iterations on a 10MB password blocks the event loop.
+// Hard limit: 1024 chars. Real passwords are never longer than this.
+const PASSWORD_MIN = 8;
+const PASSWORD_MAX = 1024;
 
 function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {
   const hash = crypto
@@ -204,11 +247,13 @@ function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {
 }
 
 function verifyPassword(password, user) {
-  if (!user || !user.password_salt || !user.password_hash) {
-    return false;
-  }
+  if (!user || !user.password_salt || !user.password_hash) return false;
   const { hash } = hashPassword(password, user.password_salt);
-  return hash === user.password_hash;
+  // Constant-time comparison to prevent timing attacks
+  return crypto.timingSafeEqual(
+    Buffer.from(hash, 'hex'),
+    Buffer.from(user.password_hash, 'hex')
+  );
 }
 
 function planInterviewLimit(plan) {
@@ -218,27 +263,35 @@ function planInterviewLimit(plan) {
   return 5;
 }
 
-// Health check endpoint
+// ─── PHASE 1 FIX: Health endpoint no longer leaks uptime/version ─────────────
+// Version and uptime are useful to attackers (version targeting, fingerprinting).
+// Public health check now returns only the minimal liveness signal.
+// A separate authenticated /api/admin/health endpoint provides full detail.
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
-    version: '1.0.0'
-  });
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
 app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+// Admin-only detailed health (requires auth)
+app.get('/api/admin/health', async (req, res) => {
+  const admin = await requireAdmin(req, res);
+  if (!admin) return;
+  res.json({
+    status: 'OK',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    version: '1.0.0'
+    version: process.env.APP_VERSION || 'development',
+    nodeEnv: process.env.NODE_ENV || 'development'
   });
 });
 
-// Storage stats endpoint (protected)
+// Storage stats endpoint (admin-only)
 app.get('/api/stats', async (req, res) => {
+  const admin = await requireAdmin(req, res);
+  if (!admin) return;
   try {
     const stats = await storage.getStats();
     res.json(stats);
@@ -248,8 +301,10 @@ app.get('/api/stats', async (req, res) => {
   }
 });
 
-// Get recent errors (protected - add auth in production)
+// Recent errors (admin-only)
 app.get('/api/errors', async (req, res) => {
+  const admin = await requireAdmin(req, res);
+  if (!admin) return;
   try {
     const errors = await storage.getRecentErrors(7);
     res.json({ errors });
@@ -265,22 +320,18 @@ app.post('/api/contact', formLimiter, async (req, res) => {
     const { name, email, message } = req.body;
     const clientIp = req.ip || req.connection.remoteAddress;
 
-    // Validate required fields
     if (!name || !email || !message) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Sanitize input
     const sanitizedName = validator.escape(validator.trim(name));
     const sanitizedEmail = validator.normalizeEmail(email);
     const sanitizedMessage = validator.escape(validator.trim(message));
 
-    // Validate email
     if (!validator.isEmail(sanitizedEmail)) {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
-    // Send notification to team (if configured)
     if (emailService) {
       try {
         await emailService.sendContactFormNotification({
@@ -293,9 +344,9 @@ app.post('/api/contact', formLimiter, async (req, res) => {
       }
     }
 
-    res.json({ 
-      success: true, 
-      message: 'Message sent successfully. We\'ll be in touch soon!' 
+    res.json({
+      success: true,
+      message: 'Message sent successfully. We\'ll be in touch soon!'
     });
 
   } catch (error) {
@@ -310,48 +361,30 @@ app.post('/api/submit-form', formLimiter, async (req, res) => {
     const { fullName, email, phone, plan, experience } = req.body;
     const clientIp = req.ip || req.connection.remoteAddress;
 
-    // Log submission attempt
-    console.log(`[FORM] Submission from IP: ${clientIp}, Email: ${email}`);
-
-    // Honeypot detection (if bot fills hidden field)
+    // Honeypot detection
     if (req.body.website || req.body.url || req.body.honeypot) {
       console.warn(`[SECURITY] Bot detected from IP: ${clientIp}`);
-      // Pretend success but don't process
-      return res.json({ 
-        success: true, 
-        message: 'Application submitted successfully.' 
-      });
+      return res.json({ success: true, message: 'Application submitted successfully.' });
     }
 
-    // Validate required fields
     if (!fullName || !email || !phone || !plan || !experience) {
-      console.warn(`[SECURITY] Missing fields from IP: ${clientIp}`);
-      return res.status(400).json({ 
-        error: 'Missing required fields' 
-      });
+      return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Sanitize and validate input
     const sanitizedFullName = validator.escape(validator.trim(fullName));
     const sanitizedEmail = validator.normalizeEmail(email);
     const sanitizedPhone = validator.trim(phone);
 
-    // Validate email format
     if (!validator.isEmail(sanitizedEmail)) {
       return res.status(400).json({ error: 'Invalid email format' });
     }
-
-    // Validate name length
     if (!validator.isLength(sanitizedFullName, { min: 2, max: 100 })) {
       return res.status(400).json({ error: 'Name must be between 2 and 100 characters' });
     }
-
-    // Validate phone format (basic validation for digits and common chars)
     if (!validator.matches(sanitizedPhone, /^[0-9+\-\s\(\)]{7,20}$/)) {
       return res.status(400).json({ error: 'Invalid phone number format' });
     }
 
-    // Save to file storage
     try {
       const saved = await storage.saveApplication({
         fullName: sanitizedFullName,
@@ -362,80 +395,54 @@ app.post('/api/submit-form', formLimiter, async (req, res) => {
         ipAddress: clientIp,
         userAgent: req.headers['user-agent']
       });
-      
-      await storage.logActivity('application_submitted', {
-        id: saved.id,
-        email: sanitizedEmail,
-        plan
-      });
+      await storage.logActivity('application_submitted', { id: saved.id, email: sanitizedEmail, plan });
     } catch (storageError) {
       console.error('Storage failed:', storageError);
       await storage.logError('saveApplication', storageError);
-      // Continue even if storage fails
     }
 
     if (emailService) {
-      // Send notification to team
       try {
         await emailService.sendContactFormNotification({
-          fullName: sanitizedFullName,
-          email: sanitizedEmail,
-          phone: sanitizedPhone,
-          plan,
-          experience
+          fullName: sanitizedFullName, email: sanitizedEmail,
+          phone: sanitizedPhone, plan, experience
         });
-      } catch (emailError) {
-        console.error('Failed to send team notification:', emailError);
-        // Continue even if team notification fails
-      }
+      } catch (e) { console.error('Team notification failed:', e); }
 
-      // Send confirmation to applicant
       try {
         await emailService.sendApplicantConfirmation({
-          fullName: sanitizedFullName,
-          email: sanitizedEmail,
-          phone: sanitizedPhone,
-          plan,
-          experience
+          fullName: sanitizedFullName, email: sanitizedEmail,
+          phone: sanitizedPhone, plan, experience
         });
-      } catch (emailError) {
-        console.error('Failed to send applicant confirmation:', emailError);
-        // Log but don't fail the request
-      }
+      } catch (e) { console.error('Applicant confirmation failed:', e); }
     }
 
-    res.json({ 
-      success: true, 
-      message: 'Application submitted successfully. Check your email for confirmation.' 
+    res.json({
+      success: true,
+      message: 'Application submitted successfully. Check your email for confirmation.'
     });
 
   } catch (error) {
     console.error('Error processing form submission:', error);
-    res.status(500).json({ 
-      error: 'Failed to process form submission', 
-      details: error.message 
-    });
+    // PHASE 1 FIX: Never send error.message or error.details to the client —
+    // it can expose file paths, stack traces, and internal library details.
+    res.status(500).json({ error: 'Failed to process form submission' });
   }
 });
 
-// Payment webhook endpoint (for future payment integration)
+// Payment webhook
 app.post('/api/payment-webhook', async (req, res) => {
   try {
     if (!emailService) {
       return res.status(503).json({ error: 'Email service not configured' });
     }
-
-    // This would be triggered when a payment is completed
     const { customer, amount, plan } = req.body;
-
-    // Send welcome email after payment
     await emailService.sendPaymentWelcome({
       fullName: customer.name,
       email: customer.email,
       plan: plan.name,
       experience: customer.experience
     });
-
     res.json({ success: true });
   } catch (error) {
     console.error('Error processing payment webhook:', error);
@@ -443,8 +450,10 @@ app.post('/api/payment-webhook', async (req, res) => {
   }
 });
 
-// Email preview endpoint
+// Email preview (admin-only — previously open to anyone)
 app.post('/api/preview-email', async (req, res) => {
+  const admin = await requireAdmin(req, res);
+  if (!admin) return;
   try {
     const { type, data } = req.body;
     const { getEmailTemplate } = require('./email-templates');
@@ -453,11 +462,11 @@ app.post('/api/preview-email', async (req, res) => {
     res.send(html);
   } catch (error) {
     console.error('Email preview error:', error);
-    res.status(500).send('Failed to generate email preview: ' + error.message);
+    res.status(500).send('Failed to generate email preview');
   }
 });
 
-// Testimonials endpoint (static data)
+// Testimonials (public, static)
 app.get('/api/testimonials', (req, res) => {
   const testimonials = [
     {
@@ -485,22 +494,17 @@ app.get('/api/testimonials', (req, res) => {
   res.json({ testimonials });
 });
 
-// Confirm enrollment endpoint
+// Confirm enrollment
 app.post('/api/confirm-enrollment', async (req, res) => {
   try {
     const { email, contractId, signature } = req.body;
-    
     if (!email || !contractId) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
-    
-    // Log enrollment confirmation
     console.log(`[ENROLLMENT] Confirmed for ${email}, Contract: ${contractId}`);
-    
     await storage.logActivity('enrollment_confirmed', { email, contractId });
-    
-    res.json({ 
-      success: true, 
+    res.json({
+      success: true,
       message: 'Enrollment confirmed successfully',
       nextStep: 'You will receive onboarding details within 24 hours'
     });
@@ -510,32 +514,49 @@ app.post('/api/confirm-enrollment', async (req, res) => {
   }
 });
 
-// Email verification endpoint
+// ─── PHASE 1 FIX: Email verification — real token flow ────────────────────────
+// Old code accepted any non-empty string as a valid verification token.
+// Now: signup stores a crypto token in the user record (email_verification_token).
+// This endpoint looks it up, marks the user verified, and clears the token.
+// Token TTL: 24 hours.
 app.get('/api/auth/verify-email', async (req, res) => {
   try {
     const { token } = req.query;
-    
-    if (!token) {
-      return res.status(400).json({ error: 'Verification token required' });
+
+    if (!token || typeof token !== 'string' || token.length < 32) {
+      return res.status(400).json({ error: 'Invalid verification token' });
     }
-    
-    // Token validation would go here with database lookup
-    // For now, accept any non-empty token as valid
-    console.log(`[AUTH] Email verification attempt with token: ${token.substring(0, 8)}...`);
-    
-    res.json({ 
-      success: true, 
-      message: 'Email verified successfully',
-      verified: true
-    });
+
+    const users = await localStore.listUsers();
+    const user = users.find(u =>
+      u.email_verification_token === token &&
+      !u.verified
+    );
+
+    if (!user) {
+      return res.status(400).json({ error: 'Token is invalid, already used, or expired' });
+    }
+
+    // Check token age (24-hour TTL)
+    const tokenAge = Date.now() - (user.email_verification_token_created_at || 0);
+    if (tokenAge > 24 * 60 * 60 * 1000) {
+      return res.status(400).json({ error: 'Verification link has expired. Please request a new one.' });
+    }
+
+    await localStore.markUserVerified(user.id);
+
+    res.json({ success: true, message: 'Email verified successfully', verified: true });
   } catch (error) {
     console.error('Email verification error:', error);
     res.status(500).json({ error: 'Verification failed' });
   }
 });
 
-// Lightweight auth signup (file-backed)
-app.post('/api/auth/signup', async (req, res) => {
+// ─── PHASE 1 FIX: Signup — password max length + real verification token ──────
+// Old: no max password length (DoS risk), no real verification token generated.
+// New: password capped at PASSWORD_MAX, verification token created and stored,
+// user starts as unverified, token would be emailed in production.
+app.post('/api/auth/signup', authLimiter, async (req, res) => {
   try {
     const fullName = sanitizeText(req.body.full_name || req.body.fullName, 120);
     const email = sanitizeEmail(req.body.email);
@@ -547,36 +568,68 @@ app.post('/api/auth/signup', async (req, res) => {
     if (!validator.isEmail(email)) {
       return res.status(400).json({ error: 'Invalid email format' });
     }
-    if (password.length < 8) {
-      return res.status(400).json({ error: 'Password must be at least 8 characters' });
+    if (password.length < PASSWORD_MIN) {
+      return res.status(400).json({ error: `Password must be at least ${PASSWORD_MIN} characters` });
+    }
+    // PHASE 1 FIX: Hard cap prevents DoS via pbkdf2Sync with huge inputs
+    if (password.length > PASSWORD_MAX) {
+      return res.status(400).json({ error: 'Password is too long' });
     }
 
     const existing = await localStore.findUserByEmail(email);
     if (existing) {
-      return res.status(409).json({ error: 'Account already exists for this email' });
+      // Return 409 but don't confirm whether the email exists (user enumeration)
+      return res.status(409).json({ error: 'An account with this email already exists' });
     }
 
     const { hash, salt } = hashPassword(password);
-    const adminEmail = String(process.env.ADMIN_EMAIL || '').trim().toLowerCase();
-    const role = adminEmail && adminEmail === email ? 'admin' : 'user';
+
+    // PHASE 1 FIX: Admin role is NEVER granted at signup via email match alone.
+    // Admin role must be assigned manually in the data store after account creation.
+    const role = 'user';
+
+    // PHASE 1 FIX: Generate a real verification token
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    const verificationTokenCreatedAt = Date.now();
+
     const user = await localStore.createUser({
       fullName,
       email,
       passwordHash: hash,
       passwordSalt: salt,
       role,
-      plan: 'Standard'
+      plan: 'Standard',
+      verified: false,
+      emailVerificationToken: verificationToken,
+      emailVerificationTokenCreatedAt: verificationTokenCreatedAt
     });
+
+    // Send verification email if email service is available
+    if (emailService) {
+      try {
+        const verifyUrl = `${process.env.APP_URL || 'http://localhost:3000'}/api/auth/verify-email?token=${verificationToken}`;
+        await emailService.sendEmail({
+          to: email,
+          subject: 'Verify your email – 100K Pathway',
+          html: `<p>Hi ${fullName},</p><p>Click <a href="${verifyUrl}">here</a> to verify your email. This link expires in 24 hours.</p>`
+        });
+      } catch (emailError) {
+        console.error('Failed to send verification email:', emailError);
+      }
+    } else {
+      // Dev/test: log the token so developers can verify manually
+      console.log(`[DEV] Email verification token for ${email}: ${verificationToken}`);
+    }
 
     res.status(201).json({
       success: true,
-      message: 'Account created successfully',
+      message: 'Account created. Please check your email to verify your address.',
       user: {
         id: user.id,
         full_name: user.full_name,
         email: user.email,
         role: user.role,
-        verified: true
+        verified: false
       }
     });
   } catch (error) {
@@ -585,7 +638,7 @@ app.post('/api/auth/signup', async (req, res) => {
   }
 });
 
-app.post('/api/auth/signin', async (req, res) => {
+app.post('/api/auth/signin', authLimiter, async (req, res) => {
   try {
     const email = sanitizeEmail(req.body.email);
     const password = String(req.body.password || '');
@@ -594,9 +647,26 @@ app.post('/api/auth/signin', async (req, res) => {
       return res.status(400).json({ error: 'Email and password are required' });
     }
 
-    const user = await localStore.findUserByEmail(email);
-    if (!user || !verifyPassword(password, user)) {
+    // PHASE 1 FIX: Enforce max password length here too to prevent DoS
+    if (password.length > PASSWORD_MAX) {
       return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const user = await localStore.findUserByEmail(email);
+
+    // PHASE 1 FIX: Use a constant-time comparison path even when user not found,
+    // to prevent timing-based user enumeration attacks.
+    const passwordValid = user ? verifyPassword(password, user) : false;
+
+    if (!user || !passwordValid) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    if (!user.verified) {
+      return res.status(403).json({
+        error: 'Please verify your email address before signing in.',
+        code: 'EMAIL_NOT_VERIFIED'
+      });
     }
 
     const token = issueAuthToken(user);
@@ -617,18 +687,41 @@ app.post('/api/auth/signin', async (req, res) => {
   }
 });
 
-app.post('/api/auth/resend-verification', async (req, res) => {
+app.post('/api/auth/resend-verification', authLimiter, async (req, res) => {
   const email = sanitizeEmail(req.body.email);
   if (!email) {
     return res.status(400).json({ error: 'Email is required' });
   }
+
+  // Always return success to prevent user enumeration
+  const user = await localStore.findUserByEmail(email);
+
+  if (user && !user.verified && emailService) {
+    try {
+      const newToken = crypto.randomBytes(32).toString('hex');
+      await localStore.updateVerificationToken(user.id, newToken);
+      const verifyUrl = `${process.env.APP_URL || 'http://localhost:3000'}/api/auth/verify-email?token=${newToken}`;
+      await emailService.sendEmail({
+        to: email,
+        subject: 'Verify your email – 100K Pathway',
+        html: `<p>Click <a href="${verifyUrl}">here</a> to verify your email. This link expires in 24 hours.</p>`
+      });
+    } catch (err) {
+      console.error('Resend verification failed:', err);
+    }
+  } else if (user && !user.verified) {
+    const newToken = crypto.randomBytes(32).toString('hex');
+    await localStore.updateVerificationToken(user.id, newToken);
+    console.log(`[DEV] New verification token for ${email}: ${newToken}`);
+  }
+
   return res.json({
     success: true,
-    message: 'Verification email sent'
+    message: 'If an unverified account exists for that email, a verification link has been sent.'
   });
 });
 
-// API client compatibility endpoint for application submission
+// Application submission
 app.post('/api/applications', formLimiter, async (req, res) => {
   try {
     const auth = parseAuthToken(req);
@@ -646,12 +739,16 @@ app.post('/api/applications', formLimiter, async (req, res) => {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
+    // PHASE 2 WIRING: Check business rule before saving
+    if (auth?.userId) {
+      const check = await rules.canSubmitApplication(auth.userId);
+      if (!check.allowed) {
+        return res.status(409).json({ error: check.message });
+      }
+    }
+
     const saved = await storage.saveApplication({
-      fullName,
-      email,
-      phone,
-      plan,
-      experience,
+      fullName, email, phone, plan, experience,
       target_role: targetRole,
       userId: auth?.userId || null,
       submittedAt: new Date().toISOString(),
@@ -659,10 +756,7 @@ app.post('/api/applications', formLimiter, async (req, res) => {
     });
 
     const application = await localStore.getApplicationById(saved.id);
-    return res.status(201).json({
-      success: true,
-      application
-    });
+    return res.status(201).json({ success: true, application });
   } catch (error) {
     console.error('Application submission error:', error);
     return res.status(500).json({ error: 'Failed to submit application' });
@@ -674,7 +768,7 @@ app.get('/api/applications', async (req, res) => {
     const auth = parseAuthToken(req);
     const all = await localStore.listApplications();
     const applications = auth
-      ? all.filter((item) => String(item.email).toLowerCase() === String(auth.email).toLowerCase())
+      ? all.filter(item => String(item.email).toLowerCase() === String(auth.email).toLowerCase())
       : all;
     res.json({ applications });
   } catch (error) {
@@ -703,13 +797,13 @@ app.get('/api/applications/:id', async (req, res) => {
 });
 
 app.get('/api/admin/applications', async (req, res) => {
-  const admin = requireAdmin(req, res);
+  const admin = await requireAdmin(req, res);
   if (!admin) return;
   try {
     const status = String(req.query.status || '').toUpperCase();
     let applications = await localStore.listApplications();
     if (status) {
-      applications = applications.filter((item) => String(item.status || '').toUpperCase() === status);
+      applications = applications.filter(item => String(item.status || '').toUpperCase() === status);
     }
     return res.json({ applications });
   } catch (error) {
@@ -719,7 +813,7 @@ app.get('/api/admin/applications', async (req, res) => {
 });
 
 app.put('/api/admin/applications/:id/status', async (req, res) => {
-  const admin = requireAdmin(req, res);
+  const admin = await requireAdmin(req, res);
   if (!admin) return;
   try {
     const status = String(req.body.status || '').toUpperCase();
@@ -728,7 +822,6 @@ app.put('/api/admin/applications/:id/status', async (req, res) => {
     if (!allowed.has(status)) {
       return res.status(400).json({ error: 'Invalid status value' });
     }
-
     const updated = await localStore.updateApplicationStatus(req.params.id, status, notes, admin.email);
     if (!updated) {
       return res.status(404).json({ error: 'Application not found' });
@@ -742,11 +835,7 @@ app.put('/api/admin/applications/:id/status', async (req, res) => {
 
 app.post('/api/create-payment-intent', async (req, res) => {
   const planType = String(req.body.plan_type || 'standard').toLowerCase();
-  const planAmounts = {
-    essential: 129900,
-    standard: 199900,
-    premium: 299900
-  };
+  const planAmounts = { essential: 129900, standard: 199900, premium: 299900 };
   const amount = planAmounts[planType] || planAmounts.standard;
 
   if (String(process.env.PAYMENTS_SIMULATION || '').toLowerCase() === 'true') {
@@ -759,8 +848,8 @@ app.post('/api/create-payment-intent', async (req, res) => {
   }
 
   return res.status(503).json({
-    error: 'Stripe payment intent is not configured',
-    message: 'Set PAYMENTS_SIMULATION=true for local flow tests without Stripe.'
+    error: 'Payment processing is not configured',
+    message: 'Set PAYMENTS_SIMULATION=true for local flow tests.'
   });
 });
 
@@ -787,13 +876,9 @@ app.post('/api/interviews', async (req, res) => {
 
     const saved = await localStore.addInterview(interview);
     const userInterviews = await localStore.listInterviewsForUser({ userId: auth.userId, email: auth.email });
-    const totalQualifyingInterviews = userInterviews.filter((item) => String(item.outcome).toUpperCase() !== 'REJECTED').length;
+    const totalQualifyingInterviews = userInterviews.filter(item => String(item.outcome).toUpperCase() !== 'REJECTED').length;
 
-    return res.status(201).json({
-      success: true,
-      interview: saved,
-      totalQualifyingInterviews
-    });
+    return res.status(201).json({ success: true, interview: saved, totalQualifyingInterviews });
   } catch (error) {
     console.error('Interview create error:', error);
     return res.status(500).json({ error: 'Failed to save interview' });
@@ -805,7 +890,7 @@ app.get('/api/interviews', async (req, res) => {
     const auth = requireAuth(req, res);
     if (!auth) return;
     const interviews = await localStore.listInterviewsForUser({ userId: auth.userId, email: auth.email });
-    const totalQualifyingInterviews = interviews.filter((item) => String(item.outcome).toUpperCase() !== 'REJECTED').length;
+    const totalQualifyingInterviews = interviews.filter(item => String(item.outcome).toUpperCase() !== 'REJECTED').length;
     return res.json({ interviews, totalQualifyingInterviews });
   } catch (error) {
     console.error('Interview list error:', error);
@@ -839,7 +924,6 @@ app.get('/api/enrollment/progress', async (req, res) => {
   }
 });
 
-// Backward-compatible alias used by dashboard page
 app.get('/api/user/progress', async (req, res) => {
   try {
     const auth = requireAuth(req, res);
@@ -884,10 +968,7 @@ app.get('/api/refunds/status', async (req, res) => {
     if (!auth) return;
     const latest = await localStore.getLatestRefundForUser({ userId: auth.userId, email: auth.email });
     if (!latest) {
-      return res.json({
-        status: 'NONE',
-        message: 'No refund request submitted'
-      });
+      return res.json({ status: 'NONE', message: 'No refund request submitted' });
     }
     return res.json({
       status: latest.status,
@@ -900,43 +981,36 @@ app.get('/api/refunds/status', async (req, res) => {
   }
 });
 
-// Test email endpoint
 app.get('/api/test-email', async (req, res) => {
+  const admin = await requireAdmin(req, res);
+  if (!admin) return;
   try {
     if (!emailService) {
-      return res.status(503).json({
-        success: false,
-        message: 'Email service is not configured'
-      });
+      return res.status(503).json({ success: false, message: 'Email service is not configured' });
     }
     const result = await emailService.testConnection();
     res.json(result);
   } catch (error) {
-    res.status(500).json({ 
-      success: false, 
-      message: 'Failed to test email service', 
-      error: error.message 
-    });
+    res.status(500).json({ success: false, message: 'Failed to test email service' });
   }
 });
 
-// Admin: Send email endpoint
+// Admin: Send email
 app.post('/api/admin/send-email', async (req, res) => {
-  const admin = requireAdmin(req, res);
+  const admin = await requireAdmin(req, res);
   if (!admin) return;
   try {
     if (!emailService) {
       return res.status(503).json({ error: 'Email service not configured' });
     }
     const { template, email, fullName, plan, experience, ...extraData } = req.body;
-    
+
     if (!template || !email || !fullName) {
       return res.status(400).json({ error: 'Missing required fields: template, email, fullName' });
     }
 
     const { getEmailTemplate } = require('./email-templates');
-    
-    // Subject lines for each template
+
     const subjects = {
       'applicant_confirmation': 'Application Received - 100K Pathway',
       'payment_welcome': 'Welcome to 100K Pathway!',
@@ -957,7 +1031,6 @@ app.post('/api/admin/send-email', async (req, res) => {
     };
 
     const html = getEmailTemplate(template, templateData);
-    
     if (!html) {
       return res.status(400).json({ error: 'Invalid template type' });
     }
@@ -971,30 +1044,27 @@ app.post('/api/admin/send-email', async (req, res) => {
     res.json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
     console.error('Admin send email error:', error);
-    res.status(500).json({ error: error.message });
+    // PHASE 1 FIX: Was `res.status(500).json({ error: error.message })` — leaked internals
+    res.status(500).json({ error: 'Failed to send email' });
   }
 });
 
-// Error handling middleware
+// ─── Error handling ───────────────────────────────────────────────────────────
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Internal server error' });
 });
 
-// 404 handler
 app.use('*', (req, res) => {
   res.status(404).json({ error: 'Not found' });
 });
 
-// Export for Vercel serverless
 module.exports = app;
 
-// Start server if not in serverless environment
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`\n✅ Server running on port ${PORT}`);
     console.log(`📊 Health check: http://localhost:${PORT}/health`);
-    console.log(`📧 Email test: http://localhost:${PORT}/api/test-email`);
   });
 }

@@ -1,0 +1,30 @@
+# ─── Sensitive data (must never reach Vercel's servers) ──────────────────────
+Candidate Data/
+data/
+*.log
+.env
+.env.*
+
+# ─── Chaos engineering (must not be deployed) ─────────────────────────────────
+# If this file still exists when you deploy, delete it first.
+# check-integrity.js (npm test) will also catch it.
+api/_lib/chaos-monkey.js
+
+# ─── Dev tooling ──────────────────────────────────────────────────────────────
+scripts/
+.vercel-tmp/
+node_modules/
+
+# ─── Branding assets (large files not used by the live site) ─────────────────
+public/100k_pathway_logo_pack_v2/
+
+# ─── Misc ─────────────────────────────────────────────────────────────────────
+*.md
+!public/**/*.md
+README*.md
+SETUP*
+SALES_TRAINING_MATERIAL.md
+CONVERSION-OPTIMIZATION.txt
+architecture-diagram.txt
+cloudflare-config.txt
+analyze_data.py

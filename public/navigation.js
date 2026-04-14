@@ -1,4 +1,4 @@
-`   /**
+/**
  * 100 Days, $100K Unified Navigation & Footer JS
  * Handles mobile menu, authentication state, and active link highlighting
  */

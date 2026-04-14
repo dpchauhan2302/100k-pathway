@@ -595,8 +595,8 @@
         </div>
     </div>
 
-    <script src="/config.js"></script>
-    <script src="api-client.js"></script>
+    <script src="/config.js" defer></script>
+    <script src="api-client.js" defer></script>
     <script>
         // Auth check
         if (!localStorage.getItem('authToken')) {
@@ -722,7 +722,7 @@
 
 <!-- 100K Pathway Loader Dismiss Script -->
 <script id="pk-loader-script">
-(function(){var l=document.getElementById('pk-page-loader');if(!l)return;window.addEventListener('load',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},250)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},6000)})();
+(function(){var l=document.getElementById('pk-page-loader');if(!l)return;document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)},0)});setTimeout(function(){if(l&&!l.classList.contains('pk-loaded')){l.classList.add('pk-loaded');setTimeout(function(){l.remove()},600)}},4000)})();
 </script>
 </body>
 </html>
