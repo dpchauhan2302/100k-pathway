@@ -616,8 +616,9 @@ app.post('/api/auth/signup', authLimiter, async (req, res) => {
       } catch (emailError) {
         console.error('Failed to send verification email:', emailError);
       }
-    } else {
-      // Dev/test: log the token so developers can verify manually
+    } else if (process.env.NODE_ENV !== 'production') {
+      // Dev/test only: log the token so developers can verify manually.
+      // Never runs in production because emailService is required there.
       console.log(`[DEV] Email verification token for ${email}: ${verificationToken}`);
     }
 
@@ -709,7 +710,8 @@ app.post('/api/auth/resend-verification', authLimiter, async (req, res) => {
     } catch (err) {
       console.error('Resend verification failed:', err);
     }
-  } else if (user && !user.verified) {
+  } else if (user && !user.verified && process.env.NODE_ENV !== 'production') {
+    // Dev/test only: print the token so developers can verify manually.
     const newToken = crypto.randomBytes(32).toString('hex');
     await localStore.updateVerificationToken(user.id, newToken);
     console.log(`[DEV] New verification token for ${email}: ${newToken}`);
@@ -839,6 +841,11 @@ app.post('/api/create-payment-intent', async (req, res) => {
   const amount = planAmounts[planType] || planAmounts.standard;
 
   if (String(process.env.PAYMENTS_SIMULATION || '').toLowerCase() === 'true') {
+    if (process.env.NODE_ENV === 'production') {
+      // PAYMENTS_SIMULATION must never be active in production — it bypasses real payment.
+      console.error('[SECURITY] PAYMENTS_SIMULATION=true detected in production. Refusing payment intent.');
+      return res.status(503).json({ error: 'Payment processing is currently unavailable' });
+    }
     return res.json({
       simulated: true,
       clientSecret: `simulated_${planType}_${Date.now()}`,

@@ -8,11 +8,25 @@ const { getEmailTemplate } = require('./email-templates');
  * No external dependencies - uses your own domain SMTP
  * Works with any email provider (Gmail, Outlook, custom domain)
  */
+// Maximum number of messages held in the retry queue.
+// If SMTP is down for an extended period, messages beyond this cap are dropped
+// and logged rather than accumulating in memory indefinitely.
+const MAX_QUEUE_SIZE = 100;
+
 class EmailService {
   constructor() {
     this.emailQueue = [];
     this.isProcessing = false;
-    
+
+    // Fail fast if SMTP credentials are missing so misconfiguration is caught
+    // at startup rather than silently at send time.
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      throw new Error(
+        'EmailService requires SMTP_USER and SMTP_PASS environment variables. ' +
+        'Set them in your .env file before instantiating EmailService.'
+      );
+    }
+
     // Self-hosted SMTP configuration
     const smtpConfig = {
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
@@ -78,9 +92,14 @@ class EmailService {
       return { success: true, messageId: result.messageId };
     } catch (error) {
       console.error('Email send failed:', error);
-      // Add to retry queue
-      this.emailQueue.push({ mailOptions, retries: 0, maxRetries: 3 });
-      this.processQueue();
+      // Add to retry queue, but cap size to prevent unbounded memory growth
+      // when SMTP is down for an extended period.
+      if (this.emailQueue.length < MAX_QUEUE_SIZE) {
+        this.emailQueue.push({ mailOptions, retries: 0, maxRetries: 3 });
+        this.processQueue();
+      } else {
+        console.error(`[EMAIL] Retry queue full (${MAX_QUEUE_SIZE}). Dropping message to: ${mailOptions.to}`);
+      }
       throw error;
     }
   }

@@ -24,12 +24,18 @@ class FileMutex {
   }
 
   async withLock(filePath, fn) {
-    // Chain the new operation onto the end of any existing queue for this file.
-    // If there's no queue, start one. The chain ensures FIFO ordering.
+    // Chain fn onto the end of the existing queue for this file (FIFO ordering).
+    // fn must run regardless of whether the previous operation succeeded or failed —
+    // a prior write error should not freeze subsequent writers indefinitely.
+    // The lock stored in _locks is always a promise that resolves (never rejects),
+    // so the queue never stalls. Errors are propagated to the original awaiter via
+    // `next`, not via the stored lock promise.
     const prev = this._locks.get(filePath) || Promise.resolve();
-    const next = prev.then(fn).catch(fn); // run fn even if previous threw
-    this._locks.set(filePath, next.catch(() => {})); // don't let errors block the queue
-    return next;
+    // Run fn after prev settles, whether prev resolved or rejected.
+    const next = prev.then(() => fn(), () => fn());
+    // Store a silenced version so the queue is never poisoned by an error.
+    this._locks.set(filePath, next.catch(() => {}));
+    return next; // callers receive the real result or rejection from fn
   }
 }
 
@@ -128,7 +134,10 @@ class LocalApiStore {
   }
 
   mapApplicationRecord(record) {
-    const id = String(record.id || record.timestamp || crypto.randomUUID());
+    // Use the stored id if present; otherwise generate a stable UUID.
+    // The old `record.timestamp` fallback was collision-prone (two records
+    // submitted in the same millisecond would get the same id).
+    const id = String(record.id || crypto.randomUUID());
     return {
       id,
       full_name: record.full_name || record.fullName || '',

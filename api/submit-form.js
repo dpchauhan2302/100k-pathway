@@ -155,31 +155,33 @@ module.exports = async function handler(req, res) {
       ip: clientIp
     }));
 
-    // PERSISTENCE: save to Airtable if configured
+    // PERSISTENCE: save to Airtable if configured.
+    // Awaited via Promise.allSettled so Vercel does not kill the process before
+    // the write completes, and so failures don't prevent the email send below.
     const airtableKey = process.env.AIRTABLE_API_KEY;
     const airtableBase = process.env.AIRTABLE_BASE_ID;
-    if (airtableKey && airtableBase) {
-      fetch(`https://api.airtable.com/v0/${airtableBase}/Leads`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${airtableKey}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          fields: {
-            Name: fullName,
-            Email: email,
-            Phone: fullPhone,
-            Plan: plan,
-            Experience: experience,
-            'Submitted At': new Date().toISOString(),
-            IP: clientIp
-          }
+    const airtablePromise = (airtableKey && airtableBase)
+      ? fetch(`https://api.airtable.com/v0/${airtableBase}/Leads`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${airtableKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fields: {
+              Name: fullName,
+              Email: email,
+              Phone: fullPhone,
+              Plan: plan,
+              Experience: experience,
+              'Submitted At': new Date().toISOString(),
+              IP: clientIp
+            }
+          })
         })
-      })
-        .then(r => r.ok ? console.log('[AIRTABLE] Lead saved') : r.text().then(t => console.error('[AIRTABLE] Error:', t)))
-        .catch(err => console.error('[AIRTABLE] Failed:', err.message));
-    }
+          .then(r => r.ok ? console.log('[AIRTABLE] Lead saved') : r.text().then(t => console.error('[AIRTABLE] Error:', t)))
+          .catch(err => console.error('[AIRTABLE] Failed:', err.message))
+      : Promise.resolve();
 
     // Send both emails and await completion so Vercel doesn't kill the process
     const fromEmail = process.env.SMTP_USER;
@@ -235,8 +237,8 @@ module.exports = async function handler(req, res) {
     }) : Promise.resolve();
 
     const t1 = Date.now();
-    const [teamResult, userResult] = await Promise.allSettled([teamMail, userMail]);
-    console.log('[EMAIL] Team:', teamResult.status, '| User:', userResult.status, '| Total:', Date.now() - t1, 'ms');
+    const [teamResult, userResult, airtableResult] = await Promise.allSettled([teamMail, userMail, airtablePromise]);
+    console.log('[EMAIL] Team:', teamResult.status, '| User:', userResult.status, '| Airtable:', airtableResult.status, '| Total:', Date.now() - t1, 'ms');
     if (teamResult.status === 'rejected') console.error('[EMAIL] Team failed:', teamResult.reason?.message);
     if (userResult.status === 'rejected') console.error('[EMAIL] User failed:', userResult.reason?.message);
     if (!transporter) console.log('[DEV] Email skipped - SMTP not configured.');

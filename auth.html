@@ -362,6 +362,39 @@
     </div>
 
     <script>
+        // ── Email verification callback ──────────────────────────────────────
+        // When the user clicks the link in their verification email they land on
+        // /api/auth/verify-email?token=xxx, which processes the token and
+        // redirects back here. We also handle the case where the verify URL
+        // points directly to auth.html?token=xxx.
+        (async function handleVerifyToken() {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            if (!token) return;
+
+            // Remove the token from the URL so a page refresh doesn't re-submit it.
+            history.replaceState({}, '', window.location.pathname);
+
+            const errorEl = document.getElementById('error');
+            try {
+                const result = await window.api.verifyEmail(token);
+                if (result.success) {
+                    // Show a green success banner then drop into the sign-in tab.
+                    errorEl.style.background = 'rgba(0,184,148,0.15)';
+                    errorEl.style.borderColor = '#00B894';
+                    errorEl.style.color = '#00B894';
+                    errorEl.textContent = '✓ Email verified! You can now sign in.';
+                    errorEl.style.display = 'block';
+                } else {
+                    errorEl.textContent = result.error || 'Verification failed. The link may have expired.';
+                    errorEl.style.display = 'block';
+                }
+            } catch (err) {
+                errorEl.textContent = 'Verification request failed. Please try again.';
+                errorEl.style.display = 'block';
+            }
+        })();
+
         function switchTab(tab) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.form-section').forEach(f => f.classList.remove('active'));

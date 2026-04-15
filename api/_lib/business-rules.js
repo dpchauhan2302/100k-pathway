@@ -213,8 +213,12 @@ class BusinessRules {
 
   isApplicationComplete(applicationData) {
     // Sync — no DB needed, just field checks.
+    if (!applicationData || typeof applicationData !== 'object') {
+      return { complete: false, missing: [], message: 'Invalid application data' };
+    }
     const required = ['full_name', 'email', 'phone', 'experience_level', 'goals'];
-    const missing = required.filter(field => !applicationData[field]);
+    // Use .trim() so empty strings ('') are treated the same as missing fields.
+    const missing = required.filter(field => !String(applicationData[field] || '').trim());
     if (missing.length > 0) {
       return {
         complete: false,

@@ -10,7 +10,12 @@ const path = require('path');
 
 // Read environment variables
 const API_BASE_URL = process.env.API_BASE_URL || process.env.APP_URL || 'http://localhost:3000';
-const STRIPE_PUBLISHABLE_KEY = process.env.STRIPE_PUBLISHABLE_KEY || 'pk_test_51QT5NzP8pJQLBmyOxMVvFD7X1CzYQwJH4eGAJh2kVMLdcIvQfNvGzLmm5cOVnbAYOV7xSZhQGCbh8pP7kkIBJZbx00jN3C7XGg';
+const STRIPE_PUBLISHABLE_KEY = process.env.STRIPE_PUBLISHABLE_KEY || '';
+
+if (!STRIPE_PUBLISHABLE_KEY) {
+    console.warn('⚠️  STRIPE_PUBLISHABLE_KEY is not set — Stripe payment UI will not function.');
+    console.warn('    Set it in your .env file or Vercel environment variables.');
+}
 
 // Read the template file
 const templatePath = path.join(__dirname, 'public', 'config.template.js');

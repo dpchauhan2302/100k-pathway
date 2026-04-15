@@ -115,6 +115,9 @@ class APIClient {
         if (result.success && result.data.token) {
             localStorage.setItem('authToken', result.data.token);
             localStorage.setItem('userId', result.data.user.id);
+            localStorage.setItem('userName', result.data.user.full_name || '');
+            localStorage.setItem('userRole', result.data.user.role || 'user');
+            localStorage.setItem('userPlan', result.data.user.plan || 'Standard');
         }
         
         return result;
