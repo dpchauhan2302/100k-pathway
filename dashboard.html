@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard - 100 Days $100K</title>
+    <link rel="stylesheet" href="global-nav.css">
+    <link rel="stylesheet" href="brand.css">
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -12,8 +14,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #f8f9fa;
-            color: #1a1a1a;
+            background: #0B1120;
+            color: #D1D5DB;
         }
         .sidebar {
             position: fixed;
@@ -26,7 +28,7 @@
             padding: 32px 24px;
             overflow-y: auto;
         }
-        .logo { font-size: 18px; font-weight: 800; margin-bottom: 40px; letter-spacing: -0.3px; }
+        .logo { margin-bottom: 8px; }
         .nav-item {
             padding: 12px 16px;
             margin-bottom: 4px;
@@ -41,15 +43,15 @@
             color: rgba(255,255,255,0.7);
         }
         .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
-        .nav-item.active { background: #0070f3; color: white; }
-        .main { margin-left: 260px; padding: 32px 48px; }
+        .nav-item.active { background: rgba(0,184,148,0.15); color: #00B894; border-left: 3px solid #00B894; }
+        .main { margin-left: 260px; padding: 32px 48px; background: #0B1120; min-height: 100vh; }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 40px;
         }
-        .header h1 { font-size: 32px; font-weight: 700; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #F9FAFB; }
         .user-menu {
             display: flex;
             align-items: center;
@@ -59,7 +61,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #00B894, #00967A);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -73,14 +75,14 @@
             margin-bottom: 40px;
         }
         .stat-card {
-            background: white;
+            background: rgba(17,24,39,0.7);
             padding: 24px;
             border-radius: 12px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid rgba(255,255,255,0.08);
         }
         .stat-label {
             font-size: 13px;
-            color: #6b7280;
+            color: #9CA3AF;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -88,7 +90,7 @@
         .stat-value {
             font-size: 36px;
             font-weight: 800;
-            color: #0b3b76;
+            color: #F9FAFB;
         }
         .stat-change {
             font-size: 13px;
@@ -96,10 +98,10 @@
             margin-top: 4px;
         }
         .progress-section {
-            background: white;
+            background: rgba(17,24,39,0.7);
             padding: 32px;
             border-radius: 12px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid rgba(255,255,255,0.08);
             margin-bottom: 32px;
         }
         .progress-header {
@@ -109,14 +111,14 @@
         }
         .progress-bar {
             height: 8px;
-            background: #e5e7eb;
+            background: rgba(255,255,255,0.08);
             border-radius: 4px;
             overflow: hidden;
             margin-bottom: 32px;
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #0070f3, #00c6ff);
+            background: linear-gradient(90deg, #00B894, #00D68F);
             width: 34%;
             transition: width 0.3s;
         }
@@ -124,7 +126,7 @@
             display: flex;
             gap: 20px;
             padding: 20px;
-            background: #f9fafb;
+            background: rgba(255,255,255,0.03);
             border-radius: 8px;
             margin-bottom: 12px;
         }
@@ -142,36 +144,36 @@
         }
         .milestone.pending .milestone-status { background: #e5e7eb; color: #6b7280; }
         .milestone-content h4 { font-size: 16px; margin-bottom: 4px; }
-        .milestone-content p { font-size: 14px; color: #6b7280; }
+        .milestone-content p { font-size: 14px; color: #9CA3AF; }
         .task-list {
-            background: white;
+            background: rgba(17,24,39,0.7);
             padding: 32px;
             border-radius: 12px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid rgba(255,255,255,0.08);
         }
         .task {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 16px;
-            border-bottom: 1px solid #f3f4f6;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .task:last-child { border-bottom: none; }
         .task-info { flex: 1; }
         .task-title { font-weight: 600; margin-bottom: 4px; }
-        .task-meta { font-size: 13px; color: #6b7280; }
+        .task-meta { font-size: 13px; color: #9CA3AF; }
         .task-badge {
             padding: 4px 12px;
             border-radius: 12px;
             font-size: 12px;
             font-weight: 600;
         }
-        .badge-urgent { background: #fee2e2; color: #991b1b; }
-        .badge-normal { background: #dbeafe; color: #1e40af; }
+        .badge-urgent { background: rgba(239,68,68,0.15); color: #FCA5A5; }
+        .badge-normal { background: rgba(0,184,148,0.12); color: #00B894; }
         .btn-primary {
             padding: 10px 20px;
-            background: #0070f3;
-            color: white;
+            background: #00B894;
+            color: #050810;
             border: none;
             border-radius: 8px;
             font-weight: 600;
@@ -179,9 +181,9 @@
         }
         .btn-secondary {
             padding: 10px 20px;
-            background: white;
-            color: #374151;
-            border: 1px solid #e5e7eb;
+            background: rgba(255,255,255,0.06);
+            color: #D1D5DB;
+            border: 1px solid rgba(255,255,255,0.12);
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
@@ -200,9 +202,10 @@
         }
         .modal.active { display: flex; }
         .modal-content {
-            background: white;
+            background: #0B1120;
             padding: 32px;
             border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
             max-width: 500px;
             width: 90%;
             max-height: 90vh;
@@ -221,13 +224,16 @@
             font-weight: 600;
             margin-bottom: 8px;
             font-size: 14px;
+            color: #F9FAFB;
         }
         .form-input, .form-select, .form-textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid rgba(255,255,255,0.12);
             border-radius: 8px;
             font-size: 14px;
+            background: rgba(255,255,255,0.05);
+            color: #F9FAFB;
         }
         .form-textarea {
             resize: vertical;
@@ -239,10 +245,10 @@
             margin-top: 24px;
         }
         .interview-card {
-            background: white;
+            background: rgba(17,24,39,0.7);
             padding: 16px;
             border-radius: 8px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid rgba(255,255,255,0.08);
             margin-bottom: 12px;
         }
         .interview-header {
@@ -257,10 +263,11 @@
             position: fixed;
             top: 24px;
             right: 24px;
-            background: white;
+            background: #1a2235;
             padding: 16px 24px;
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            border: 1px solid rgba(0,184,148,0.2);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -293,12 +300,12 @@
             100% { transform: scale(1); }
         }
         .interview-date { color: #6b7280; font-size: 13px; }
-        .interview-position { color: #374151; margin-bottom: 4px; }
+        .interview-position { color: #D1D5DB; margin-bottom: 4px; }
         .interview-type { 
             display: inline-block;
             padding: 4px 8px;
-            background: #dbeafe;
-            color: #1e40af;
+            background: rgba(0,184,148,0.12);
+            color: #00B894;
             border-radius: 4px;
             font-size: 12px;
             font-weight: 600;
@@ -333,7 +340,7 @@
 </div>
     <header class="global-header">
         <nav class="nav-container">
-            <a href="index" class="nav-logo">100K Pathway</a>
+            <a href="index.html" class="nav-logo" aria-label="100K Pathway - Home"><img src="logo.svg" alt="100K Pathway" class="nav-logo-img" width="160" height="32"></a>
             <div class="nav-links">
                 <a href="how-it-works" class="nav-link">How It Works</a>
                 <a href="pricing" class="nav-link">Pricing</a>
@@ -347,7 +354,7 @@
     </header>
     
     <div class="sidebar">
-        <a href="index" class="logo">100 Days $100K</a>
+        <a href="index.html"><img src="logo.svg" alt="100K Pathway" width="140" height="28" style="display:block;margin-bottom:32px"></a>
         <div class="nav-item active">
             <span>📊</span> Dashboard
         </div>
@@ -378,7 +385,7 @@
         <div class="header">
             <div>
                 <h1>Welcome back, <span id="user-name">Sarah</span></h1>
-                <p style="color: #6b7280; margin-top: 4px;">Day <span id="display-day">34</span> of 100 • <span id="user-plan">Standard Plan</span></p>
+                <p style="color: #9CA3AF; margin-top: 4px;">Day <span id="display-day">34</span> of 100 • <span id="user-plan">Standard Plan</span></p>
             </div>
             <div class="user-menu">
                 <button class="btn-secondary">Schedule Mentor</button>
@@ -410,18 +417,18 @@
         </div>
 
         <!-- 100-Day Progress Tracker -->
-        <div style="background:white;padding:32px;border-radius:12px;border:1px solid #e5e7eb;margin-bottom:32px;">
+        <div style="background:rgba(17,24,39,0.7);padding:32px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);margin-bottom:32px;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
                 <div>
                     <h3 style="font-size:20px;font-weight:700;margin-bottom:4px;">100-Day Journey</h3>
-                    <p style="color:#6b7280;font-size:14px;">Day <span id="current-day">34</span> of 100</p>
+                    <p style="color:#9CA3AF;font-size:14px;">Day <span id="current-day">34</span> of 100</p>
                 </div>
                 <div style="text-align:right;">
                     <div style="font-size:32px;font-weight:800;color:#0b3b76;" id="progress-percent">34%</div>
                     <div style="font-size:13px;color:#10b981;">↑ On track</div>
                 </div>
             </div>
-            <div style="background:#f3f4f6;height:12px;border-radius:6px;overflow:hidden;margin-bottom:16px;">
+            <div style="background: rgba(255,255,255,0.08);height:12px;border-radius:6px;overflow:hidden;margin-bottom:16px;">
                 <div id="progress-bar" style="background:linear-gradient(90deg,#0070f3,#00d4ff);height:100%;width:34%;transition:width 0.5s ease;"></div>
             </div>
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
