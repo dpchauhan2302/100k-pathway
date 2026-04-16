@@ -31,7 +31,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="performance-mobile-fix.css">
-<link rel="stylesheet" href="global-nav.css">
+    <link rel="stylesheet" href="global-nav.css">
+    <link rel="stylesheet" href="brand.css">
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
@@ -1461,7 +1462,9 @@
     <div class="content-wrapper">
     <header class="global-header">
         <nav class="nav-container">
-            <a href="index" class="nav-logo">100K Pathway</a>
+            <a href="index.html" class="nav-logo" aria-label="100K Pathway - Home">
+                <img src="logo.svg" alt="100K Pathway" class="nav-logo-img" width="160" height="32">
+            </a>
             
             <button class="mobile-menu-toggle" aria-label="Toggle Menu">
                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
@@ -1616,7 +1619,8 @@
                     <li>Group mentorship sessions</li>
                     <li>Interview prep (3 sessions)</li>
                 </ul>
-                <a href="apply" class="plan-btn plan-btn-secondary"><span>Get Started <span class="btn-arrow">&rarr;</span></span></a>
+                <p class="plan-roi-line">Avg. $132K first offer · 81 days</p>
+                <a href="apply.html" class="plan-btn plan-btn-secondary"><span>Get Started <span class="btn-arrow">&rarr;</span></span></a>
             </div>
 
             <!-- Standard -->
@@ -1639,7 +1643,8 @@
                     <li>Interview prep (6 sessions)</li>
                     <li>Salary negotiation coaching</li>
                 </ul>
-                <a href="apply" class="plan-btn"><span>Get Started <span class="btn-arrow">&rarr;</span></span></a>
+                <p class="plan-roi-line">Avg. $148K first offer · 67 days</p>
+                <a href="apply.html" class="plan-btn"><span>Get Started <span class="btn-arrow">&rarr;</span></span></a>
             </div>
 
             <!-- Premium -->
@@ -1662,7 +1667,8 @@
                     <li>Salary negotiation coaching</li>
                     <li>Direct hiring manager intros</li>
                 </ul>
-                <a href="apply" class="plan-btn plan-btn-secondary"><span>Get Started <span class="btn-arrow">&rarr;</span></span></a>
+                <p class="plan-roi-line">Avg. $165K first offer · 58 days</p>
+                <a href="apply.html" class="plan-btn plan-btn-secondary"><span>Get Started <span class="btn-arrow">&rarr;</span></span></a>
             </div>
         </div>
     </section>

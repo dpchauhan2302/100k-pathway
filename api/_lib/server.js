@@ -355,6 +355,38 @@ app.post('/api/contact', formLimiter, async (req, res) => {
   }
 });
 
+// Newsletter subscription endpoint
+app.post('/api/newsletter', formLimiter, async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
+    const sanitizedEmail = validator.normalizeEmail(String(email).trim());
+    if (!sanitizedEmail || !validator.isEmail(sanitizedEmail)) {
+      return res.status(400).json({ error: 'Please enter a valid email address' });
+    }
+
+    // Notify team of new subscriber
+    if (emailService) {
+      try {
+        await emailService.sendEmail({
+          to: process.env.TEAM_EMAIL || 'team@100k-pathway.com',
+          subject: 'New Newsletter Subscriber',
+          html: `<p>New subscriber: <strong>${sanitizedEmail}</strong></p>`
+        });
+      } catch (emailError) {
+        console.error('[newsletter] Failed to send notification:', emailError.message);
+      }
+    }
+
+    res.json({ success: true, message: 'Subscribed successfully!' });
+  } catch (error) {
+    console.error('Error processing newsletter subscription:', error);
+    res.status(500).json({ error: 'Failed to subscribe. Please try again.' });
+  }
+});
+
 // Application form submission endpoint
 app.post('/api/submit-form', formLimiter, async (req, res) => {
   try {

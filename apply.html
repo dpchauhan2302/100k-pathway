@@ -21,7 +21,8 @@
     <script defer data-domain="100k-pathway.com" src="https://plausible.io/js/script.js"></script>
     
     <link rel="stylesheet" href="performance-mobile-fix.css">
-<link rel="stylesheet" href="global-nav.css">
+    <link rel="stylesheet" href="global-nav.css">
+    <link rel="stylesheet" href="brand.css">
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -422,7 +423,9 @@
     <div class="content-wrapper">
     <header class="global-header">
         <nav class="nav-container">
-            <a href="index" class="nav-logo">100K Pathway</a>
+            <a href="index.html" class="nav-logo" aria-label="100K Pathway - Home">
+                <img src="logo.svg" alt="100K Pathway" class="nav-logo-img" width="160" height="32">
+            </a>
             
             <button class="mobile-menu-toggle" aria-label="Toggle Menu">
                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
@@ -455,149 +458,254 @@
         <p>Choose your plan and get started. Additional details collected after payment confirmation.</p>
     </section>
 
-    <!-- Form Section -->
+    <!-- Multi-Step Form Section -->
     <div class="form-section">
         <div class="form-card">
             <div class="form-header">
                 <h2>Start Your Application</h2>
-                <p>We'll reach out within 24 hours to schedule your strategy call</p>
+                <p>3 quick steps — we'll reach out within 24 hours</p>
             </div>
 
-            <form id="applyForm" action="/api/submit-form" method="POST">
-                
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" name="fullName" required>
+            <!-- Progress Bar -->
+            <div class="form-progress-bar" role="progressbar" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1">
+                <div class="form-step-indicator">
+                    <div class="form-step-dot active" data-step="1">1</div>
+                    <span class="form-step-label active">Contact</span>
+                </div>
+                <div class="form-step-connector"><div class="form-step-connector-fill"></div></div>
+                <div class="form-step-indicator">
+                    <div class="form-step-dot" data-step="2">2</div>
+                    <span class="form-step-label">Plan</span>
+                </div>
+                <div class="form-step-connector"><div class="form-step-connector-fill"></div></div>
+                <div class="form-step-indicator">
+                    <div class="form-step-dot" data-step="3">3</div>
+                    <span class="form-step-label">Goals</span>
+                </div>
+            </div>
+
+            <form id="applyForm" novalidate>
+
+                <!-- Step 1: Contact Info -->
+                <div class="form-panel active" data-panel="1">
+                    <div class="form-group" id="group-fullName">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Jane Smith" autocomplete="name">
+                        <span class="field-error" id="err-fullName"></span>
+                    </div>
+                    <div class="form-group" id="group-email">
+                        <label for="email">Work or Personal Email</label>
+                        <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email">
+                        <span class="field-error" id="err-email"></span>
+                    </div>
+                    <div class="form-group" id="group-phone">
+                        <label for="phone">Contact Number</label>
+                        <div class="phone-row">
+                            <select id="countryCode" name="countryCode">
+                                <option value="+1">+1</option>
+                                <option value="+44">+44</option>
+                                <option value="+91">+91</option>
+                                <option value="+61">+61</option>
+                                <option value="+49">+49</option>
+                                <option value="+33">+33</option>
+                                <option value="+81">+81</option>
+                                <option value="+86">+86</option>
+                                <option value="+65">+65</option>
+                                <option value="+971">+971</option>
+                                <option value="+353">+353</option>
+                                <option value="+31">+31</option>
+                                <option value="+46">+46</option>
+                                <option value="+41">+41</option>
+                                <option value="+972">+972</option>
+                            </select>
+                            <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel">
+                        </div>
+                        <span class="field-error" id="err-phone"></span>
+                    </div>
+                    <button type="button" class="submit-btn" onclick="nextStep(1)">
+                        <span>Continue &rarr;</span>
+                    </button>
                 </div>
 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Contact Number</label>
-                    <div class="phone-row">
-                        <select id="countryCode" name="countryCode" required>
-                            <option value="+1">+1</option>
-                            <option value="+44">+44</option>
-                            <option value="+91">+91</option>
-                            <option value="+61">+61</option>
-                            <option value="+49">+49</option>
-                            <option value="+33">+33</option>
-                            <option value="+81">+81</option>
-                            <option value="+86">+86</option>
-                            <option value="+65">+65</option>
-                            <option value="+971">+971</option>
-                            <option value="+353">+353</option>
-                            <option value="+31">+31</option>
-                            <option value="+46">+46</option>
-                            <option value="+41">+41</option>
-                            <option value="+972">+972</option>
+                <!-- Step 2: Plan + Experience -->
+                <div class="form-panel" data-panel="2">
+                    <div class="form-group" id="group-plan">
+                        <label for="plan">Which plan interests you?</label>
+                        <select id="plan" name="plan">
+                            <option value="" disabled selected>Select a plan</option>
+                            <option value="Essential ($1,299 + 15%)">Essential — $1,299 + 15% success fee (3 interviews)</option>
+                            <option value="Standard ($1,999 + 12%)">Standard — $1,999 + 12% success fee (5 interviews)</option>
+                            <option value="Premium ($2,999 + 10%)">Premium — $2,999 + 10% success fee (9 interviews)</option>
                         </select>
-                        <input type="tel" id="phone" name="phone" placeholder=" " required>
+                        <span class="field-error" id="err-plan"></span>
+                    </div>
+                    <div class="form-group" id="group-experience">
+                        <label for="experience">Years of tech experience</label>
+                        <select id="experience" name="experience">
+                            <option value="" disabled selected>Select experience level</option>
+                            <option value="0-1 years">0–1 years (career switcher)</option>
+                            <option value="2-3 years">2–3 years</option>
+                            <option value="4-6 years">4–6 years</option>
+                            <option value="7-10 years">7–10 years</option>
+                            <option value="10+ years">10+ years</option>
+                        </select>
+                        <span class="field-error" id="err-experience"></span>
+                    </div>
+                    <div style="display:flex;gap:1rem;margin-top:1.5rem">
+                        <button type="button" class="submit-btn" style="background:rgba(255,255,255,0.06);color:#D1D5DB;flex:0 0 auto;padding:1rem 1.5rem" onclick="prevStep(2)">
+                            &larr; Back
+                        </button>
+                        <button type="button" class="submit-btn" style="flex:1" onclick="nextStep(2)">
+                            <span>Continue &rarr;</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="plan">Interested Plan</label>
-                    <select id="plan" name="plan" required>
-                        <option value="" disabled selected>Select a plan</option>
-                        <option value="Essential ($1,299 + 15%)">Essential - $1,299 + 15% success fee</option>
-                        <option value="Standard ($1,999 + 12%)">Standard - $1,999 + 12% success fee</option>
-                        <option value="Premium ($2,999 + 10%)">Premium - $2,999 + 10% success fee</option>
-                    </select>
+                <!-- Step 3: Goals + Submit -->
+                <div class="form-panel" data-panel="3">
+                    <div class="form-group" id="group-goals">
+                        <label for="goals">What's your main goal? <span style="color:var(--text-muted);font-weight:400">(optional)</span></label>
+                        <textarea id="goals" name="goals" rows="4" placeholder="e.g. Transition into backend engineering at a Series B startup, targeting $130K+..."></textarea>
+                    </div>
+                    <div style="background:rgba(0,184,148,0.06);border:1px solid rgba(0,184,148,0.15);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;font-size:0.9rem;color:var(--text-muted)">
+                        By applying you agree to our <a href="terms.html" style="color:#00B894">Terms of Service</a> and <a href="privacy.html" style="color:#00B894">Privacy Policy</a>.
+                    </div>
+                    <div id="formMessage" style="display:none;margin-bottom:1rem;padding:1rem;border-radius:8px;text-align:center;font-size:0.95rem"></div>
+                    <div style="display:flex;gap:1rem">
+                        <button type="button" class="submit-btn" style="background:rgba(255,255,255,0.06);color:#D1D5DB;flex:0 0 auto;padding:1rem 1.5rem" onclick="prevStep(3)">
+                            &larr; Back
+                        </button>
+                        <button type="submit" class="submit-btn" id="submitBtn" style="flex:1">
+                            <span>Submit Application</span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="experience">Years of Tech Experience</label>
-                    <select id="experience" name="experience" required>
-                        <option value="" disabled selected>Select experience level</option>
-                        <option value="2-3 years">2-3 years</option>
-                        <option value="4-6 years">4-6 years</option>
-                        <option value="7-10 years">7-10 years</option>
-                        <option value="10+ years">10+ years</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="submit-btn">
-                    <span>Submit Application</span>
-                </button>
             </form>
-
-            <div id="formMessage" style="display: none; margin: 20px 0; padding: 15px; border-radius: 8px; text-align: center;"></div>
-
-            <div class="form-footer">
-                By applying, you agree to our <a href="terms">Terms of Service</a> and <a href="privacy">Privacy Policy</a>
-            </div>
-
-            <script>
-                document.getElementById('applyForm').addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    console.log('Form submitted');
-                    
-                    const formData = new FormData(this);
-                    const data = Object.fromEntries(formData);
-                    console.log('Form data:', data);
-                    
-                    const submitBtn = this.querySelector('.submit-btn');
-                    const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<span>Sending...</span>';
-                    submitBtn.disabled = true;
-                    
-                    try {
-                        // Use configurable API base when available; fallback to same-origin in production
-                        const apiBase = (window.API_CONFIG && window.API_CONFIG.BASE_URL) ||
-                            (window.location.hostname === 'localhost' ? 'http://localhost:3000' : window.location.origin);
-                        const endpoint = apiBase + '/api/submit-form';
-                        const response = await fetch(endpoint, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(data)
-                        });
-
-                        const raw = await response.text();
-                        let result = {};
-                        try {
-                            result = raw ? JSON.parse(raw) : {};
-                        } catch (parseErr) {
-                            result = { error: raw || 'Invalid server response' };
-                        }
-                        
-                        if (response.ok) {
-                            document.getElementById('formMessage').innerHTML = `
-                                <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; color: #10B981;">
-                                    Application submitted successfully! Check your email for confirmation.
-                                </div>
-                            `;
-                            document.getElementById('formMessage').style.display = 'block';
-                            this.reset();
-                            
-                            // Redirect after 3 seconds
-                            setTimeout(() => {
-                                window.location.href = '/apply-success';
-                            }, 3000);
-                        } else {
-                            throw new Error(result.error || `Submission failed (HTTP ${response.status})`);
-                        }
-                    } catch (error) {
-                        console.error('Form error:', error);
-                        document.getElementById('formMessage').innerHTML = `
-                            <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid #EF4444; color: #EF4444;">
-                                Error: ${error.message}
-                            </div>
-                        `;
-                        document.getElementById('formMessage').style.display = 'block';
-                    } finally {
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }
-                });
-            </script>
         </div>
     </div>
+
+    <script>
+    let currentStep = 1;
+
+    function showStep(step) {
+        document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+        document.querySelector('[data-panel="' + step + '"]').classList.add('active');
+        const dots = document.querySelectorAll('.form-step-dot');
+        const labels = document.querySelectorAll('.form-step-label');
+        const connectors = document.querySelectorAll('.form-step-connector');
+        dots.forEach((dot, i) => {
+            dot.classList.remove('active', 'done');
+            if (i + 1 < step) dot.classList.add('done');
+            if (i + 1 === step) dot.classList.add('active');
+        });
+        labels.forEach((lbl, i) => {
+            lbl.classList.remove('active');
+            if (i + 1 === step) lbl.classList.add('active');
+        });
+        connectors.forEach((conn, i) => {
+            conn.classList.toggle('done', i + 1 < step);
+        });
+        document.querySelector('.form-progress-bar').setAttribute('aria-valuenow', step);
+        currentStep = step;
+    }
+
+    function validateStep(step) {
+        let valid = true;
+        if (step === 1) {
+            const name = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            setFieldState('fullName', name.length >= 2, 'Please enter your full name');
+            setFieldState('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), 'Please enter a valid email address');
+            setFieldState('phone', phone.length >= 7, 'Please enter your phone number');
+            valid = name.length >= 2 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && phone.length >= 7;
+        } else if (step === 2) {
+            const plan = document.getElementById('plan').value;
+            const exp = document.getElementById('experience').value;
+            setFieldState('plan', !!plan, 'Please select a plan');
+            setFieldState('experience', !!exp, 'Please select your experience level');
+            valid = !!plan && !!exp;
+        }
+        return valid;
+    }
+
+    function setFieldState(fieldId, isValid, errorMsg) {
+        const group = document.getElementById('group-' + fieldId);
+        const err = document.getElementById('err-' + fieldId);
+        if (!group) return;
+        group.classList.remove('has-error', 'has-success');
+        group.classList.add(isValid ? 'has-success' : 'has-error');
+        if (err) err.textContent = isValid ? '' : errorMsg;
+    }
+
+    function nextStep(step) {
+        if (validateStep(step)) showStep(step + 1);
+    }
+
+    function prevStep(step) {
+        showStep(step - 1);
+    }
+
+    // Inline validation on blur
+    document.getElementById('fullName').addEventListener('blur', function() {
+        setFieldState('fullName', this.value.trim().length >= 2, 'Please enter your full name');
+    });
+    document.getElementById('email').addEventListener('blur', function() {
+        setFieldState('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value.trim()), 'Please enter a valid email address');
+    });
+    document.getElementById('phone').addEventListener('blur', function() {
+        setFieldState('phone', this.value.trim().length >= 7, 'Please enter your phone number');
+    });
+
+    document.getElementById('applyForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        const msgEl = document.getElementById('formMessage');
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="btn-loading"></span>';
+
+        const data = {
+            fullName: document.getElementById('fullName').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: (document.getElementById('countryCode').value || '+1') + ' ' + document.getElementById('phone').value.trim(),
+            plan: document.getElementById('plan').value,
+            experience: document.getElementById('experience').value,
+            goals: document.getElementById('goals').value.trim()
+        };
+
+        try {
+            const apiBase = (window.API_CONFIG && window.API_CONFIG.BASE_URL) ||
+                (window.location.hostname === 'localhost' ? 'http://localhost:3000' : window.location.origin);
+            const response = await fetch(apiBase + '/api/submit-form', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const raw = await response.text();
+            let result = {};
+            try { result = raw ? JSON.parse(raw) : {}; } catch(_) {}
+
+            if (response.ok) {
+                msgEl.innerHTML = 'Application submitted! Check your email for confirmation.';
+                msgEl.style.cssText = 'display:block;background:rgba(0,184,148,0.12);border:1px solid #00B894;color:#00B894;border-radius:8px;padding:1rem;text-align:center';
+                this.reset();
+                showStep(1);
+                setTimeout(() => { window.location.href = '/apply-success'; }, 2500);
+            } else {
+                throw new Error(result.error || 'Submission failed. Please try again.');
+            }
+        } catch (error) {
+            msgEl.innerHTML = error.message;
+            msgEl.style.cssText = 'display:block;background:rgba(239,68,68,0.12);border:1px solid #EF4444;color:#EF4444;border-radius:8px;padding:1rem;text-align:center';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Submit Application</span>';
+        }
+    });
+    </script>
 
     </div>
 

@@ -104,23 +104,35 @@ body.unified-theme {
 }
 
 .nav-logo {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--nav-text);
     display: flex;
     align-items: center;
     text-decoration: none;
     transition: opacity 0.2s;
-    letter-spacing: -0.01em;
+    flex-shrink: 0;
 }
 
+.nav-logo:hover {
+    opacity: 0.85;
+}
+
+.nav-logo-img {
+    display: block;
+    height: 30px;
+    width: auto;
+}
+
+/* Fallback text (shown only if SVG fails to load) */
 .nav-logo-prefix {
     color: #FFFFFF;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .nav-logo-accent {
     color: var(--accent);
     margin-left: 4px;
+    font-size: 22px;
     font-weight: 800;
 }
 

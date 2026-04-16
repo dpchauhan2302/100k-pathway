@@ -1,7 +1,13 @@
 <svg width="200" height="40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- 100K text - bold, dark charcoal with distinctive angular 1 -->
-  <text x="0" y="30" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="28" fill="#1a1a2e" letter-spacing="-1">100K</text>
-
-  <!-- PATHWAY text - teal brand color -->
-  <text x="80" y="30" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="700" font-size="28" fill="#00B894">Pathway</text>
+  <!-- Icon mark -->
+  <rect width="40" height="40" rx="10" fill="rgba(0,184,148,0.1)"/>
+  <path d="M9 30 L16 20 L22 24.5 L31 10" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="31" cy="10" r="4" fill="#00B894"/>
+  <circle cx="9" cy="30" r="2.5" fill="rgba(0,184,148,0.5)" stroke="#00B894" stroke-width="1.5"/>
+  <circle cx="16" cy="20" r="1.5" fill="rgba(0,184,148,0.7)"/>
+  <circle cx="22" cy="24.5" r="1.5" fill="rgba(0,184,148,0.7)"/>
+  <!-- 100K – bold white -->
+  <text x="50" y="27" font-family="Inter,-apple-system,BlinkMacSystemFont,sans-serif" font-weight="800" font-size="20" fill="#FFFFFF" letter-spacing="-0.6">100K</text>
+  <!-- Pathway – brand green, lighter weight -->
+  <text x="101" y="27" font-family="Inter,-apple-system,BlinkMacSystemFont,sans-serif" font-weight="600" font-size="20" fill="#00B894" letter-spacing="-0.3">Pathway</text>
 </svg>

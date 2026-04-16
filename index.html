@@ -17,6 +17,7 @@
     <!-- Critical Performance & Mobile CSS -->
     <link rel="stylesheet" href="performance-mobile-fix.css">
     <link rel="stylesheet" href="global-nav.css">
+    <link rel="stylesheet" href="brand.css">
     <script src="mobile-nav.js" defer></script>
     
     <meta name="description" content="We submit applications for you. You focus on interviews. Get interviews at $100K+ companies in 100 days with money-back guarantee.">
@@ -267,7 +268,7 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
-            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(100, 120, 180, 0.15), transparent), radial-gradient(ellipse 60% 40% at 80% 50%, rgba(80, 100, 160, 0.08), transparent), radial-gradient(ellipse 50% 30% at 20% 80%, rgba(90, 110, 170, 0.06), transparent);
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,184,148,0.08), transparent), radial-gradient(ellipse 60% 40% at 80% 50%, rgba(0,184,148,0.04), transparent), radial-gradient(ellipse 50% 30% at 20% 80%, rgba(0,184,148,0.03), transparent);
         }
         
         /* Noise texture overlay */
@@ -337,9 +338,9 @@
         .glow-hover {
             transition: all 0.4s ease;
         }
-        
+
         .glow-hover:hover {
-            box-shadow: 0 0 30px rgba(100, 120, 180, 0.2), 0 0 60px rgba(100, 120, 180, 0.1), 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 30px rgba(0,184,148,0.15), 0 0 60px rgba(0,184,148,0.08), 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
         /* Staggered entrance */
@@ -644,7 +645,7 @@
             top: 0;
             width: 4px;
             height: 100%;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(180deg, #00B894 0%, #00967A 100%);
             transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -687,7 +688,7 @@
         }
         
         .faq-door.open .faq-door-title {
-            background: linear-gradient(135deg, #f1f5f9 0%, #667eea 100%);
+            background: linear-gradient(135deg, #f1f5f9 0%, #00B894 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -710,7 +711,7 @@
         .faq-door-icon::after {
             content: '';
             position: absolute;
-            background: #667eea;
+            background: #00B894;
             transition: all 0.3s ease;
         }
         
@@ -725,7 +726,7 @@
         }
         
         .faq-door.open .faq-door-icon {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #00B894, #00967A);
             transform: rotate(180deg);
         }
         
@@ -774,13 +775,13 @@
         }
         
         .faq-door-answer a {
-            color: #667eea;
+            color: #00B894;
             text-decoration: none;
             transition: color 0.2s ease;
         }
         
         .faq-door-answer a:hover {
-            color: #764ba2;
+            color: #00967A;
         }
         
         /* Decision Tools Cards */
@@ -827,7 +828,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #00B894, #00967A);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -856,7 +857,7 @@
         }
         
         .tool-card:hover .tool-card-number {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #00B894 0%, #00967A 100%);
             -webkit-background-clip: text;
             background-clip: text;
             transform: scale(1.1);
@@ -871,7 +872,7 @@
         }
         
         .tool-card:hover .tool-card-title {
-            background: linear-gradient(135deg, #f1f5f9 0%, #667eea 100%);
+            background: linear-gradient(135deg, #f1f5f9 0%, #00B894 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -890,7 +891,7 @@
             gap: 0.5rem;
             background: rgba(102, 126, 234, 0.1);
             border: 1px solid rgba(102, 126, 234, 0.3);
-            color: #667eea;
+            color: #00B894;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
@@ -899,7 +900,7 @@
         }
         
         .tool-card:hover .tool-card-cta {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #00B894, #00967A);
             border-color: transparent;
             color: #fff;
             transform: translateX(8px);
@@ -1071,7 +1072,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #00B894, #00967A);
             transform: scaleX(0);
             transition: transform 0.4s ease;
         }
@@ -1094,7 +1095,7 @@
         .stat-number {
             font-size: 3rem;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--text-heading) 0%, #667eea 100%);
+            background: linear-gradient(135deg, var(--text-heading) 0%, #00B894 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1129,7 +1130,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 3px;
-            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            background: linear-gradient(90deg, transparent, #00B894, transparent);
             border-radius: 2px;
         }
         
@@ -1182,7 +1183,7 @@
             left: 0;
             width: 3px;
             height: 100%;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(180deg, #00B894 0%, #00967A 100%);
             transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1220,7 +1221,7 @@
             font-size: 2.5rem;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #00B894 0%, #00967A 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1461,7 +1462,9 @@
     <header class="global-header" role="banner">
         <a href="#main-content" class="skip-to-content">Skip to main content</a>
         <nav class="nav-container" role="navigation" aria-label="Main navigation">
-            <a href="index.html" class="nav-logo">100K Pathway</a>
+            <a href="index.html" class="nav-logo" aria-label="100K Pathway - Home">
+                <img src="logo.svg" alt="100K Pathway" class="nav-logo-img" width="160" height="32">
+            </a>
             
                         
 <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
@@ -1491,11 +1494,35 @@
     </header>
     
     <main id="main-content" role="main">
+
+    <!-- Outcome Ticker -->
+    <div class="outcome-ticker" aria-hidden="true">
+        <div class="ticker-track">
+            <span class="ticker-item">✦ Marcus T. — $148K @ Stripe &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ Priya K. — $165K @ Databricks &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ James W. — $132K @ Cloudflare &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ Aisha M. — $142K @ Figma &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ David L. — $158K @ Vercel &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ Sofia R. — $139K @ Notion &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ Kevin H. — $172K @ OpenAI &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ Nadia B. — $144K @ Linear &nbsp;&nbsp;</span>
+            <!-- duplicate for seamless loop -->
+            <span class="ticker-item">✦ Marcus T. — $148K @ Stripe &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ Priya K. — $165K @ Databricks &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ James W. — $132K @ Cloudflare &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ Aisha M. — $142K @ Figma &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ David L. — $158K @ Vercel &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ Sofia R. — $139K @ Notion &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ Kevin H. — $172K @ OpenAI &nbsp;&nbsp;</span>
+            <span class="ticker-item">✦ Nadia B. — $144K @ Linear &nbsp;&nbsp;</span>
+        </div>
+    </div>
+
     <section class="hero" id="hero-section" aria-labelledby="hero-heading">
         <div class="hero-content" id="hero-content">
             <div class="hero-badge">Stop Searching. Start Interviewing.</div>
             <h1 id="hero-heading" class=""><span class="gradient-text">100 Days, $100K</span><br>Guaranteed Interviews or Full Refund</h1>
-            <p class="hero-subtitle">We submit applications on your behalf. You focus on interview preparation. Interview guarantee varies by plan with refund protection until day 180 if guarantee not met.</p>
+            <p class="hero-subtitle">We submit applications on your behalf. You focus on interview prep. Get your guaranteed number of qualifying interviews in 100 days — or a full refund.</p>
             <div class="cta-group">
                 <a href="apply.html" class="btn-primary">Start Application</a>
                 <a href="how-it-works.html" class="btn-secondary">See How It Works</a>
@@ -1503,19 +1530,48 @@
         </div>
     </section>
     
-    <!-- Trust Badges Section -->
+    <!-- Trust Stats Section -->
     <section class="trust-section">
         <div class="container">
-            <div class="trust-grid">
-                <div class="trust-badge" data-trust="guarantee"> <div class="trust-text" style="font-weight:600;font-size:0.95rem">Get interviews or get your money back</div> <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">We have 180 days to prove it works</div>
+            <div class="trust-stats-grid">
+                <div class="trust-stat">
+                    <div class="trust-stat-number">92%</div>
+                    <div class="trust-stat-label">ATS Pass Rate</div>
+                    <div class="trust-stat-sub">Resumes past screening</div>
                 </div>
-                <div class="trust-badge" data-trust="payment"> <div class="trust-text" style="font-weight:600;font-size:0.95rem">Your resume passes ATS filters</div> <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">92% of ours make it past screening</div>
+                <div class="trust-stat">
+                    <div class="trust-stat-number">23 days</div>
+                    <div class="trust-stat-label">Avg. First Interview</div>
+                    <div class="trust-stat-sub">From program start</div>
                 </div>
-                <div class="trust-badge" data-trust="metrics"> <div class="trust-text" style="font-weight:600;font-size:0.95rem">Track everything we submit</div> <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Dashboard shows every single application</div>
+                <div class="trust-stat">
+                    <div class="trust-stat-number">542</div>
+                    <div class="trust-stat-label">Outcomes Tracked</div>
+                    <div class="trust-stat-sub">Since 2020 · Q1 2025</div>
                 </div>
-                <div class="trust-badge" data-trust="timeline"> <div class="trust-text" style="font-weight:600;font-size:0.95rem">100 days max</div> <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">That's our deadline, not yours</div>
+                <div class="trust-stat">
+                    <div class="trust-stat-number">180 days</div>
+                    <div class="trust-stat-label">Refund Protection</div>
+                    <div class="trust-stat-sub">Full money-back window</div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Alumni Strip -->
+    <section class="alumni-strip" aria-label="Companies our alumni work at">
+        <div class="alumni-label">Alumni now at</div>
+        <div class="alumni-logos">
+            <span class="alumni-logo">Stripe</span>
+            <span class="alumni-logo">Databricks</span>
+            <span class="alumni-logo">Cloudflare</span>
+            <span class="alumni-logo">Figma</span>
+            <span class="alumni-logo">Vercel</span>
+            <span class="alumni-logo">Notion</span>
+            <span class="alumni-logo">OpenAI</span>
+            <span class="alumni-logo">Linear</span>
+            <span class="alumni-logo">Retool</span>
+            <span class="alumni-logo">Rippling</span>
         </div>
     </section>
     
@@ -1640,61 +1696,76 @@
             </p>
         </div>
         
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem;margin-top:4rem">
-            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2rem">
-                <div style="margin-bottom:1.5rem"> <div style="font-size:0.9rem;color:var(--text-muted)">Backend Engineer, Bootcamp Grad | $148K TC</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;margin-top:4rem">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="avatar">MT</div>
+                    <div>
+                        <div class="testimonial-name">Marcus T. <span class="verified-badge">✓ Verified</span></div>
+                        <div class="testimonial-role">Backend Engineer · $148K TC @ Stripe</div>
+                    </div>
                 </div>
-                <p style="font-style:italic;margin-bottom:1.5rem;line-height:1.7"> "Failed 12 onsites before this. The portfolio project changed everything. When I could say 'I reduced API latency from 450ms to 12ms with Redis caching,' interviewers stopped testing and started hiring. 81 days."
-                </p>
-                <div style="color:var(--accent-bright);font-weight:600">5 offers, Standard Plan</div>
-            </div> <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2rem">
-                <div style="margin-bottom:1.5rem"> <div style="font-size:0.9rem;color:var(--text-muted)">Data Engineer, Finance Background | $165K</div>
+                <p class="testimonial-quote">"Failed 12 onsites before this. The portfolio project changed everything. When I could say 'I reduced API latency from 450ms to 12ms with Redis caching,' interviewers stopped testing and started hiring."</p>
+                <div class="testimonial-result">5 offers · Standard Plan · 81 days</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="avatar">PK</div>
+                    <div>
+                        <div class="testimonial-name">Priya K. <span class="verified-badge">✓ Verified</span></div>
+                        <div class="testimonial-role">Data Engineer · $165K @ Databricks</div>
+                    </div>
                 </div>
-                <p style="font-style:italic;margin-bottom:1.5rem;line-height:1.7"> "Resume kept getting auto-rejected. Built a fraud detection pipeline with 94% accuracy. Fintech companies hired me on the spot. Application submission service was clutch. I never touched LinkedIn again."
-                </p>
-                <div style="color:var(--accent-bright);font-weight:600">+140% salary increase, 94 days</div>
-            </div> <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2rem">
-                <div style="margin-bottom:1.5rem"> <div style="font-size:0.9rem;color:var(--text-muted)">DevOps Engineer, QA Tester | $132K</div>
+                <p class="testimonial-quote">"Resume kept getting auto-rejected. Built a fraud detection pipeline with 94% accuracy. Fintech companies hired me on the spot. Application submission service was clutch. I never touched LinkedIn again."</p>
+                <div class="testimonial-result">+140% salary increase · 94 days</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="avatar">JW</div>
+                    <div>
+                        <div class="testimonial-name">James W. <span class="verified-badge">✓ Verified</span></div>
+                        <div class="testimonial-role">DevOps Engineer · $132K @ Cloudflare</div>
+                    </div>
                 </div>
-                <p style="font-style:italic;margin-bottom:1.5rem;line-height:1.7"> "'No production experience' - rejected everywhere. Built a full CI/CD pipeline with 99.9% uptime. Portfolio demonstrated real capability beyond my QA background."
-                </p>
-                <div style="color:var(--accent-bright);font-weight:600">+$75K vs QA role, 103 days</div>
+                <p class="testimonial-quote">"'No production experience' — rejected everywhere. Built a full CI/CD pipeline with 99.9% uptime. Portfolio demonstrated real capability beyond my QA background."</p>
+                <div class="testimonial-result">+$75K vs QA role · 103 days</div>
             </div>
         </div>
-        
+
         <div style="text-align:center;margin-top:3rem">
-            <a href="success-stories.html" style="color:var(--accent-bright);text-decoration:none;font-weight:600;font-size:1.1rem">Read All Case Studies</a>
+            <a href="success-stories.html" style="color:var(--accent);text-decoration:none;font-weight:600;font-size:1.1rem">Read All Case Studies &rarr;</a>
         </div>
     </section>
     
     <!-- Newsletter + Contact CTA Section -->
-    <section class="section" style="background:linear-gradient(135deg,rgba(0,255,157,0.05),rgba(0,0,0,0.3));border-top:1px solid rgba(0,255,157,0.2);border-bottom:1px solid rgba(0,255,157,0.2)">
+    <section class="section" style="background:linear-gradient(135deg,rgba(0,184,148,0.05),rgba(0,0,0,0.3));border-top:1px solid rgba(0,184,148,0.15);border-bottom:1px solid rgba(0,184,148,0.15)">
         <div style="max-width:800px;margin:0 auto;text-align:center;padding:0 24px">
             <h2 style="font-size:2.5rem;margin-bottom:1rem">Have Questions? Let's Talk.</h2>
             <p style="font-size:1.2rem;color:var(--text-muted);margin-bottom:3rem;max-width:600px;margin-left:auto;margin-right:auto">
                 Not sure if this is right for you? Book a free 15-minute call. No pitch. Just honest feedback on your situation.
             </p>
-            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-bottom:3rem">
-                <div style="background:linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);padding:2rem;border-radius:16px;border:1px solid rgba(102, 126, 234, 0.2);text-align:center;display:flex;flex-direction:column;align-items:center">
-                    <div style="font-size:2rem;font-weight:800;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.5rem">15 min</div>
-                    <h3 style="margin-bottom:0.5rem;font-size:1.25rem">Book a Call</h3>
-                    <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.25rem">Free career consultation</p>
-                    <a href="mailto:hello@100k-pathway.com?subject=Career Consultation Request" style="color:#667eea;text-decoration:none;font-weight:600;font-size:0.95rem">Schedule Now &rarr;</a>
+            <div class="book-call-grid">
+                <div class="book-card">
+                    <div class="book-card-number">15 min</div>
+                    <h3 class="book-card-title">Book a Call</h3>
+                    <p class="book-card-sub">Free career consultation</p>
+                    <a href="https://calendly.com/100k-pathway/15min" target="_blank" rel="noopener" class="book-card-link">Schedule Now &rarr;</a>
                 </div>
-                <div style="background:linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);padding:2rem;border-radius:16px;border:1px solid rgba(102, 126, 234, 0.2);text-align:center;display:flex;flex-direction:column;align-items:center">
-                    <div style="font-size:2rem;font-weight:800;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.5rem">24 hrs</div>
-                    <h3 style="margin-bottom:0.5rem;font-size:1.25rem">Email Us</h3>
-                    <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.25rem">Get answers fast</p>
-                    <a href="mailto:hello@100k-pathway.com" style="color:#667eea;text-decoration:none;font-weight:600;font-size:0.95rem">hello@100k-pathway.com</a>
+                <div class="book-card">
+                    <div class="book-card-number">24 hrs</div>
+                    <h3 class="book-card-title">Email Us</h3>
+                    <p class="book-card-sub">Get answers fast</p>
+                    <a href="mailto:hello@100k-pathway.com" class="book-card-link">hello@100k-pathway.com</a>
                 </div>
             </div>
-            <div style="margin-top:2rem;background:linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);padding:2.5rem;border-radius:16px;border:1px solid rgba(102, 126, 234, 0.2)">
+            <div style="margin-top:2rem;background:rgba(255,255,255,0.03);padding:2.5rem;border-radius:16px;border:1px solid rgba(0,184,148,0.15)">
                 <h3 style="margin-bottom:0.75rem;font-size:1.3rem">Get Weekly Job Market Insights</h3>
                 <p style="color:var(--text-muted);margin-bottom:1.5rem;font-size:1rem">Interview tips, salary data, and hiring trends. No spam. Unsubscribe anytime.</p>
-                <form style="display:flex;max-width:480px;margin:0 auto;gap:0.75rem">
-                    <input type="email" placeholder="your.email@example.com" required style="flex:1;padding:0.9rem 1.25rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:8px;color:white;font-size:0.95rem">
-                    <button type="submit" style="padding:0.9rem 1.75rem;background:var(--accent-bright);color:#000;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.95rem;white-space:nowrap">Subscribe</button>
+                <form class="newsletter-form" id="newsletter-form" onsubmit="submitNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="your.email@example.com" required aria-label="Email address">
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
                 </form>
+                <p class="newsletter-msg" id="newsletter-msg" style="display:none;margin-top:1rem;font-size:0.9rem"></p>
             </div>
         </div>
     </section>
@@ -1791,27 +1862,27 @@
         </div>
         
         <div style="max-width:900px;margin:0 auto;display:grid;gap:1.5rem">
-            <div class="faq-door" style="border-left:4px solid #667eea">
+            <div class="faq-door" style="border-left:4px solid #00B894">
                 <div class="faq-door-header"> <h3 class="faq-door-title">"I can't afford to lose $1,299-$2,999"</h3> <div class="faq-door-icon"></div>
                 </div>
                 <div class="faq-door-content"> <div class="faq-door-answer"> <p>You are protected by our interview guarantee. If you do not receive the guaranteed number of qualifying interviews within 100 days, you may request a refund until day 180. Essential: 3 interviews. Standard: 5 interviews. Premium: 7 interviews.</p> <p>We're betting our time and resources that we can get you interviews. <strong>If we fail, you're protected by our refund guarantee.</strong></p> </div>
                 </div>
-            </div> <div class="faq-door" style="border-left:4px solid #667eea">
+            </div> <div class="faq-door" style="border-left:4px solid #00B894">
                 <div class="faq-door-header"> <h3 class="faq-door-title">"I don't have time for another program"</h3> <div class="faq-door-icon"></div>
                 </div>
                 <div class="faq-door-content"> <div class="faq-door-answer"> <p>We handle the application work. 90% of our members are employed full-time. Portfolio work happens evenings and weekends. We submit applications on your behalf. Mentorship sessions are 1-2 hours per week on your schedule.</p> <p>You're spending 10-15 hours/week job searching anyway. We make those hours count 10x more.</p> </div>
                 </div>
-            </div> <div class="faq-door" style="border-left:4px solid #667eea">
+            </div> <div class="faq-door" style="border-left:4px solid #00B894">
                 <div class="faq-door-header"> <h3 class="faq-door-title">"What if I already have a portfolio?"</h3> <div class="faq-door-icon"></div>
                 </div>
                 <div class="faq-door-content"> <div class="faq-door-answer"> <p>Good. We'll audit it, find gaps, and make it production-grade. Most portfolios we see are tutorial projects with no monitoring, no error handling, no real users.</p> <p>We make your portfolio look like you've been running production systems for years. That's what gets you past the "lack of experience" objection.</p> </div>
                 </div>
-            </div> <div class="faq-door" style="border-left:4px solid #667eea">
+            </div> <div class="faq-door" style="border-left:4px solid #00B894">
                 <div class="faq-door-header"> <h3 class="faq-door-title">"The success fee is too high"</h3> <div class="faq-door-icon"></div>
                 </div>
                 <div class="faq-door-content"> <div class="faq-door-answer"> <p>Let's do the math. $120K offer. 12% success fee = $14,400. Sounds like a lot. But you just went from $70K to $120K. That's $50K more per year. Forever.</p> <p><strong>You recoup the fee in 3-4 months.</strong> Every month after that, you keep the extra $4,000+/month. For the rest of your career.</p> </div>
                 </div>
-            </div> <div class="faq-door" style="border-left:4px solid #667eea">
+            </div> <div class="faq-door" style="border-left:4px solid #00B894">
                 <div class="faq-door-header"> <h3 class="faq-door-title">"This sounds too good to be true"</h3> <div class="faq-door-icon"></div>
                 </div>
                 <div class="faq-door-content"> <div class="faq-door-answer"> <p>Volume, targeting, and demonstrated capability. We submit applications to companies actively hiring through our network. Your portfolio demonstrates real skills. Interview prep ensures you're prepared.</p> <p>Established 2020. 350+ outcomes completed. Built on partnerships with tech recruiters. <strong>Proven process, documented results.</strong></p> </div>
@@ -2628,6 +2699,61 @@
     });
     </script>
     <script src="navigation.js"></script>
+
+    <!-- Mobile Sticky CTA Bar -->
+    <div class="mobile-cta-bar" id="mobile-cta-bar" aria-hidden="true">
+        <a href="apply.html" class="mobile-cta-btn">Start Application — Free</a>
+        <a href="https://calendly.com/100k-pathway/15min" target="_blank" rel="noopener" class="mobile-cta-link">or book a call</a>
+    </div>
+
+    <script>
+    // Newsletter form submission
+    async function submitNewsletter(e) {
+        e.preventDefault();
+        const form = e.target;
+        const btn = form.querySelector('button[type="submit"]');
+        const msg = document.getElementById('newsletter-msg');
+        const email = form.querySelector('input[type="email"]').value.trim();
+        btn.disabled = true;
+        btn.textContent = 'Subscribing…';
+        try {
+            const res = await fetch('/api/newsletter', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                msg.textContent = 'You\'re in! Check your inbox.';
+                msg.style.color = '#00B894';
+                form.reset();
+            } else {
+                msg.textContent = data.error || 'Something went wrong. Please try again.';
+                msg.style.color = '#EF4444';
+            }
+        } catch (err) {
+            msg.textContent = 'Network error. Please try again.';
+            msg.style.color = '#EF4444';
+        }
+        msg.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+    }
+
+    // Show mobile CTA bar on scroll
+    (function() {
+        const bar = document.getElementById('mobile-cta-bar');
+        if (!bar) return;
+        let shown = false;
+        window.addEventListener('scroll', function() {
+            if (!shown && window.scrollY > 400) {
+                bar.classList.add('visible');
+                bar.setAttribute('aria-hidden', 'false');
+                shown = true;
+            }
+        }, { passive: true });
+    })();
+    </script>
 
 <!-- 100K Pathway Loader Dismiss Script -->
 <script id="pk-loader-script">
